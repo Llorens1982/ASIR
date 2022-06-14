@@ -1,0 +1,2 @@
+
+UPDATE CLIENT SET cp=NULL;

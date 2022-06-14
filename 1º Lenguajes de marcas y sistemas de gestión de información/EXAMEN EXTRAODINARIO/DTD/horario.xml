@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE alumnes SYSTEM "horario.dtd">
+<horario dia="26-6-2017">
+  <entrenamiento tipo="resistencia">
+    <entrenador>Robert</entrenador>
+    <tiempo medida="minutos">60</tiempo>
+  </entrenamiento>
+  <plantilla>
+    <jugador pos="portero" id="J001">
+      <nombre>Pedro</nombre>
+      <dorsal>1</dorsal>
+    </jugador>
+    <jugador pos="medio" id="J021">
+      <nombre>Juan</nombre>
+      <dorsal>21</dorsal>
+    </jugador>
+  </plantilla>
+</horario>

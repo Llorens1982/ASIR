@@ -1,0 +1,21 @@
+xpath
+
+1. Nom de tots els alumnes de Castelló?
+
+//alumne[poblacio="Castelló"]/nom/text()
+
+2. Quines assignatures hi ha.
+
+//professor/assignatura/text()
+
+3. Nom dels alumnes que repeteixen alguna assignatura.
+
+//alumne[credits/assignatura/@repeteix="Si"]/nom/text()
+
+4. Quins alumnes es van matricular anteriorment a 2009?
+
+//alumne[any<2009]/nom/text()
+
+5. Quins professors donen classe a l'alumne Bill Garcia.
+
+//professor[assignatura=//alumne[nom="Bill Garcia"]/credits/assignatura/text()]/nom/text()

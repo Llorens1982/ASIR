@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:annotation>	
+	<xs:documentation >
+		Restricciones ejercicio
+		1) carrer 			máximo 100 caracteres
+		2) codi postal 		5 dígitos, obligatorio
+		3) referencia pis 	única, no puede repetirse
+		4) tipus pis 		(Pis | Dúplex | Casa)
+		5) 					(venta | lloguer)
+
+===============================================================
+== == ==== ======== METODO TIPOS DE NOMBRE ======== ===== == ==
+===============================================================
+
+	</xs:documentation>	
+</xs:annotation>
+
+<!--
+	definición de tipos simples
+--> 
+<xs:simpleType name="TipoCarrer">
+	
+	<xs:restriction base="xs:string">
+		<xs:maxLength value="100"/>
+	</xs:restriction>	
+	 	
+</xs:simpleType>
+
+<xs:simpleType name="TipoCodi_postal">
+
+	<xs:restriction base="xs:decimal">
+		<xs:pattern value="[0-9]{5}"/>
+	</xs:restriction>	
+	 	
+</xs:simpleType>
+
+ 
+
+<xs:simpleType name="TipoTipus">
+	
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="Pis"/>
+		<xs:enumeration value="Dúplex"/>
+		<xs:enumeration value="Casa"/>
+	</xs:restriction>	
+		
+</xs:simpleType>
+
+<xs:simpleType name="TipoVenta_o_lloguer">
+	
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="Venta"/>
+		<xs:enumeration value="Lloguer"/>		 
+	</xs:restriction>	
+		
+</xs:simpleType>
+
+<xs:simpleType name="TipoPreu">
+	<xs:restriction base="xs:decimal">
+		<xs:fractionDigits value="2"/>
+	</xs:restriction>	
+</xs:simpleType>
+
+  
+
+
+ <!--
+ Definición elementos complejos
+
+
+pisos
+pis
+adresa
+-->
+<xs:element name="pisos">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="pis" type="TipoPis" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+		
+	</xs:complexType>	
+</xs:element>	
+
+
+
+<xs:complexType name="TipoPis">
+	
+		<xs:sequence>
+			<xs:element name="adresa" type="TipoAdresa"/>
+			<xs:element name="tipus" type="TipoTipus"/>
+			<xs:element name="venta_o_lloguer" type="TipoVenta_o_lloguer"/>
+			<xs:element name="preu" type="TipoPreu"/>
+
+		</xs:sequence>	
+<!--
+no lo he sabido invocar con type ...
+-->		
+		<xs:attribute name="codi" id="codi"/>	
+</xs:complexType>	
+	
+
+
+
+
+
+
+
+	<xs:complexType name="TipoAdresa">
+		<xs:sequence>
+			<xs:element name="carrer" type="TipoCarrer"/>
+			<xs:element name="codi_postal" type="TipoCodi_postal"/>
+			<xs:element name="poblacio"/>
+		</xs:sequence>	
+	</xs:complexType>
+
+</xs:schema>	
+
+
+

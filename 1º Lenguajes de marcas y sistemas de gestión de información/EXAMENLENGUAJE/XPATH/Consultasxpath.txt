@@ -1,0 +1,25 @@
+ 
+1. Nom de tots els alumnes de Castelló?
+
+//alumne/nom[//poblacio=Castelló]
+
+2. Quines assignatures hi ha.
+
+//assignatura/text()
+
+3. Nom dels alumnes que repeteixen alguna assignatura.
+
+//assignatura[@repeteix='Si']/../../nom/text()
+
+4. Quins alumnes es van matricular anteriorment a 2009?
+
+//alumne/nom[//any>2009]  
+
+05. Quins professors donen classe a l'alumne Bill Garcia.
+
+2 subconsultes 
+
+Asignatures de Bill Garcia
+
+//assignatura[//nom="Bill Garcia"]
+

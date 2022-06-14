@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+ <!--
+ Tipus simple per definir els valors que pot prendre el sistema operatiu 
+-->
+<xs:simpleType name="sistema_operatiu">
+<xs:restriction base="xs:string">
+<xs:enumeration value="Windows XP"/>
+<xs:enumeration value="Windows 7"/>
+<xs:enumeration value="Ubuntu"/>
+</xs:restriction>
+</xs:simpleType>
+ <!--
+ Tipus que prendra l'element sistemes operatius. Tindrà una seqüència d'elements sistema operatiu (definit anteriorment), tindrà com a mínim un element i màxim ilimitat
+-->
+<xs:complexType name="sistemes_operatius">
+<xs:sequence>
+<xs:element name="sistema_operatiu" type="sistema_operatiu" minOccurs="1" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+ <!--
+ Tipus que prendra l'element ordinador. Estarà format pels elements: microprocessador, ram, disc_dur i sistemes operatius. A més tindrà un atribut Id que serà identificador i obligatori 
+-->
+<xs:complexType name="ordinador">
+<xs:sequence>
+<xs:element name="microprocessador" type="xs:string"/>
+<xs:element name="ram" type="xs:string"/>
+<xs:element name="disc_dur" type="xs:string"/>
+<xs:element name="sistemes_operatius" type="sistemes_operatius"/>
+</xs:sequence>
+<xs:attribute name="codi" type="xs:ID" use="required"/>
+</xs:complexType>
+ <!--
+ Tipus que prendra l'element ordinadors. Estarà format per elements de tipus ordinador (definit anteriorment). Tindrà com a mínim un element i màxim ilimitat 
+-->
+<xs:complexType name="ordinadors">
+<xs:sequence>
+<xs:element name="ordinador" type="ordinador" minOccurs="1" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+ <!--
+ Tipus simple per restringir els valors possibles a "Si" o "No".  L'utilitzarem en l'atribut informatica dels elements aula
+-->
+<xs:simpleType name="sino">
+<xs:restriction base="xs:string">
+<xs:enumeration value="Si"/>
+<xs:enumeration value="No"/>
+</xs:restriction>
+</xs:simpleType>
+ <!--
+ Tipus simple en el que definim el format que han de tindre els noms de les aules. LLetra, guió i tres números
+-->
+<xs:simpleType name="nom">
+<xs:restriction base="xs:string">
+<xs:pattern value="[A-C]-[0-9]{3}"/>
+</xs:restriction>
+</xs:simpleType>
+ <!--
+ El tipus aula es un tipus complex. L'aula estarà formada pels elements capacitat (enter) i ordinadors del tipus ordinadors definit anteriorment. 
+A més tindrà els atributs nom i informàtica dels tipus propis nom i sino definits anteriorment.
+-->
+<xs:complexType name="aula">
+<xs:sequence>
+<xs:element name="capacitat" type="xs:integer"/>
+<xs:element name="ordinadors" type="ordinadors" minOccurs="0" maxOccurs="1"/>
+</xs:sequence>
+<xs:attribute name="nom" type="nom" use="required"/>
+<xs:attribute name="informatica" type="sino" use="required"/>
+</xs:complexType>
+ <!--
+ Definim l'element arrel que es dirà institut i contindrà una sequência d'elements aula del tipus aula definit anteriorment. 
+-->
+<xs:element name="institut">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="aula" type="aula" minOccurs="1" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>

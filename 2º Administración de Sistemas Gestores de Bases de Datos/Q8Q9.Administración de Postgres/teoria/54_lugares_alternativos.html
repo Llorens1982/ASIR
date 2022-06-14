@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<!-- Created using eXe: http://exelearning.org -->
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" /><link rel="stylesheet" type="text/css" href="content.css" /><link rel="stylesheet" type="text/css" href="nav.css" /><title>5.4 Lugares alternativos </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta http-equiv="Content-Type" content="text/html;  charset=utf-8" />
+<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+<div id="content">
+<div id="emptyHeader"></div><div id="siteNav">
+<ul>
+<li><a href="index.html" class="daddy main-node">Administración de PostgreSQL</a></li><li><a href="1__instalacin.html" class="no-ch">1 - Instalación</a></li>
+<li><a href="nota_previa.html" class="no-ch">Nota Previa</a></li>
+<li><a href="2_arranque_y_parada_del_sistema.html" class="no-ch">2. Arranque y parada del sistema</a></li>
+<li><a href="3__ficheros_de_configuracin.html" class="no-ch">3 - Ficheros de configuración</a></li>
+<li><a href="4__gestin_de_usuarios_y_privilegios.html" class="daddy">4 - Gestión de usuarios y privilegios</a><ul class="other-section">
+<li><a href="41__gestin_de_roles_utilizacin_como_usuarios.html" class="no-ch">4.1 - Gestión de roles: utilización como usuarios</a></li>
+<li><a href="42__gestin_de_roles_utilizacin_como_grupos.html" class="no-ch">4.2 - Gestión de roles: utilización como grupos</a></li>
+<li><a href="43__permisos.html" class="no-ch">4.3 - Permisos</a></li>
+<li><a href="44__roles_y_miembros.html" class="no-ch">4.4 - Roles y miembros</a></li>
+<li><a href="45__autenticacin_de_usuarios.html" class="no-ch">4.5 - Autenticación de usuarios</a></li>
+</ul>
+</li>
+<li class="current-page-parent"><a href="5__gestin_de_bases_de_datos.html" class="current-page-parent daddy">5 - Gestión de Bases de Datos</a><ul>
+<li><a href="51__bases_de_datos_creacin_modificacin_y_eliminacin.html" class="no-ch">5.1 - Bases de Datos: Creación, Modificación y Eliminación</a></li>
+<li><a href="52__esquemas.html" class="no-ch">5.2 - Esquemas</a></li>
+<li><a href="53__tablespaces.html" class="no-ch">5.3 - Tablespaces</a></li>
+<li id="active"><a href="54_lugares_alternativos.html" class="active no-ch">5.4 Lugares alternativos</a></li>
+</ul>
+</li>
+<li><a href="6_copia_de_seguridad_y_restauracin.html" class="daddy">6- Copia de seguridad y restauración</a><ul class="other-section">
+<li><a href="61__pg_dump.html" class="no-ch">6.1 - PG_DUMP</a></li>
+<li><a href="62__restauracin_del_dump.html" class="no-ch">6.2 - Restauración del DUMP</a></li>
+<li><a href="63__backup_desde_pgadmin.html" class="no-ch">6.3 - Backup desde PgAdmin</a></li>
+<li><a href="64__backup_por_copia_de_ficheros.html" class="no-ch">6.4 - Backup por copia de ficheros</a></li>
+</ul>
+</div>
+<div id='topPagination'><div class="pagination noprt"><a href="53__tablespaces.html" class="prev"><span>&laquo; </span>Anterior</a> | <a href="6_copia_de_seguridad_y_restauracin.html" class="next"> Siguiente<span> &raquo;</span></a></div>
+</div><div id="main">
+<div id="nodeDecoration"><h1 id="nodeTitle">5.4 Lugares alternativos</h1></div>
+<div class="FreeTextIdevice" id="id15">
+<div class="iDevice emphasis0">
+<div id="ta15_1" class="block" style="display:block;position:relative"><p class="MsoBodyText">
+ <span style="font-family: Arial; color: black">De momento nada más tenemos creada una Base de Datos (de las
+grandes, la súper Base de Datos, o con palabras técnicas el Database Cluster).
+Se creó en el momento de la instalación de PostgreSQL, y no especificamos donde
+se debía guardar. El lugar por defecto, si instalamos por paquetes Ubuntu, es <span> </span></span><b><i><span>/var/lib/postgresql/9.1/main</span></i></b><span style="font-family: Arial; color: black">, aunque otro lugar
+habitual es <span> </span></span><b><i><span>/var/lib/posgres/data </span></i></b><span style="font-family: Arial; color: black">(hay una variable de
+entorno, PGDATA, que contiene la ruta ).En Windows es </span><b><span>C:\Archivos de Programa\PostgreSQL\9.1\data<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Pero ya hemos visto, en el momento de instalar PostgreSQL a mano,
+que en la sintaxis de la sentencia de creación podemos especificar otro lugar
+para una Base de Datos. Vamos a ver este proceso. Intentaremos hacerlo en Linux
+y en Windows (para que cada uno elija el que quiera), aunque la explicación más
+larga estará en Linux. Al final tendremos dos clusteres en marcha, es decir dos
+grandes Bases de Datos, como si fueran dos servidores en marcha.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<i><span style="font-family: Arial; color: black">Abrimos
+una consola, y nos conectamos como posgres con la opción – para a que coja el
+entorno de este usuario (quizá nos toque hacerlo desde root):<o:p></o:p></span></i>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 8pt; font-family: Arial; color: black">Linux<span>                                                                      </span>
+Windows<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<b><span style="font-family: 'Courier New'; color: mediumblue">sudo su - posgres <span>      </span>&gt;
+runas /user:postgres cmd<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Inicializamos el nuevo lugar. Podemos colocarlo donde vulguem,
+nada más debemos controlar que el directorio padre de esta ruta
+(/var/lib/postgresql/8.3 en el ejemplo siguiente) debe existir y debe poder escribir el usuario
+posgres. El subdirectorio (main2) se creará durante el proceso, así como toda la estructura interna<i>.<o:p></o:p></i></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 8pt; font-family: Arial; color: black">Linux <o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue">cd /usr/lib/postgresql/8.3/bin<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">$ ./initdb<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">/var/lib/postgresql/8.3/main2<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 8pt; font-family: Arial; color: black" lang="EN-GB">Windows</span><b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB"><o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue">cd &quot;\Archivos de<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue">Programa\PostgreSQL\8.3\bin&quot;<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue">initdb ../data2<span>    </span><o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="margin-left: 70.9pt">
+<span style="font-size: 8pt; font-family: Arial; color: black">podría darse el caso de que el usuario no tuviera permiso de
+escritura<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 70.9pt">
+<span style="font-size: 8pt; font-family: Arial; color: black">sobre el directorio que estamos indicando. Si es así, podemos dar
+permiso<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 70.9pt">
+<span style="font-size: 8pt; font-family: Arial; color: black">al de S.O posgres</span><b><span style="font-size: 8pt"> </span></b><span style="font-size: 8pt; font-family: Arial; color: black">sobre el
+directorio raíz de PostgreSQL. O<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 70.9pt">
+<span style="font-size: 8pt; font-family: Arial; color: black">si no queremos complicarnos la vida creamos el nuevo lugar en un
+directorio donde<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 70.9pt">
+<span style="font-size: 8pt; font-family: Arial; color: black">seguro tendremos permiso, por ejemplo </span><b><span style="font-size: 8pt">C:	emp\data2<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="margin-left: 70.9pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue">initdb /temp/data2<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Si todo ha ido bien nos avisará que ya está creado y como ponerlo
+en marcha. Nada más tendremos en cuenta una cosa: si el anterior cluster (lo
+que estamos utilizando durante todo el curso) está en marcha, y queremos a que
+lo esté, deberemos cuidar de poner el nuevo en otro puerto. Normalmente el ya
+existente estará en el puerto 5432. Por ejemplo podríamos utilizar para el
+nuevo el 5433. Podemos utilizar para ponerlo en marcha las maneras que viéramos
+en el punto 2 donde se especifique cuál es el lugar (y también el puerto). Es
+decir postmaster o pg_ctl.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 8pt; font-family: Arial; color: black">Linux <o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue">posgres -D<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue">/var/lib/postgresql/8.3/main2 -p<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue">5433<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 8pt; font-family: Arial; color: black">Windows</span><b><span style="font-family: 'Courier New'; color: mediumblue"><o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 8pt; font-family: Arial; color: black">Dependiendo
+donde la habíamos habíamos haremos:<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue">posgres -D ../data2<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue">-p 5433<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 8pt; font-family: Arial; color: black">O bien<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="color: blue"> </span><b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">posgres -D<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">/temp/data2 -p 5433<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">De esta manera está en marcha en esta terminal. <span> </span>Cuando cerramos la terminal o hacemos ctrl-c,
+pararemos esta Base de Datos. Podríamos hacerlo en segundo plano, ponerlo en marcha nada más arrancar, ...<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Aquí tenemos todo lo que hemos hecho en Linux (en Windows debería
+salir de forma similar), resaltando en negrita los comandos escritos. Fijaos
+que si al poner en marcha la Base de Datos no especificamos el puerto, entonces
+se percatará que ya está ocupado<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">lliurex@lliurex-virtual:~$
+</span><b><span style="font-size: 9pt; font-family: 'Courier New'; color: black">sudo
+su - posgres</span></b><b><span style="font-size: 7pt; font-family: 'Courier New'; color: black"><o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">Password:<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">postgres@lliurex-virtual:~$
+</span><b><span style="font-size: 9pt; font-family: 'Courier New'; color: black">cd
+/usr/lib/postgresql/9.1/bin/</span></b><b><span style="font-size: 7pt; font-family: 'Courier New'; color: black"><o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">postgres@lliurex-virtual:/usr/lib/postgresql/8.3/bin$
+<b>.</b></span><b><span style="font-size: 9pt; font-family: 'Courier New'; color: black">/initdb /var/lib/postgresql/9.1/main2</span></b><b><span style="font-size: 7pt; font-family: 'Courier New'; color: black"><o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">Los
+archivos de este cluster serán de propropiedad del usuario «posgres».<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">Este
+usuario también debe ser quien ejecute el proceso servidor.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">El
+cluster será inicializado cono configuración local qcv_ES.UTF-8.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">La
+codificación miedo omisión ha sido miedo lo tanto definida a UTF8.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">initdb:
+no se pudo encontrar una configuración para búsqueda en texto apropiada<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">para
+la configuración local qcv_ES.UTF-8<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">La
+configuración de búsqueda en texto ha sido definida a «simple».<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">creando
+el directorio /var/lib/postgresql/8.3/main2 ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">creando
+subdirectorios ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">seleccionando
+el valor para max_connections ... 100<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">seleccionando
+el valor para shared_bufferes/max_fsm_campesino ... 24MB/153600<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">creando
+archivos de configuración ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">creando
+base de datos template1 en /var/lib/postgresql/8.3/main2/base/1 ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">inicializando
+pg_authid ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">inicializando
+dependencias ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">creando
+laso vistas de sistema ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">cargando
+laso descripciones de los objetos del sistema ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">creando
+conversiones ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">creando
+directorios ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">estableciendo
+privilegios en objetos predefinidos ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">creando
+el esquema de información ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">haciendo
+vacuum a la base de datos template1 ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">copiando
+template1 a template0 ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">copiando
+template1 a posgres ... hecho<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">ATENCIÓN:
+activando autentificación «trust» para conexiones locales.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">Puede
+cambiar esto editando pg_hba.conf o usando el parámetro -A<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">la
+próxima vez que ejecute initdb.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">Completado.
+Puede iniciar el servidor de bases de datos usando:<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">./posgres
+-D /var/lib/postgresql/8.3/main2<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">o<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">./pg_ctl
+-D /var/lib/postgresql/8.3/main2 -l archivo_de_registro start<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">postgres@lliurex-virtual:/usr/lib/postgresql/8.3/bin$
+</span><b><span style="font-size: 9pt; font-family: 'Courier New'; color: black">./posgres
+-D<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<b><span style="font-size: 9pt; font-family: 'Courier New'; color: black">/var/lib/postgresql/8.3/main2 -p 5432<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">LOG:
+no se pudo enlazar al socket IPv4: La dirección ya está en uso<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">HINT:
+¿Hay otro postmaster corriendo en el puerto 5432? Si no, aguarde unos segundos
+y<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">reintento.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">WARNING:
+no se pudo crear el socket de escucha para «localhost»<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">FATAL:
+no se pudo crear ningún socket TCP/IP<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">postgres@lliurex-virtual:/usr/lib/postgresql/8.3/bin$
+<b>./posgres </b></span><b><span style="font-size: 9pt; font-family: 'Courier New'; color: black">-D<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<b><span style="font-size: 9pt; font-family: 'Courier New'; color: black">/var/lib/postgresql/8.3/main2 -p 5433<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">LOG:
+el sistema de bases de datos fue apagado en 2008-03-28 07:09:45 CET<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">LOG:
+lanzador de autovacuum iniciado<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 7pt; font-family: 'Courier New'; color: black">LOG:
+el sistema de bases de datos está listo para aceptar conexiones<o:p></o:p></span>
+</p>
+<p>
+<span style="font-size: 12pt; font-family: Arial; color: black">A
+continuación hay una imagen donde se ven dos terminales con dos conexiones a
+los dos clusteres en marcha. Nos conectamos como posgres en los dos, pero observa
+como las Bases de Datos no son las mismas.</span>
+</p>
+<blockquote>
+	<p>
+	<img src="Tema_5_Admon_5.4_Imagen1.JPG" height="482" width="643" /> 
+	</p>
+</blockquote>
+<p>
+
+</p>
+<p>
+&nbsp;
+</p>
+<p class="MsoBodyText">
+ <span style="font-family: Arial; color: black">Y ahora otra imagen del PgAdmin (en esta ocasión en Windows) donde
+se ha creado una conexión al segundo lugar (al puerto 5433). Observáis que el
+número de objetos (Base de Datos, Roles, Tablespaces, ...) son diferentes.<o:p></o:p></span>
+</p>
+<blockquote>
+	<blockquote>
+		<p>
+		 <img src="Tema_5_Admon_5.4_Imagen2.JPG" height="330" width="576" />
+		</p>
+	</blockquote>
+</blockquote>
+<p>
+&nbsp;
+</p>
+</div></div>
+</div>
+<div id='bottomPagination'><div class="pagination noprt"><a href="53__tablespaces.html" class="prev"><span>&laquo; </span>Anterior</a> | <a href="6_copia_de_seguridad_y_restauracin.html" class="next"> Siguiente<span> &raquo;</span></a></div>
+</div></div>
+</div>
+</body></html>

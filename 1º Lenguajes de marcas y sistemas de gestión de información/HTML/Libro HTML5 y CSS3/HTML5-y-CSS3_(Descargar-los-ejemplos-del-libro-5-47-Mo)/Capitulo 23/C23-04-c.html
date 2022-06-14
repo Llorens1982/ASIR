@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Html5</title>
+<meta charset="UTF-8"> 
+</head>
+<body>
+<canvas id="zona" width="200px" height="200px" style="border: 1px solid black">
+Su navegador no soporta la etiqueta canvas
+</canvas>
+<script type="text/javascript">
+var canvas = document.getElementById("zona");
+var contexto = canvas.getContext( "2d" );
+contexto.strokeRect(25,50,150,100);
+</script>
+</body>
+</html>

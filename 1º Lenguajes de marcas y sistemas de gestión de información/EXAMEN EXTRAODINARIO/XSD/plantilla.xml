@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<plantilla xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="plantilla.xsd">>
+  <jugador id="J001" posicion="portero">
+    <nombre>Jose Ramón</nombre>
+    <apellidos>García González</apellidos>
+    <direccion>
+      <domicilio cod_postal="46003">El Pez, 12</domicilio>
+      <provincia>Cantabria</provincia>
+    </direccion>
+  </jugador>
+  <jugador id="J005" posicion="delantero">
+    <nombre>Carlos</nombre>
+    <apellidos>López Pérez</apellidos>
+    <direccion>
+      <domicilio cod_postal="46025">El Cangrejo, 25</domicilio>
+      <provincia>Cantabria</provincia>
+    </direccion>
+  </jugador>
+</plantilla>

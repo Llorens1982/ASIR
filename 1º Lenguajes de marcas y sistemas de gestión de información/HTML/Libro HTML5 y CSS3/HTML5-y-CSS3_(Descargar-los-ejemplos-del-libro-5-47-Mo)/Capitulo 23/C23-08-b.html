@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Html5</title>
+<meta charset="UTF-8"> 
+</head>
+<script type="text/javascript">
+function dibujo() {
+var canvas = document.getElementById("zona");
+var contexto = canvas.getContext("2d");
+var img = new Image();
+img.src = 'grafo.png';
+contexto.drawImage(img,0,0);
+contexto.beginPath();
+contexto.lineWidth = 2;
+contexto.moveTo(18,244);
+contexto.lineTo(72,67);
+contexto.lineTo(124,186);
+contexto.lineTo(176,36);
+contexto.lineTo(228,212);
+contexto.lineTo(280,126);
+contexto.stroke();
+}
+</script>
+<body onload="dibujo()">
+<canvas id="zona" width="285px" height="260px">
+Su navegador no soporta la etiqueta canvas
+</canvas>
+<img src="grafo.png" style="visibility:hidden;">
+</body>
+</html>
+

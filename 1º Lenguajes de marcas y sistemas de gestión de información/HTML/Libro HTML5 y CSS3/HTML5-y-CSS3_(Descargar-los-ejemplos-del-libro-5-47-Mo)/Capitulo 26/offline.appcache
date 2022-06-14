@@ -1,0 +1,15 @@
+﻿CACHE MANIFEST
+# version 1.0
+CACHE:
+index.html
+fallback.htm
+style.css 
+script.js
+regalo1.jpg
+regalo2.jpg
+regalo3.jpg
+regalo4.jpg
+FALLBACK:
+/ fallback.htm
+NETWORK:
+*

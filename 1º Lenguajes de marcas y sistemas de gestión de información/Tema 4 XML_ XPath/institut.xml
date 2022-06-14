@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+
+El document ens permet guardar informació sobre les diferents aules que hi ha a l'institut 
+Per cada aula guardarem la següent informació:
+	- El nom de l'aula. El guardarem en forma d'atribut. Tindrà  el format següent: Una lletra, un guió, tres números.	
+	- Si és aula d'informà tica o no ho és. Ho indiquem amb un atribut.
+	- La seva capacitat, que serà  un enter.
+	- Els ordinadors que hi ha a l'aula (si és d'informàtica). Per cada ordinador indicarem:
+		- Un codi en forma d'atribut
+		- El tipus de microprocessador
+		- La capacitat del disc dur
+		- Els sistemes operatius que té instal·lats
+			- Per cada sistema operatiu guardarem el nom del sistema operatiu que podrà  prendre els valors de Windows XP/Windows 7/Ubuntu 
+-->
+<institut xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="institut.xsd">
+
+	<aula nom="A-123" informatica="Si">
+		<capacitat>20</capacitat>
+		<ordinadors>
+				<ordinador codi="o1">
+					<microprocessador>i7</microprocessador>
+					<ram>4</ram>
+					<disc_dur>300</disc_dur>
+					<sistemes_operatius>
+						<sistema_operatiu>Windows XP</sistema_operatiu>
+						<sistema_operatiu>Ubuntu</sistema_operatiu>
+					</sistemes_operatius>
+				</ordinador>
+				<ordinador codi="o2">
+					<microprocessador>i9</microprocessador>
+					<ram>16</ram>
+					<disc_dur>500</disc_dur>
+					<sistemes_operatius>
+						<sistema_operatiu>Ubuntu</sistema_operatiu>
+					</sistemes_operatius>
+				</ordinador>
+					
+		</ordinadors>
+	</aula>
+	
+	<aula nom="B-200" informatica="No">
+		<capacitat>20</capacitat>
+	</aula>
+	
+
+
+</institut>

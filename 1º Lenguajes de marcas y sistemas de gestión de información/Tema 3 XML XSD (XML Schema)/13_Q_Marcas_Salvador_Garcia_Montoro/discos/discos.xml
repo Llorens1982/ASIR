@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+ <discos xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
+ 	xs:noNamespaceSchemaLocation="discos.xsd">
+<disco>
+	<autor>Radiohead</autor>
+	<titulo>OK Computer</titulo>
+	<genero>Alternative Rock</genero>
+	<numero_de_canciones>12</numero_de_canciones>
+</disco>
+<disco>
+	<autor>Arcade Fire</autor>
+	<titulo>Funeral</titulo>
+	<genero>Art Rock</genero>
+	<numero_de_canciones>10</numero_de_canciones>
+</disco>
+<disco>
+	<autor>LCD Soundsystem</autor>
+	<titulo>American Dream</titulo>
+	<genero>Electronica</genero>
+	<numero_de_canciones>10</numero_de_canciones>
+</disco>
+<disco>
+	<autor>Arctic Monkeys</autor>
+	<titulo>Whatever People Say I Am, That's What I'm Not</titulo>
+	<genero>Indie Rock</genero>
+	<numero_de_canciones>13</numero_de_canciones>
+</disco>
+<disco>
+	<autor>Damien Rice</autor>
+	<titulo>My Favourite Faded Fantasy</titulo>
+	<genero>Folk</genero>
+	<numero_de_canciones>8</numero_de_canciones>
+</disco>
+</discos>

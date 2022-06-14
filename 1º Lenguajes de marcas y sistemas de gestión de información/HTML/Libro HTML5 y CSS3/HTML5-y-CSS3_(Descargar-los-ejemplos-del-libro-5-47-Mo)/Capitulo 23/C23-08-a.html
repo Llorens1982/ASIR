@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Html5</title>
+<meta charset="UTF-8"> 
+</head>
+<script type="text/javascript">
+function dibujo() {
+var canvas = document.getElementById("zona");
+var contexto = canvas.getContext("2d");
+var img = new Image();
+img.src = 'rosa.png';
+contexto.drawImage(img,5,5);
+}
+</script>
+<body onload="dibujo()">
+<canvas id="zona" width="210px" height="194px" style="border: 1px solid black">
+Su navegador no soporta la etiqueta canvas
+</canvas>
+<img src="rosa.png" style="visibility: hidden;">
+</body>
+</html>
+

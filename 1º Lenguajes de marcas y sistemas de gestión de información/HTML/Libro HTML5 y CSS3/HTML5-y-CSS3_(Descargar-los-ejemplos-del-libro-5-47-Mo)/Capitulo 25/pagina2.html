@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Html5</title>
+<meta charset=utf-8>
+<style type="text/css">
+div { border: 1px solid black;
+      font-size:16px;
+      font-weight: bold;
+      width: 250px;
+      padding-left: 3px;}
+</style>
+<script type="text/javascript">
+function get_item() {
+document.getElementById("f1").innerHTML = sessionStorage.getItem("apellidos"); 
+document.getElementById("f2").innerHTML = sessionStorage.getItem("nombre"); 
+document.getElementById("f3").innerHTML = sessionStorage.getItem("direccion"); 
+document.getElementById("f4").innerHTML = sessionStorage.getItem("cp"); 
+document.getElementById("f5").innerHTML = sessionStorage.getItem("ciudad"); 
+document.getElementById("f6").innerHTML = sessionStorage.getItem("pais");
+}
+</script>
+</head>
+<body onload="get_item()">
+<h1>Página 2</h1>
+<form>
+ <p>Su pedido se enviará a la dirección:<p>
+<div>
+<span id="f1"></span> <span id="f2"></span><br>
+<span id="f3"></span><br>
+<span id="f4"></span> <span id="f5"></span><br>
+<span id="f6"></span>
+</div>
+</form>
+</body>
+</html>

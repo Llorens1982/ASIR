@@ -1,0 +1,1 @@
+CREATE INDEX i_nom_cli ON CLIENT (nom);

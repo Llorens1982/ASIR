@@ -1,0 +1,10 @@
+ORCL2003 =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = VWINDOWS2003)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      
+      (SERVICE_NAME = orcl2003)
+    )
+  )

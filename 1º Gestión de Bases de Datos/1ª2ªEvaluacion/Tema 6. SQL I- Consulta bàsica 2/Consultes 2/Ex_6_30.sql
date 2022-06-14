@@ -1,0 +1,3 @@
+SELECT DISTINCT cod_ven 
+FROM factura 
+WHERE TO_CHAR(data,'YYYY-MM')='2015-01';

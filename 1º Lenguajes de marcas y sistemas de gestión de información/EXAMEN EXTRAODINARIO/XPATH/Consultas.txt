@@ -1,0 +1,15 @@
+ Identificador de todos los ciclos.
+ 
+ //ciclos/ciclo/@id
+
+ Nombre de las materias que tienen 40 horas teóricas.
+ 
+ //materia[horas_teoricas=40]/nombre/text()
+
+ Código de las materias que estudian alguna mujer.
+
+ //estudiante[sexo="Mujer"]//materia/@codigo
+ 
+ Nombre de los ciclos que tengan coordinador.
+
+//ciclo[coordinador]/nombre/text()

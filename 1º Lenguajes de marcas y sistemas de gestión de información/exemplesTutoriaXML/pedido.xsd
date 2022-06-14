@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    
+  <xs:element name="pedido">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="producto" type="tipoProducto" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="fecha" type="xs:date"/>
+    </xs:complexType>
+  </xs:element>
+ 
+  <xs:complexType name="tipoProducto">
+    <xs:sequence>
+    <xs:element name="referencia" type="tipoReferencia"></xs:element>
+    <xs:element name="talla" type="tipoTalla"></xs:element>
+    <xs:element name="unidades" type="xs:integer"></xs:element>
+     <xs:element name="color"  minOccurs="0" type="tipoColor"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+   <xs:simpleType name="tipoTalla">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="S"/>
+         <xs:enumeration value="M"/>
+         <xs:enumeration value="L"/>
+         <xs:enumeration value="XL"/>
+      </xs:restriction>
+   </xs:simpleType>
+    
+    <xs:simpleType name="tipoReferencia">
+      <xs:restriction base="xs:string">
+         <xs:pattern value="[A-Z]-[1-9]{3}"/>
+      </xs:restriction>
+   </xs:simpleType>
+   
+  <xs:complexType name="tipoColor">
+ <xs:simpleContent>
+      <xs:extension base="xs:string">
+      <xs:attribute name="codigo" type="xs:integer"/>      
+      </xs:extension>
+    </xs:simpleContent>
+  
+</xs:complexType>   
+   
+   
+  
+   
+</xs:schema>

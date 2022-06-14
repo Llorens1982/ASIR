@@ -1,0 +1,239 @@
+Implantación Sistemas Operativos
+Práctica de Refuerzo de Administración de Linux
+
+TEMA 10: ADMINISTRACIÓN DE LINUX.
+Consideraciones previas
+No hay que entregar nada de esta práctica. Es para aquellos que tienen dificultades con
+los comandos de Linux.
+Es una práctica guiada que hay que hacer mediante la consola de comandos.
+PRÁCTICA 1. Usuarios y Grupos
+1. Abre una terminal de comandos.
+2. Crea un usuario llamado mercurio
+$ sudo useradd mercurio
+
+Necesitamos utilizar el mandato sudo
+3. Al crearlo sin ningún parámetro no nos ha creado la carpeta personal. Comprueba
+que no se ha creado.
+$ ls /home
+
+4. Elimina el usuario mercurio
+$ sudo usedel mercurio
+
+5. Comprueba en el fichero de usuarios que no está el usuario mercurio
+$ cat /etc/passwd
+
+6. Vuelve a crear el usuario mercurio indicándole que nos cree su carpeta personal.
+$ sudo useradd mercurio –m
+
+7. Comprueba que esta vez sí se ha creado la carpeta.
+$ ls /home
+
+8. Al crear el usuario se ha creado también un grupo, llamado igual, y que es el grupo
+principal del usuario. Visualiza los ficheros correspondientes para comprobarlo.
+$ cat /etc/group
+$ cat /etc/passwd
+
+CFGS: ADMINISTRACIÓN SISTEMAS INFORMÁTICOS RED
+
+1/6
+
+JOSÉ RAMÓN PELLICER MARCO
+
+Implantación Sistemas Operativos
+Práctica de Refuerzo de Administración de Linux
+
+Si quisiéramos que sólo nos aparecieran las líneas con la palabra mercurio:
+$ cat /etc/group | grep mercurio
+$ cat /etc/passwd | grep mercurio
+
+Observa que el GID del grupo mercurio en el fichero /etc/group coincide con el
+asignado al usuario en el fichero /etc/passwd como grupo principal del usuario
+9. Elimina el usuario mercurio junto con su carpeta personal y comprueba que se ha
+eliminado tanto el usuario, como el grupo como la carpeta
+$ sudo usedel -r mercurio
+$ ls /home
+$ cat /etc/group | grep mercurio
+$ cat /etc/passwd | grep mercurio
+
+10. Crea un grupo llamado planetas
+$ sudo groupadd planetas
+
+11. Crea en la raíz un directorio llamado hogar
+$ sudo mkdir /hogar
+
+Al no tener permisos de escritura en la raíz necesitamos ejecutar el comando como
+administrador, por eso utilizamos sudo
+12. Crea un usuario, de nuevo, llamado mercurio cuyo grupo principal sea planetas y su
+carpeta personal sea /hogar/mercurio
+$ sudo useradd -m -d /hogar/mercurio -g planetas mercurio
+
+El parámetro -m es para crear la carpeta personal. EL -d para indicarle una carpeta
+personal distinta a la que se crea por defecto. El -g para indicarle el grupo principal
+(al hacerlo no se creará un grupo con el mismo nombre que el del usuario).
+13. Asigna la contraseña mercurio al usuario mercurio
+$ sudo passwd mercurio
+
+14. Inicia sesión con el usuario mercurio
+
+CFGS: ADMINISTRACIÓN SISTEMAS INFORMÁTICOS RED
+
+2/6
+
+JOSÉ RAMÓN PELLICER MARCO
+
+Implantación Sistemas Operativos
+Práctica de Refuerzo de Administración de Linux
+
+Podemos hacerlo abriendo una nueva terminal con las teclas ctrl+alt+F1, o F2, … o
+tecleando el siguiente mandato:
+$ su – mercurio
+
+Al poner el símbolo – nos abre una sesión distinta a la que teníamos.
+15. Fíjate (en el prompt) que el shell no es el bash
+16. Con el usuario mercurio, cierra la sesión
+$ exit
+
+17. Edita el fichero /etc/passwd para que el shell del usuario mercurio sea /bin/bash (en
+lugar de /bin/sh)
+$ sudo nano /etc/passwd
+
+En la línea correspondiente sustituimos /bin/sh por /bin/bash y guardamos el fichero
+y salimos.
+18. Vuelve a abrir sesión con mercurio.
+19. Con el usuario mercurio comprueba en qué directorio estás situado. Ese es el
+directorio $HOME
+$ pwd
+
+Su directorio debe ser /hogar/mercurio
+20. Cierra sesión de mercurio
+$ exit
+
+21. Bloquea el usuario mercurio para que no pueda abrir sesión
+$ sudo passwd -l mercurio
+
+El parámetro -l bloquea el usuario poniendo un símbolo de exclamación (!) delante
+de la contraseña cifrada del fichero /etc/shadow
+22. Comprueba que el fichero de contraseña ha cambiado con el signo de exclamación
+delante de la contraseña de mercurio
+$ sudo cat /etc/shadow
+
+CFGS: ADMINISTRACIÓN SISTEMAS INFORMÁTICOS RED
+
+3/6
+
+JOSÉ RAMÓN PELLICER MARCO
+
+Implantación Sistemas Operativos
+Práctica de Refuerzo de Administración de Linux
+
+23. Intenta abrir sesión con el usuario mercurio
+24. Desbloquea el usuario mercurio
+$ sudo passwd -u mercurio
+
+El parámetro -u desbloquea el usuario quitando el símbolo de exclamación (!) de
+delante de la contraseña cifrada del fichero /etc/shadow
+
+PRÁCTICA 2. Permisos
+25. Sitúate, si no lo estás, en tu directorio $HOME
+$ cd
+
+26. Crea un fichero de texto llamado autores en tu carpeta $HOME que contenga la
+siguiente lista de escritores:
+Carlos Ruiz Zafón
+Arturo Pérez Reverte
+Antonio Muñoz Molina
+Matilde Asensi
+$ nano autores
+
+O bien:
+$ vi autores
+
+O también:
+$ echo “Carlos Ruiz Zafón” > autores
+$ echo “Arturo Pérez Reverte” >> autores
+$ echo “Antonio Muñoz Molina” >> autores
+$ echo “Matilde Asensi” >> autores
+
+27. Visualiza el contenido del fichero
+$ cat autores
+
+28. Visualiza los permisos, el usuario propietario y el grupo propietario del fichero
+autores.
+
+CFGS: ADMINISTRACIÓN SISTEMAS INFORMÁTICOS RED
+
+4/6
+
+JOSÉ RAMÓN PELLICER MARCO
+
+Implantación Sistemas Operativos
+Práctica de Refuerzo de Administración de Linux
+
+$ ls –l autores
+
+29. Cambia el usuario propietario del fichero autores para que sea el usuario mercurio.
+$ sudo chown mercurio autores
+
+Necesitamos permisos de administrador para cambiar el propietario, de ahí la
+necesidad de utilizar el sudo.
+30. Vuelve a visualizar los permisos, el usuario propietario y el grupo propietario del
+fichero autores. Comprueba que ha cambiado el propietario.
+$ ls –l autores
+
+31. Cambia el grupo propietario del fichero autores para que sea el grupo planetas.
+$ sudo chown .planetas autores
+
+O bien:
+$ sudo chgrp planetas autores
+
+Necesitamos permisos de administrador para cambiar el propietario, de ahí la
+necesidad de utilizar el sudo.
+32. Vuelve a cambiar el usuario y el grupo propietario del fichero autores para que sea
+el usuario y grupo alumno original.
+$ sudo chown alumno.alumno autores
+
+33. Dale permisos al fichero autores de manera que el propietario tenga permiso de
+lectura, escritura y ejecución.
+$ chmod u=rwx autores
+
+O bien:
+$ chmod u+x autores
+
+Otra opción sería:
+$ chmod 764 autores
+
+CFGS: ADMINISTRACIÓN SISTEMAS INFORMÁTICOS RED
+
+5/6
+
+JOSÉ RAMÓN PELLICER MARCO
+
+Implantación Sistemas Operativos
+Práctica de Refuerzo de Administración de Linux
+
+34. Dale permisos al fichero autores de manera que el grupo propietario tenga
+únicamente permiso de lectura.
+Asignamos sólo lectura al grupo:
+$ chmod g=r autores
+
+O bien quitamos el de escritura al grupo:
+$ chmod g-w autores
+
+Otra opción sería:
+$ chmod 744 autores
+
+35. Dale permisos al fichero autores de manera que el propietario tenga permiso de
+lectura y escritura. Los miembros del grupo del propietario sólo puedan leerlo y el
+resto no tenga ningún acceso a él. Utiliza un solo mandato.
+$ chmod u=rwx,g=r,o-r fichero
+
+Otra opción sería:
+$ chmod 740
+
+CFGS: ADMINISTRACIÓN SISTEMAS INFORMÁTICOS RED
+
+6/6
+
+JOSÉ RAMÓN PELLICER MARCO
+
+

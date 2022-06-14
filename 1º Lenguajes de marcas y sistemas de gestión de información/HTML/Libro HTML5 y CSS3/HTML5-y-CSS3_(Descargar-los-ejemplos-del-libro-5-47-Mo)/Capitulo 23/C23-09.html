@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Html5</title>
+<meta charset="iso-8859-1"> 
+</head>
+<body>
+<canvas id="dibujo" width="240px" height="200px" style="border: 1px solid black">
+Su navegador no soporta la etiqueta canvas
+</canvas>
+<script type="text/javascript">
+var canvas = document.getElementById( "dibujo" );
+var contexto = canvas.getContext( "2d" );
+contexto.textBaseline = "alphabetic";
+contexto.textAlign = "left";
+contexto.font = '36px "Segoe UI" bold';
+contexto.fillText("Html5 canvas", 10, 70); 
+contexto.font = '80px "Segoe UI" bold';
+contexto.strokeText("Html5", 10, 150);
+</script>
+</body>
+</html>

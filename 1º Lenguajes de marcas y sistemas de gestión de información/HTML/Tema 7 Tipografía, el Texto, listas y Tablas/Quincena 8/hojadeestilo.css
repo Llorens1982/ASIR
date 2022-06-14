@@ -1,0 +1,14 @@
+body {background-color: #99cccc ;
+	  font-family: "Times New Roman";}
+p {text-align: left;}
+.subrayadoinferior {text-decoration: underline;}
+.negrita {font-weight: bold;}
+.textohaciaderecha { text-align: right;}
+.textocentrado {text-align: center;}
+.letragrande {font-size:32px;}
+.letramediana {font-size: 22px;}    
+footer {font-family: verdana;
+	    text-align: right;
+	    font-size: 22px;
+	    color:#00008B}
+ 

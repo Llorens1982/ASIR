@@ -1,0 +1,262 @@
+PRÁCTICA 1. Particionado manual
+Para entregar, captura la pantalla de los puntos 6 y 7 y escribe lo que se te pide en el punto 9.
+1. Arranca la máquina Einstein.
+2. Abre un Terminal. Lo vamos a hacer todo con comandos.
+3. Abre sesión de root mediante el mandato
+$ sudo su 4. Teclea el mandato
+# fdisk -l
+5. Comprueba en la salida del mandato anterior que aparecen las dos unidades de disco
+añadidas (sdb y sdc). En ambas debe haber una tabla de particiones no válida (no hay tabla de
+particiones).
+
+6. Con el comando fdisk crea 2 particiones primarias en el primer disco nuevo. La primera
+partición será de 30GB y la segunda de 20GB. Será un disco MBR. Captura la pantalla del
+proceso de creación de las particiones.
+Welcome to fdisk (util-linux 2.27.1).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+Orden (m para obtener ayuda): o
+Created a new DOS disklabel with disk identifier 0x2e52d8a3.
+Orden (m para obtener ayuda): n
+Partition type
+p primary (0 primary, 0 extended, 4 free)
+e extended (container for logical partitions)
+Select (default p):
+Using default response p.
+Número de partición (1-4, default 1):
+First sector (2048-104857599, default 2048):
+Last sector, +sectors or +size{K,M,G,T,P} (2048-104857599, default 104857599): +30700M
+Created a new partition 1 of type 'Linux' and of size 30 GiB.
+Orden (m para obtener ayuda): n
+Partition type
+
+p primary (1 primary, 0 extended, 3 free)
+e extended (container for logical partitions)
+Select (default p):
+Using default response p.
+Número de partición (2-4, default 2):
+First sector (62875648-104857599, default 62875648):
+Last sector, +sectors or +size{K,M,G,T,P} (62875648-104857599, default 104857599):
+Created a new partition 2 of type 'Linux' and of size 20 GiB.
+Orden (m para obtener ayuda): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+(INDICANDO GIGAS ADEMAS DE MEGAS)
+# fdisk /dev/sdb
+Orden (m para obtener ayuda): o
+Created a new DOS disklabel with disk identifier 0x65eff13e.
+Orden (m para obtener ayuda): n
+Partition type
+p primary (0 primary, 0 extended, 4 free)
+e extended (container for logical partitions)
+Select (default p):
+Using default response p.
+Número de partición (1-4, default 1):
+First sector (2048-104857599, default 2048):
+Last sector, +sectors or +size{K,M,G,T,P} (2048-104857599, default 104857599): +30GB
+Created a new partition 1 of type 'Linux' and of size 28 GiB.
+Orden (m para obtener ayuda): n
+Partition type
+p primary (1 primary, 0 extended, 3 free)
+e extended (container for logical partitions)
+Select (default p):
+Using default response p.
+Número de partición (2-4, default 2):
+First sector (58595328-104857599, default 58595328):
+Last sector, +sectors or +size{K,M,G,T,P} (58595328-104857599, default 104857599):
++20GB
+Created a new partition 2 of type 'Linux' and of size 18,6 GiB.
+Orden (m para obtener ayuda): w
+
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+7.
+
+El
+
+segundo nuevo disco lo vamos a particionar con una tabla de particiones GPT. Para ello utiliza
+el mandato gdisk. Crea dos particiones de 25 GB cada una. Captura la pantalla del proceso de
+creación de las particiones.
+root@alumno-VirtualBox:/home/alumno# gdisk /dev/sdc
+GPT fdisk (gdisk) version 1.0.1
+Partition table scan:
+MBR: protective
+BSD: not present
+APM: not present
+GPT: present
+Found valid GPT with protective MBR; using GPT.
+Command (? for help): o
+This option deletes all partitions and creates a new protective MBR.
+Proceed? (Y/N): y
+Command (? for help): n
+Partition number (1-128, default 1):
+First sector (34-104857566, default = 2048) or {+-}size{KMGTP}:
+Last sector (2048-104857566, default = 104857566) or {+-}size{KMGTP}: +25GB
+Current type is 'Linux filesystem'
+Hex code or GUID (L to show codes, Enter = 8300):
+Changed type of partition to 'Linux filesystem'
+Command (? for help): n
+Partition number (2-128, default 2):
+First sector (34-104857566, default = 52430848) or {+-}size{KMGTP}:
+Last sector (52430848-104857566, default = 104857566) or {+-}size{KMGTP}:
+Current type is 'Linux filesystem'
+Hex code or GUID (L to show codes, Enter = 8300):
+Changed type of partition to 'Linux filesystem'
+Command (? for help): w
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdc.
+The operation has completed successfully
+
+8. Formatea desde la línea de comandos cada una de las 4 particiones creadas. Tres tendrán el
+formato ext4 y la de 20GB tendrá un sistema de ficheros BtrFS.
+# mkfs.ext4 -L Disco1Particion1 /dev/sdb1
+# mkfs.ext4 -L Disco1Particion2 /dev/sdb2
+mkfs.btrfs -L Disco2Particion1 /dev/sdc1
+# mkfs.btrfs -L Disco2Particion2 /dev/sdc2
+9. Comprueba con el mandato fdisk -l cada una de las particiones existentes en los tres discos.
+Escríbelas en el documento a entregar indicando por cada una de ellas el nombre, el tipo, el
+tamaño, el disco en el que se encuentra y el sistema de ficheros que contiene
+root@alumno-VirtualBox:/home/alumno# fdisk -l
+Disk /dev/sda: 80 GiB, 85899345920 bytes, 167772160 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xc85d51b8
+Disposit. Inicio Start Final Sectores Size Id Tipo
+/dev/sda1 *
+2048 165675007 165672960 79G 83 Linux
+/dev/sda2
+165677054 167770111 2093058 1022M 5 Extendida
+/dev/sda5
+165677056 167770111 2093056 1022M 82 Linux swap / Solaris
+Disk /dev/sdb: 50 GiB, 53687091200 bytes, 104857600 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x2e52d8a3
+Disposit. Inicio
+
+Start
+
+Final Sectores Size Id Tipo
+
+/dev/sdb1
+/dev/sdb2
+
+2048 62875647 62873600 30G 83 Linux
+62875648 104857599 41981952 20G 83 Linux
+
+Disk /dev/sdc: 50 GiB, 53687091200 bytes, 104857600 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 28B7DA34-454F-4F43-B69F-D24E1CB7AE94
+Disposit. Start Final Sectores Size Tipo
+/dev/sdc1
+2048 52430847 52428800 25G Linux filesystem
+/dev/sdc2 52430848 104857566 52426719 25G Linux filesystem
+
+PRÁCTICA 2. Montaje de particiones
+
+Para entregar, escribe los comandos que has escrito en los puntos 11 y 13 y captura la pantalla del
+punto 19.
+10. Crea un directorio en /media llamado contabilidad
+$ sudo mkdir /media/contabilidad
+11. Monta una de las particiones de 25GB creada en los puntos anteriores en el directorio
+contabilidad.
+$ sudo mount /dev/sdc1 /media/contabilidad
+12. Crea un directorio en /media llamado produccion
+$ sudo mkdir /media/produccion
+13. Modifica el fichero correspondiente para que cada vez que se arranque el sistema se monte
+de manera automática la otra partición de 25GB en el directorio produccion. En el documento a
+entregar escribe la línea que añades al fichero, así como el nombre del fichero.
+$ sudo nano /etc/fstab
+/dev/sdc2 /media/produccion btrfs defaults 0 0
+14. Comprueba que funciona el punto anterior tecleando el mandato: # mount -a
+15. Crea una carpeta compartida en virtualbox y móntala en el Linux.
+$ sudo mount -t vboxsf Compartida /media/compartida
+16. Haz pruebas para compartir datos entre el SO Guest y el SO Host.
+Funciona por que comparti la carpeta de descargas
+17. Inserta una unidad de USB en tu máquina anfitrión. Configura Virtualbox para que la
+reconozca en la máquina virtual.
+18. Comprueba que Linux la reconoce y la monta de manera automática. Si no es así, móntala
+de manera manual.
+
+19.
+Abre
+el
+
+explorador de archivos y sitúate en la carpeta donde ha montado la unidad de USB. Captura la
+pantalla.
+
+Se monta automaticamente, es un usb instalador de Kubuntu 18.04, el unico problema que he
+tenido es al configurar el USB en Virtualbox con linux tienes que formar parte del grupo
+vboxusers.
+20. Apaga la máquina Einstein.
+PRÁCTICA 3. Instalación de Ubuntu con LVM con particionado automático
+Para entregar, escribe los comandos que has escrito en el punto 33.
+21. Inserta el cd de instalación de Ubuntu en la máquina Turing.
+22. Arranca la máquina Turing e inicia el proceso de instalación.
+23. Al llegar al punto del particionado del disco (pantalla de tipo de instalación), selecciona
+Borrar disco y marca también la opción Usar LVM en la instalación de Ubuntu. Deben estar
+marcadas ambas opciones.
+24. Completa el proceso de instalación, indicando el nombre de usuario (alumno), el nombre del
+equipo (Turing) y la contraseña del usuario (alumno).
+
+25. Una vez instalado comprueba con el comando fdisk –l la lista de particiones.
+
+26. Comprueba mediante los correspondientes comandos los discos físicos (PVs), los grupos de
+volúmenes (VGs) y los volúmenes lógicos (LVs) que se han creado.
+
+27. Compruébalo todo mediante la aplicación Discos de la interfaz gráfica.
+
+28. Fíjate en la mezcla de particiones tradicionales y volúmenes lógicos. Observa que en la
+partición primaria está montado el directorio /boot, esto es así pues necesita arrancar de una
+partición, no puede hacerse desde un LV.
+29. El sistema de archivos / está montado en un LV.
+30. Apaga la máquina.
+31. Añade un nuevo disco de 30GB
+
+32. Arranca la máquina.
+33. Teclea la secuencia de comandos necesarios para añadir los nuevos 30GB al sistema de
+ficheros ext4 montado en / mediante el uso de volúmenes lógicos.
+$ sudo pvcreate devsdb
+$ sudo vgextend ubuntu-vg /dev/sdb
+$ sudo lvextend L+29GB /dev/mapper/ubuntu--vg-root
+$ sudo resize2fs /dev/mapper/ubuntu—vg-root
+34. Comprueba el tamaño de la unidad donde está montado /
+
+PRÁCTICA 4. NFS
+Para esta práctica es necesario tener arrancadas las dos máquinas (Einstein y Turing). Para entregar,
+captura la pantalla del punto 41.
+35. Cambia el tipo de adaptador de red de las máquinas Einstein y Turing para que estén en
+modo puente (bridge).
+36. En la máquina Turing instala el servidor NFS.
+$ sudo apt-get install nfs-kernel-server
+37. Crea una carpeta (Documentos), y compártela mediante el protocolo NFS de manera que
+todos los equipos y usuarios de la red puedan leer y escribir en ella.
+$ sudo mkdir /Documentos
+$ nano /etc/exports (se añade la linea /documentos *(rw) )
+$ sudo service nfs-kernel-server start
+38. En la máquina Einstein instala el cliente NFS.
+# apt-get install portmap nfs-common
+39. Monta la carpeta creada Documentos de la máquina Turing y crea algún fichero en ella.
+# mount -t 192.168.1.17:/home/alumno/Documentos /docs-servidor
+40. Modifica el fichero fstab para que se monte de manera automática al arrancar la máquina.
+
+# nano /etc/fstab
+linea: 192.168.1.17:/home/alumno/Documentos /docs-servidor nfs
+41. Teclea el mandato mount y captura la pantalla mostrando la línea en la que aparece la
+carpeta compartida montada.
+
+

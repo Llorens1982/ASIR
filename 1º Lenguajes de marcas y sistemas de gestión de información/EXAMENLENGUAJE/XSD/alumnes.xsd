@@ -1,0 +1,43 @@
+﻿<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="ciutat" type="xs:string"/>
+  <xs:simpleType name="carrer" type="xs:string"/>
+  <xs:simpleType name="numero" type="xs:decimal"/>
+  <xs:simpleType name="pis" type="xs:decimal"/>
+  <xs:simpleType name="porta" type="xs:decimal"/>
+  <xs:simpleType name="cp" type="xs:short"/>
+  <xs:simpleType name="nom" type="xs:string"/>
+  <xs:simpleType name="cognom" type="xs:string"/>
+  <xs:simpleType name="Edat" type="xs:decimal"/>
+  <xs:simpleType name="adreca">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ciutat"/>
+        <xs:element ref="carrer"/>
+        <xs:element ref="numero"/>
+        <xs:element ref="pis"/>
+        <xs:element ref="porta"/>
+        <xs:element ref="cp"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="alumne">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="nom"/>
+        <xs:element ref="cognom" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element ref="Edat"/>
+        <xs:element ref="adreca"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="id"/>
+      <xs:attribute type="xs:string" name="cicle"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="alumnes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="alumne" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="institut"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,18 @@
+<!ELEMENT alumnes (alumne)+>
+<!ELEMENT alumne (nom,cognom+,Edat,adreca)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT cognom (#PCDATA)>
+<!ELEMENT Edat (#PCDATA)>
+<!ELEMENT adreca (ciutat,carrer,numero,pis,porta,cp)>
+<!ELEMENT ciutat (#PCDATA)>
+<!ELEMENT carrer (#PCDATA)>
+<!ELEMENT numero (#PCDATA)>
+<!ELEMENT pis (#PCDATA)>
+<!ELEMENT porta (#PCDATA)>
+<!ELEMENT cp (#PCDATA)>
+
+
+
+<!ATTLIST alumnes institut ID #REQUIRED>
+<!ATTLIST alumne id #REQUIRED>
+<!ATTLIST alumne cicle (ASIX|SMX|DAW|DAM|) #REQUIRED>

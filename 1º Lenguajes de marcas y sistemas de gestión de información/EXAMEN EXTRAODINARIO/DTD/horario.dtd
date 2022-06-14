@@ -1,0 +1,16 @@
+ <?xml encoding="UTF-8"?>
+
+<!ELEMENT horario (entrenamiento,plantilla)>
+<!ELEMENT entrenamiento (entrenador,tiempo)>
+<!ELEMENT plantilla (jugador)+>
+<!ELEMENT entrenador (#PCDATA)>
+<!ELEMENT tiempo (#PCDATA)>
+<!ELEMENT jugador (nombre,dorsal)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT dorsal (#PCDATA)>
+
+<!ATTLIST horario dia CDATA>
+<!ATTLIST entrenamiento tipo CDATA>
+<!ATTLIST tiempo medidas CDATA>
+<!ATTLIST jugador pos (portero|defensa|medio|delantero) #REQUIRED>
+<!ATTLIST jugador ID #REQUIRED>

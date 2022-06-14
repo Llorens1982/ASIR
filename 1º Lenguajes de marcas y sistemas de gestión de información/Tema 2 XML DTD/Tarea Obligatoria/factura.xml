@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  factura SYSTEM  "factura.dtd">
+<factura num_fac="C123f">
+  
+    <datos_empresa>
+                                          <nombre>Ordenadores Sagunto</nombre>
+                                          <dir>Avda. Fausto Caruana</dir>
+                                          <poblacion cod_postal="46520">Sagunto</poblacion>
+                                          <provincia>Valencia</provincia>
+                                          <cif>Q-6666666</cif>
+                                          <telefono></telefono>
+    </datos_empresa>
+    <datos_cliente num_cli="x1234">
+                                              <nombre>Francesc Martí Picó</nombre>
+                                              <dir_env>Av. Valencia, 5, 7</dir_env>
+                                              <poblacion cod_postal="46008">Valencia</poblacion>
+                                              <provincia>Valencia</provincia>
+      </datos_cliente>
+    
+      <datos_factura num_ped="p547" iva="21" f_pago="efectivo"
+        moneda="euro">
+                                <fecha>12-04-2017</fecha>
+                                <linea>
+                                          <ref>LIMI93PE/4</ref>
+                                          <desc>PORTATIL ASUS</desc>
+                                          <cant>1</cant>
+                                          <precio>500</precio>
+                                          <importe>605</importe>
+                                </linea>
+                                <linea>
+                                          <ref>LIMI94PE/4</ref>
+                                          <desc>PORTATIL HP</desc>
+                                          <cant>1</cant>
+                                          <precio>450</precio>
+                                          <importe>544,50</importe>
+                                </linea>
+                                <linea>
+                                          <ref>LIMI94ZE/4</ref>
+                                          <desc>MINIPORTATIL HAP</desc>
+                                          <cant>2</cant>
+                                          <precio>250</precio>
+                                          <importe>605,00</importe>
+                                </linea>
+                                <linea>
+                                          <ref> LIMI54RE/4</ref>
+                                          <desc>MONITOR LG 17</desc>
+                                          <cant>4</cant>
+                                          <precio>120</precio>
+                                          <importe>580,80</importe>
+                                </linea>
+                                <base>1930,00</base>
+                                <cuota_iva>405,30</cuota_iva>
+                                <total>2335,30</total>
+      </datos_factura>
+</factura>

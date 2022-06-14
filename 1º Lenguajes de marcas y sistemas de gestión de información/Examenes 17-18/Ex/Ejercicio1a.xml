@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Pedido xmlns="http://www.todogames.org/pedidos" fecha="2017-05-15">
+  <Destino>
+    <Nombre>Abel Martí Martín</Nombre>
+    <Direccion>Calle Bergatín 22-24</Direccion>
+    <Ciudad>Los Barrios</Ciudad>
+    <CodPostal>46853</CodPostal>
+  </Destino>
+  <Observaciones>En blanco a ser posible </Observaciones>
+  <Ordenante>
+    <Nombre>Alejandro Blanco Sánchez</Nombre>
+    <Direccion>Calle Illa de Buda 55</Direccion>
+    <Ciudad>Sant Quirze del Vallès</Ciudad>
+    <CodPostal>17088</CodPostal>
+  </Ordenante>
+  <Contenido>
+    <Producto codigo="945-BA">
+      <Nombre>XBOX 360</Nombre>
+      <Cantidad>1</Cantidad>
+      <Precio>410.90</Precio>
+      <Observaciones> </Observaciones>
+    </Producto>
+    <Producto codigo="153-CS">
+      <Nombre>FIFA 18</Nombre>
+      <Cantidad>1</Cantidad>
+      <Precio>34.95</Precio>
+    </Producto>
+  </Contenido>
+</Pedido>

@@ -1,0 +1,9 @@
+CREATE OR REPLACE FUNCTION DEU_Q() RETURNS void AS 
+$CUERPO$
+BEGIN
+FOR y IN 1..10 LOOP
+RAISE NOTICE 'Numero:%. Cuadrado:% ' , y, y*y; 
+END LOOP;
+END;
+$CUERPO$
+LANGUAGE 'plpgsql';

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:annotation>	
+	<xs:documentation >
+		Restricciones ejercicio
+		1) carrer 			máximo 100 caracteres
+		2) codi postal 		5 dígitos, obligatorio
+		3) referencia pis 	única, no puede repetirse
+		4) tipus pis 		(Pis | Dúplex | Casa)
+		5) 					(venta | lloguer)
+	</xs:documentation>	
+</xs:annotation>
+
+<!--
+	definición de elementos simples
+--> 
+<xs:element name="carrer">
+	<xs:simpleType>
+	<xs:restriction base="xs:string">
+		<xs:maxLength value="100"/>
+	</xs:restriction>	
+	</xs:simpleType> 	
+</xs:element>
+
+<xs:element name="codi_postal">
+	<xs:simpleType>
+	<xs:restriction base="xs:decimal">
+		<xs:pattern value="[0-9]{5}"/>
+	</xs:restriction>	
+	</xs:simpleType> 	
+</xs:element>
+
+<xs:element name="poblacio" type="xs:string"/>
+
+<xs:element name="tipus">
+	<xs:simpleType>
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="Pis"/>
+		<xs:enumeration value="Dúplex"/>
+		<xs:enumeration value="Casa"/>
+	</xs:restriction>	
+	</xs:simpleType>	
+</xs:element>
+
+<xs:element name="venta_o_lloguer">
+	<xs:simpleType>
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="Venta"/>
+		<xs:enumeration value="Lloguer"/>		 
+	</xs:restriction>	
+	</xs:simpleType>	
+</xs:element>
+
+<xs:element name="preu" type="xs:decimal"/>
+
+<!--
+Definición Attributes
+-->
+<xs:attribute name="codi" type="xs:string"/>
+	 
+
+
+ <!--
+ Definición elementos complejos
+
+
+pisos
+pis
+adresa
+-->
+<xs:element name="pisos">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="pis" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+		
+	</xs:complexType>	
+</xs:element>	
+
+
+
+<xs:element name="pis">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="adresa"/>
+			<xs:element ref="tipus"/>
+			<xs:element ref="venta_o_lloguer"/>
+			<xs:element ref="preu"/>
+
+		</xs:sequence>	
+		<xs:attribute ref="codi" id="codi"/>	
+	</xs:complexType>	
+</xs:element>	
+
+
+
+
+
+
+<xs:element name="adresa">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="carrer"/>
+			<xs:element ref="codi_postal"/>
+			<xs:element ref="poblacio"/>
+		</xs:sequence>	
+	</xs:complexType>
+</xs:element>		
+
+
+
+</xs:schema>	
+
+
+

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="notas.xsl"?>
+﻿<notas>
+  <alumno>
+    <nombre>Joan Garcia</nombre>
+    <programacion>5</programacion>
+    <sistemas_operativos>4</sistemas_operativos>
+    <redes>6</redes>
+  </alumno>
+  <alumno>
+    <nombre>Vicente Albiol</nombre>
+    <programacion>5</programacion>
+    <sistemas_operativos>6</sistemas_operativos>
+    <redes>4</redes>
+  </alumno>
+  <alumno>
+    <nombre>Daniel Segura</nombre>
+    <programacion>7</programacion>
+    <sistemas_operativos>6</sistemas_operativos>
+    <redes>8</redes>
+  </alumno>
+</notas>

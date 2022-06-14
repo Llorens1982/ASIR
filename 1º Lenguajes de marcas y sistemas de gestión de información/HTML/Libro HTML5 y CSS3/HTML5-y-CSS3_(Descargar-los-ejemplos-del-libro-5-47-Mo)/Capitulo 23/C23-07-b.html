@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Html5</title>
+<meta charset="UTF-8"> 
+</head>
+<body>
+<canvas id="zona" width="150px" height="150px" style="border: 1px solid black">
+Su navegador no soporta la etiqueta canvas
+</canvas>
+<script type="text/javascript">
+var canvas = document.getElementById("zona");
+var contexto = canvas.getContext("2d");
+contexto.beginPath();
+contexto.lineWidth = 2;
+contexto.moveTo(75,25);
+contexto.quadraticCurveTo(25,25,25,62.5);
+contexto.quadraticCurveTo(25,100,50,100);
+contexto.quadraticCurveTo(50,120,30,125);
+contexto.quadraticCurveTo(60,120,65,100);
+contexto.quadraticCurveTo(125,100,125,62.5);
+contexto.quadraticCurveTo(125,25,75,25);
+contexto.stroke();
+</script>
+</body>
+</html>

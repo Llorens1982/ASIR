@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="projectes.xsl"?>
+<empresa>
+  <projecte estat="iniciado">
+    <nom>Optimización y control multivariable de sistemas de refrigeración</nom>
+    <durada>2</durada>
+    <dataInici>30/01/2014</dataInici>
+    <pressupost>12345</pressupost>
+    <participants>
+      <responsable departament="Automática e informática">Daniel Garcia</responsable>
+      <responsable departament="Ingenería de software">Francisco Gonzalez</responsable>
+      <responsable departament="Lenguaje y sistemas informáticos">Antonio Morales</responsable>
+    </participants>
+  </projecte>
+  <projecte estat="finalizado">
+    <nom>Control basado en eventos de sistemas distribuidos y colaborativos</nom>
+    <durada>4</durada>
+    <dataInici>15/06/2013</dataInici>
+    <pressupost>33333</pressupost>
+    <participants>
+      <responsable departament="Automática e informática">Daniel Garcia</responsable>
+      <responsable departament="Lenguaje y sistemas informáticos">Antonio Morales</responsable>
+      <responsable departament="Ingenería de software">Francisco Gonzalez</responsable>
+    </participants>
+  </projecte>
+  <projecte estat="iniciado">
+    <nom>Sistema autónomo para la contención de residuos en el mar</nom>
+    <durada>8</durada>
+    <dataInici>01/12/2015</dataInici>
+    <pressupost>54321</pressupost>
+    <participants>
+      <responsable departament="Lenguaje y sistemas informáticos">Antonio Morales</responsable>
+      <responsable departament="Ingenería de software">Francisco Gonzalez</responsable>
+      <responsable departament="Automática e informática">Daniel Garcia</responsable>
+    </participants>
+  </projecte>
+</empresa>

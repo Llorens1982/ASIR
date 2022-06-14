@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persones>
+  <professor>
+       <nom>Pere Garcia</nom>
+       <assignatura>XML</assignatura>
+  </professor>
+  <professor>
+       <nom>Joan Perdut</nom>
+       <assignatura>Xarxes Locals</assignatura>
+  </professor>
+  <professor>
+       <nom>Johannes Wirth</nom>
+       <assignatura>Programació</assignatura>
+  </professor>
+  <alumne>
+    <nom>Federicu Pi</nom>
+    <poblacio>Valencia</poblacio>
+    <any>2010</any>
+    <credits>
+      <assignatura>XML</assignatura>
+      <assignatura>Xarxes Locals</assignatura>
+    </credits>
+  </alumne>
+  <alumne>
+    <nom>Marcelinu Paivinu</nom>
+    <poblacio>Valencia</poblacio>
+    <any>2007</any>
+    <credits>
+      <assignatura>Xarxes Locals</assignatura>
+    </credits>
+  </alumne>
+  <alumne>
+    <nom>Filomeno Garcia</nom>
+    <poblacio>Castelló</poblacio>
+    <any>2010</any>
+    <credits>
+      <assignatura>Programació</assignatura>
+      <assignatura>Xarxes Locals</assignatura>
+    </credits>
+  </alumne>
+  <alumne>
+    <nom>Eustaquio Pons</nom>
+    <any>2008</any>
+    <poblacio>Castelló</poblacio>
+    <credits>
+      <assignatura>XML</assignatura>
+    </credits>
+  </alumne>
+  <alumne>
+    <nom>Tomeu Bonys</nom>
+    <any>2009</any>
+    <poblacio>Castelló</poblacio>
+    <credits>
+      <assignatura repeteix="Si">XML</assignatura>
+      <assignatura>Programació</assignatura>
+    </credits>
+  </alumne>
+  <alumne>
+    <nom>Bernat Garengou</nom>
+    <any>2010</any>
+    <poblacio>Castelló</poblacio>
+    <credits>
+      <assignatura>XML</assignatura>
+      <assignatura repeteix="Si">Xarxes Locals</assignatura>
+    </credits>
+  </alumne>
+  <alumne>
+    <nom>Pere Nou</nom>
+    <any>2010</any>
+    <poblacio>Castelló</poblacio>
+    <credits>
+      <assignatura>Programació</assignatura>
+    </credits>
+  </alumne>
+  <alumne>
+    <nom>Bill Garcia</nom>
+    <any>2010</any>
+    <poblacio>Castelló</poblacio>
+    <credits>
+      <assignatura>XML</assignatura>
+      <assignatura repeteix="Si">Programació</assignatura>
+      <assignatura>Xarxes Locals</assignatura>
+    </credits>
+  </alumne>
+</persones>

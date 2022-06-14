@@ -1,0 +1,2 @@
+SELECT COUNT(DISTINCT cod_Pob)
+FROM client;

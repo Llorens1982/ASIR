@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="pedido.xsl"?>
+<pedido fecha="2019-01-01" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="pedido.xsd">
+          <producto>
+          <referencia>A-123</referencia>        
+          <talla>L</talla>
+          <unidades>3</unidades>
+          <color codigo="43">Rojo</color>
+        </producto>
+        <producto>
+          <referencia>A-786</referencia>        
+          <talla>M</talla>
+          <unidades>12</unidades>
+        </producto>
+        <producto>
+          <referencia>B-456</referencia>        
+          <talla>S</talla>
+          <unidades>2</unidades>
+        </producto>
+  
+</pedido>

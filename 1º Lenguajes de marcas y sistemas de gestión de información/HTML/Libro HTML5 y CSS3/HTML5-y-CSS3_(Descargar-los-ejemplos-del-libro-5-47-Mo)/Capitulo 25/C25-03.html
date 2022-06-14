@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Html5</title>
+<meta charset=utf-8>
+<style type="text/css">
+a { color: black;}
+form.css fieldset { padding: 1em;
+                    width: 290px; 
+                    border:1px solid black;}
+form.css label { display: inline;
+                 float: left;
+                 width: 90px;}
+input { margin-bottom: 5px;}
+</style>
+<script type="text/javascript">
+function set_item() {
+var name = "apellidos";
+var data1 = document.getElementById("f1").value
+sessionStorage.setItem(name, data1);
+var nombre = "nombre";
+var data2 = document.getElementById("f2").value
+sessionStorage.setItem(nombre, data2);
+var direccion = "direccion";
+var data3 = document.getElementById("f3").value
+sessionStorage.setItem(direccion, data3);
+var cp = "cp";
+var data4 = document.getElementById("f4").value
+sessionStorage.setItem(cp, data4);
+var ciudad = "ciudad";
+var data5 = document.getElementById("f5").value
+sessionStorage.setItem(ciudad, data5);
+var pais = "pais";
+var data6 = document.getElementById("f6").value
+sessionStorage.setItem(pais, data6);
+}
+</script>
+</head>
+<body>
+<h1>Página 1</h1>
+<form class="css">
+<fieldset>
+<legend>Inscripción</legend>
+<label>Apellidos: </label>
+<input id="f1" size="25" required><br>
+<label>Nombre: </label>
+<input  id="f2" size="25" required><br>
+<label>Dirección: </label>
+<input  id="f3" size="25" required><br>
+<label>Código Postal: </label>
+<input  id="f4" size="25" required><br>
+<label>Ciudad: </label>
+<input  id="f5" size="25" required><br>
+<label>País: </label>
+<input  id="f6" size="25" required><br>
+</fieldset>
+</form>
+<p><a href="pagina2.html" onclick="set_item()">Seguir</a> su pedido.</p>
+</body>
+</html>

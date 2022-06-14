@@ -1,0 +1,40 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="domicilio">
+    <xs:complexType>
+      <xs:simpleType>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:int" name="cod_postal" use="optional"/>
+        </xs:extension>
+      </xs:simpleType>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="provincia" type="xs:string"/>
+  <xs:element name="nombre" type="xs:string"/>
+  <xs:element name="apellidos" type="xs:string"/>
+  <xs:element name="direccion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="domicilio"/>
+        <xs:element ref="provincia"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="jugador">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="nombre"/>
+        <xs:element ref="apellidos"/>
+        <xs:element ref="direccion"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="id"/>
+      <xs:attribute type="xs:string" name="posicion"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="plantilla">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="jugador" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema> 

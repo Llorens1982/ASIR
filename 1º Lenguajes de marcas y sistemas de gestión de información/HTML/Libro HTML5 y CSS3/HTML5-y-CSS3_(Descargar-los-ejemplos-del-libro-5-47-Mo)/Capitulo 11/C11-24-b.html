@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Html5</title>
+<meta charset="UTF-8"> 
+<style>
+fieldset {border : 1px solid black;}
+span {margin-right: 24px;}
+</style>
+</head>
+<body>
+<form action="mailto:su_direccion_de_correo" method="post" enctype="text/plain">
+<fieldset>
+<legend><i>Cliente</i></legend>
+Nombre y apellidos: <input type="text" name="Nomnbre" required placeholder="Nombre y apellidos"><br>
+Dirección: <input type="text" name="Direccion" required><br>
+Código postal: <input type="text" name="CP" size="4" maxlength="5" required pattern="[0-9]"><br>
+País: <input type="text" readonly name="Pais" value="España">
+</fieldset>
+<br>
+<fieldset>
+<legend><i>Pedido</i></legend>
+Modelo: <input type="text" readonly name="Modelo" value="Road 66"><br>
+Talla: <br>
+<input type="range" name="Talla" min="1" max="4" step="1" value="2">
+<div>
+<span>S</span>
+<span>M</span>
+<span>L</span>
+<span>XL</span>
+</div>
+<br>
+Cantidad: <input type="number" name="Cantidad" min="1" max="6" step="1" value="1"><br>
+</fieldset>
+<br>
+<input type="submit" value="Enviar">
+<input type="reset" value="Reiniciar">
+</form>	
+</body>
+</html> 

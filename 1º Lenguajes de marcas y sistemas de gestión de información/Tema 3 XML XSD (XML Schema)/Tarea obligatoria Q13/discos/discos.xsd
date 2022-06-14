@@ -1,0 +1,19 @@
+﻿<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="discos" type="discosTipo"/>
+  
+  
+  <xs:complexType name="discoTipo">
+    <xs:sequence>
+      <xs:element type="xs:string" name="autor"/>
+      <xs:element type="xs:string" name="titulo"/>
+      <xs:element type="xs:string" name="genero"/>
+      <xs:element type="xs:decimal" name="numero_de_canciones"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="discosTipo">
+    <xs:sequence>
+      <xs:element type="discoTipo" name="disco" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

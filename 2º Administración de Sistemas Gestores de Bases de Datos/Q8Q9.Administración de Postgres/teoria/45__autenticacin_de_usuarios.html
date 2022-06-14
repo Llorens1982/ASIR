@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<!-- Created using eXe: http://exelearning.org -->
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" /><link rel="stylesheet" type="text/css" href="content.css" /><link rel="stylesheet" type="text/css" href="nav.css" /><title>4.5 - Autenticación de usuarios </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta http-equiv="Content-Type" content="text/html;  charset=utf-8" />
+<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+<div id="content">
+<div id="emptyHeader"></div><div id="siteNav">
+<ul>
+<li><a href="index.html" class="daddy main-node">Administración de PostgreSQL</a></li><li><a href="1__instalacin.html" class="no-ch">1 - Instalación</a></li>
+<li><a href="nota_previa.html" class="no-ch">Nota Previa</a></li>
+<li><a href="2_arranque_y_parada_del_sistema.html" class="no-ch">2. Arranque y parada del sistema</a></li>
+<li><a href="3__ficheros_de_configuracin.html" class="no-ch">3 - Ficheros de configuración</a></li>
+<li class="current-page-parent"><a href="4__gestin_de_usuarios_y_privilegios.html" class="current-page-parent daddy">4 - Gestión de usuarios y privilegios</a><ul>
+<li><a href="41__gestin_de_roles_utilizacin_como_usuarios.html" class="no-ch">4.1 - Gestión de roles: utilización como usuarios</a></li>
+<li><a href="42__gestin_de_roles_utilizacin_como_grupos.html" class="no-ch">4.2 - Gestión de roles: utilización como grupos</a></li>
+<li><a href="43__permisos.html" class="no-ch">4.3 - Permisos</a></li>
+<li><a href="44__roles_y_miembros.html" class="no-ch">4.4 - Roles y miembros</a></li>
+<li id="active"><a href="45__autenticacin_de_usuarios.html" class="active no-ch">4.5 - Autenticación de usuarios</a></li>
+</ul>
+</li>
+<li><a href="5__gestin_de_bases_de_datos.html" class="daddy">5 - Gestión de Bases de Datos</a><ul class="other-section">
+<li><a href="51__bases_de_datos_creacin_modificacin_y_eliminacin.html" class="no-ch">5.1 - Bases de Datos: Creación, Modificación y Eliminación</a></li>
+<li><a href="52__esquemas.html" class="no-ch">5.2 - Esquemas</a></li>
+<li><a href="53__tablespaces.html" class="no-ch">5.3 - Tablespaces</a></li>
+<li><a href="54_lugares_alternativos.html" class="no-ch">5.4 Lugares alternativos</a></li>
+</ul>
+</li>
+<li><a href="6_copia_de_seguridad_y_restauracin.html" class="daddy">6- Copia de seguridad y restauración</a><ul class="other-section">
+<li><a href="61__pg_dump.html" class="no-ch">6.1 - PG_DUMP</a></li>
+<li><a href="62__restauracin_del_dump.html" class="no-ch">6.2 - Restauración del DUMP</a></li>
+<li><a href="63__backup_desde_pgadmin.html" class="no-ch">6.3 - Backup desde PgAdmin</a></li>
+<li><a href="64__backup_por_copia_de_ficheros.html" class="no-ch">6.4 - Backup por copia de ficheros</a></li>
+</ul>
+</div>
+<div id='topPagination'><div class="pagination noprt"><a href="44__roles_y_miembros.html" class="prev"><span>&laquo; </span>Anterior</a> | <a href="5__gestin_de_bases_de_datos.html" class="next"> Siguiente<span> &raquo;</span></a></div>
+</div><div id="main">
+<div id="nodeDecoration"><h1 id="nodeTitle">4.5 - Autenticación de usuarios</h1></div>
+<div class="FreeTextIdevice" id="id10">
+<div class="iDevice emphasis0">
+<div id="ta10_1" class="block" style="display:block;position:relative">
+<p class="Textbody">
+<span style="font-family: Arial; color: black">Cuando</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">un</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">cliente</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">se</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">quiere</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conectar</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">a</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Base</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Datos,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">bien</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">sea</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">por</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">uno</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">los</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">programas</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ya</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">vistos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(</span><b><i><span>PSQL</span></i></b><span style="font-family: Arial; color: black">,</span><span style="font-family: Arial; color: black"> </span><b><i><span>PgAdmin</span></i></b><span style="font-family: Arial; color: black">,</span><span style="font-family: Arial; color: black"> </span><b><i><span>PhpPgAdmin</span></i></b><b><i><span> </span></i></b><span style="font-family: Arial; color: black">...)</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">o</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">bien</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">desde</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">otro</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">entorno</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(como</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">veremos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">último</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">tema),</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">siempre</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">se</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">dice</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">a</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">qué</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Base</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Datos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">quiere</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conectarse</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">y</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">como</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">qué</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">usuario</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">PostgreSQL,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">aunque</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">no</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">lo</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">especifiquemos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">expresamente.<o:p></o:p></span>
+</p>
+<p class="Textbody">
+<span style="font-family: Arial; color: black">Por</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ejemplo,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">si</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">entramos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">una</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">consola</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">y</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">hacemos:<o:p></o:p></span>
+</p>
+<p class="Textbody" style="margin-left: 2cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">psql</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">-U</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">xarxa<o:p></o:p></span></b>
+</p>
+<p class="Textbody">
+<span style="font-family: Arial; color: black">parece</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">nada</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">más</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">estamos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">especificando</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">usuario,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">pero</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">también</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">se</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">especifica</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Base</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Datos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">cogerá</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">por</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">defecto</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">mismo</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">nombre</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">usuario,</span><span style="font-family: Arial; color: black"> </span><b><i><span>xarxa</span></i></b><span style="font-family: Arial; color: black">)</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">y</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">lugar</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">del</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">servidor</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(por</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">defecto</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">es</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><b><i><span>local</span></i></b><b><i><span> </span></i></b><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Linux,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">y</span><span style="font-family: Arial; color: black"> </span><b><i><span>localhost</span></i></b><b><i><span> </span></i></b><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Windows).<o:p></o:p></span>
+</p>
+<p class="Textbody">
+<span style="font-family: Arial; color: black">Una</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">vez</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conectado,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">usuario</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">tendrá</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">determinados</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">permisos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">para</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ver</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">las</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">tablas</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">y</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">otros</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">objetos,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">como</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">hemos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">visto</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el punto</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">anterior.<o:p></o:p></span>
+</p>
+<p class="Textbody">
+<b><span>La</span></b><b><span> </span></b><b><span>autenticación</span></b><b><span> </span></b><b><span>es</span></b><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">proceso</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">por</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">servidor</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">comprueba</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">identidad</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">del</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">cliente,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">es</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">decir,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">cliente</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">es</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">realmente</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">quien</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">dice</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ser,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">y</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">así</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">poder</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">darle</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">acceso</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">a</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">lo</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">le</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">corresponda.<o:p></o:p></span>
+</p>
+<p class="Textbody">
+<span style="font-family: Arial; color: black">PostgreSQL</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ofrece</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">diversos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">métodos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">autenticación,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">y</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">se</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">podrán</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">definir</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">diferentes</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">métodos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">según</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Base</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Datos,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">usuario</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(o</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">rol</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">entrada),</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">y</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">dirección</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">IP</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">máquina</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">desde</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">donde</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">se</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conecta.<o:p></o:p></span>
+</p>
+<p class="Textbody">
+<span style="font-family: Arial; color: black">Esta</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">configuración</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">se</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">guarda</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">fichero</span><span style="font-family: Arial; color: black"> </span><b><i><span>pg_hba.conf</span></i></b><b><i><span> </span></i></b><span style="font-family: Arial; color: black">(HBA:</span><span style="font-family: Arial; color: black"> </span><i><span>host-based</span></i><i><span> </span></i><i><span>authentication</span></i><span style="font-family: Arial; color: black">),</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">situado</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">normalmente</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">mismo</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">directorio</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">los</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">datos,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">aunque</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">no</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">es</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">preciso</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(por</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ejemplo</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">instalación</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">por</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">paquetes</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><b><span>Lliurex</span></b><b><span> </span></b><b><span>estará</span></b><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><b><i><span>/etc/postgresql/9.2/main</span></i></b><span style="font-family: Arial; color: black">).</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">En</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el punto</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">3</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">del</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">presente</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">tema</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ya</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">se
+comentó</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">esta</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">cuestión.<o:p></o:p></span>
+</p>
+<p class="Textbody">
+<span style="font-family: Arial; color: black">Este</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">fichero,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">texto</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">y</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">con</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">propietario</span><span style="font-family: Arial; color: black"> </span><b><i><span>postgres</span></i></b><span style="font-family: Arial; color: black">,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">guardará</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">diferentes</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">líneas</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">las</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">diferentes</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">especificaciones</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(las</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">líneas</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">blanco</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">y</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">las</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">comentadas</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">con</span><span style="font-family: Arial; color: black"> </span><b><span>#</span></b><b><span> </span></b><span style="font-family: Arial; color: black">no</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">cuentan).</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">En</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">cada</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">línea</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">habrá</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">una</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">serie</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">campos:<o:p></o:p></span>
+</p>
+<p class="Textbody">
+<b><span>Tipo_conexión<span>  </span></span></b><b><span><span> </span></span></b><b><span>Base_datos</span></b><b><span> <span>  </span></span></b><b><span>Usuario<span>  </span></span></b><b><span><span> </span></span></b><b><span>Dirección_ip</span></b><b><span> <span>  </span></span></b><b><span>Máscara_ip</span></b><b><span> <span>  </span></span></b><b><span>Método</span></b><b><span> </span></b><b><span>_autenticación<o:p></o:p></span></b>
+</p>
+<p class="Textbody">
+<span style="font-family: Arial; color: black">donde</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">algunos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">campos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">pueden</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">estar</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">vacíos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">según</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">tipo</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conexión</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(por</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ejemplo,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">para</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conexión</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">local</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">no</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">tiene</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">sentido</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">dirección</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">IP).<o:p></o:p></span>
+</p>
+<p class="Textbody">
+<span style="font-family: Arial; color: black">Cuando</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">un</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">cliente</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">hace</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">una</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">solicitud</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conexión,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">se</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">comprueba</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">este</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">fichero</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">hasta</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">encuentra</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">primera</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">línea</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">coincide</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">tipo</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conexión,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Base</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Datos,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">usuario,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">...,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">y</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">entonces</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">se</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">aplica</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">método</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conexión</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">especificado.<o:p></o:p></span>
+</p>
+<p class="Textbody">
+<b><span>Nota<o:p></o:p></span></b>
+</p>
+<p class="Textbody">
+<span style="font-family: Arial; color: black">Es</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">muy</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conveniente</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">realizar</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">una</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">copia</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">seguridad</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">del</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">fichero</span><span style="font-family: Arial; color: black"> </span><b><span>pg_hba.conf</span></b><b><span> </span></b><span style="font-family: Arial; color: black">antes</span><b><span style="font-family: Arial; color: black"> </span></b><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">hacer</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">modificaciones,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ya</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">si</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">sintaxis</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">del</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">fichero</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">es</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">incorrecta,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">PostgreSQL</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">no</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">arrancará.<o:p></o:p></span>
+</p>
+<p class="Textbody">
+<b><span>Tipo</span></b><b><span> </span></b><b><span>de</span></b><b><span> </span></b><b><span>conexión<o:p></o:p></span></b>
+</p>
+<p class="Textbody">
+<span style="font-family: Arial; color: black">El</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">tipo</span><b><span> </span></b><b><span>de</span></b><b><span> </span></b><b><span>conexión</span></b><b><span> </span></b><b><span>puede</span></b><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ser</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">uno</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">los</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">siguientes:<o:p></o:p></span>
+</p>
+<table class="MsoNormalTable" style="border: medium none ; border-collapse: collapse" border="1" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr style="height: 96.15pt">
+			<td style="border: 1pt solid windowtext; padding: 0cm 5.4pt; width: 111.75pt; height: 96.15pt" valign="top" width="149">
+			<p class="MsoBodyText">
+			<b><span>LOCAL</span></b><span style="font-family: Arial; color: black"><o:p></o:p></span>
+			</p>
+			</td>
+			<td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 380.9pt; height: 96.15pt" valign="top" width="508">
+			<p class="MsoBodyText">
+			<span style="font-size: 12pt; font-family: Arial; color: black">La</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">conexión</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">es</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">local,</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">es</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">decir,</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">desde</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">la</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">misma</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">máquina</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">donde</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">está</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">el servidor.</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">Esta</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">conexión</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">se</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">hace,</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">en</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><b><span style="font-size: 12pt">Linux</span></b><span style="font-size: 12pt; font-family: Arial; color: black">,</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">utilizando</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><i><span style="font-size: 12pt">sockets</span><span style="font-size: 12pt"> </span><span style="font-size: 12pt">Unix</span></i><span style="font-size: 12pt; font-family: Arial; color: black">.</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">A</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">parte</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">del</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">usuario</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">que</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">ponemos</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">para</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">conectar,</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">le</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">llega</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">el</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">usuario</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">de</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">S.O.</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">que</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">hace</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">la</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">solicitud</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">de</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">conexión,</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">ya</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">que</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">según</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">qué</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">método</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">de</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">conexión</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">utilizamos</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">le</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">hará</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">falta.</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">No</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">existe</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">este</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">tipo</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">de</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">conexión</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">en</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt">Windows</span><span></span><span style="font-family: Arial; color: black"><o:p></o:p></span>
+			</p>
+			</td>
+		</tr>
+		<tr style="height: 106pt">
+			<td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 111.75pt; height: 106pt" valign="top" width="149">
+			<p class="MsoBodyText">
+			<b><span>HOST<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 380.9pt; height: 106pt" valign="top" width="508">
+			<p class="Textbody">
+			<b><span>Indicará</span></b><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conexiones</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">externas</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">por</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">TCP/IP.</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Por</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">defecto,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">las</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conexiones</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">vía</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">TCP/IP</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">están</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">deshabilitadas.</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Para</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">habilitarlas</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">se</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">debe</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">cambiar</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">un</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">parámetro</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">del</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">fichero</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">configuración</span><span style="font-family: Arial; color: black"> </span><b><i><span>postgresql.conf</span></i></b><span style="font-family: Arial; color: black">:<o:p></o:p></span>
+			</p>
+			<p class="Textbody" style="margin-left: 22.95pt">
+			<b><span style="font-family: 'Courier New'; color: mediumblue">listen_addresses</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">=</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">'*'</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">#</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">esto</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">indica</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">que</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">escuche</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">de</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">todos</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">los</span></b><b><span style="font-family: 'Courier New'; color: mediumblue"> </span></b><b><span style="font-family: 'Courier New'; color: mediumblue">lugares<o:p></o:p></span></b>
+			</p>
+			<span style="font-size: 12pt; font-family: Arial; color: black">(y</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">seguramente</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">volver</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">a</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">arrancar</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">el</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">servidor) <br />
+			</span></td>
+		</tr>
+		<tr style="height: 28.15pt">
+			<td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 111.75pt; height: 28.15pt" valign="top" width="149">
+			<p class="MsoBodyText">
+			<b><span>HOSTSSL<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 380.9pt; height: 28.15pt" valign="top" width="508">
+			<p class="MsoBodyText">
+			<span>Para</span><span style="font-family: Arial; color: black"> conexiones que utilizan </span><b><span>SSL </span></b><span style="font-family: Arial; color: black">sobre </span><b><span>TCP/IP<o:p></o:p></span></b>
+			</p>
+			</td>
+		</tr>
+		<tr style="height: 30.3pt">
+			<td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 111.75pt; height: 30.3pt" valign="top" width="149">
+			<p class="MsoBodyText">
+			<b><span>HOSTNOSSL <o:p></o:p></span></b>
+			</p>
+			</td>
+			<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 380.9pt; height: 30.3pt" valign="top" width="508">
+			<p class="MsoBodyText">
+			<span>Para</span><span style="font-family: Arial; color: black"> conexiones que no utilizan </span><span>SSL </span><span style="font-family: Arial; color: black">sobre </span><span>TCP/IP<o:p></o:p></span>
+			</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><u><span style="font-family: 'Arial Rounded MT Bold'; color: black">Nota
+muy importante<o:p></o:p></span></u></b>
+</p>
+<p class="Textbody" style="margin-left: 35.45pt">
+<span style="font-family: Arial; color: black">La</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conexión</span><span style="font-family: Arial; color: black"> </span><b><span>LOCAL</span></b><b><span> </span></b><span>utiliza</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">sockets</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Unix.</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Por</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">tanto</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Windows</span><span style="font-family: Arial; color: black"> </span><b><span>no</span></b><b><span> </span></b><b><span>estará</span></b><b><span> </span></b><b><span>disponible</span></b><span style="font-family: Arial; color: black">.</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Hasta</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ahora</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">hemos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">hemos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">por</span><span style="font-family: Arial; color: black"> </span><b><i><span>localhost</span></i></b><span style="font-family: Arial; color: black">,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">es</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">una</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conexión</span><span style="font-family: Arial; color: black"> </span><b><span>HOST</span></b><b><span> </span></b><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ordenador</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">local</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(con</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">IP</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">127.0.0.1).<o:p></o:p></span>
+</p>
+<p class="Textbody" style="margin-left: 35.45pt">
+<span style="font-family: Arial; color: black">Por</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">lo</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">anterior,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">debemos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">tener</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">consideración</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><b><span>pgAdmin</span></b><span style="font-family: Arial; color: black">,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Windows</span><span> </span><span style="font-family: Arial; color: black">siempre</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">utilizará</span><span style="font-family: Arial; color: black"> </span><b><span>localhost</span></b><span style="font-family: Arial; color: black">.</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">En</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">cambio</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><b><span>Linux</span></b><span style="font-family: Arial; color: black">,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">podemos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">utilizar</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">cualquiera</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">las</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">dos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(poniendo</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">dirección</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">del</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">servidor</span><span style="font-family: Arial; color: black"> </span><b><span>local</span></b><b><span> </span></b><span style="font-family: Arial; color: black">o</span><span style="font-family: Arial; color: black"> </span><b><span>localhost</span></b><span style="font-family: Arial; color: black">,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">respectivamente)<o:p></o:p></span>
+</p>
+<span style="font-size: 12pt; font-family: Arial; color: black">Por</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">otra</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">parte,</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">para</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">utilizar</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">la</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">conexión</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">al</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">HOST</span><b><span style="font-size: 12pt"> </span><span style="font-size: 12pt">127.0.0.1</span><span style="font-size: 12pt"> </span></b><span style="font-size: 12pt; font-family: Arial; color: black">no</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">hace</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">falta</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">a</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">que</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><span style="font-size: 12pt; font-family: Arial; color: black">esté</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><b><span style="font-size: 12pt">listen_addresses</span><span style="font-size: 12pt"> </span></b><span style="font-size: 12pt; font-family: Arial; color: black">a</span><span style="font-size: 12pt; font-family: Arial; color: black"> </span><b><span style="font-size: 12pt">'*'</span></b>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<b><span><o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<b><span style="color: black"><o:p> </o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<b><span style="font-size: 14pt; color: black">Base de Datos<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">La </span><b><span>Base</span></b><span style="color: black"> </span><b><span>de Datos</span></b><span style="font-family: Arial; color: black">;
+que además de un nombre de una B.D. existente, puede ser algunos de los siguientes:<o:p></o:p></span>
+</p>
+<p>
+&nbsp;
+</p>
+<table class="MsoNormalTable" style="border: medium none ; border-collapse: collapse" border="1" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td style="border: 1pt solid windowtext; padding: 0cm 5.4pt; width: 90.45pt" valign="top" width="121">
+			<p class="MsoBodyText">
+			<span style="color: blue"> </span><b><span>ALL<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 398.4pt" valign="top" width="531">
+			<p class="MsoBodyText">
+			<b><span>Se</span></b><span style="font-family: Arial; color: black"> refiere a
+			todas las bases de datos.<o:p></o:p></span>
+			</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 90.45pt" valign="top" width="121">
+			<p class="MsoBodyText">
+			<b><span>SAMEUSER<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 398.4pt" valign="top" width="531">
+			<p class="MsoBodyText">
+			<span>Se</span><span style="font-family: Arial; color: black">
+			refiere a la Base de Datos con el mismo nombre que el usuario (mejor dedo,
+			rol de usuario).<o:p></o:p></span>
+			</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 90.45pt" valign="top" width="121">
+			<p class="MsoBodyText">
+			<b><span>SAMEROLE<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 398.4pt" valign="top" width="531">
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">Se refiere a la Base de Datos con
+			el mismo nombre que un rol de grupo, al que debe pertenecer el usuario. Se
+			puede utilizar también el sinónimo SAMEGROUP.<o:p></o:p></span>
+			</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Si no es ningún de los anteriores, entonces se interpretará como
+el nombre de una Base de Datos. O más de una, separadas por comas</span><b><span><o:p></o:p></span></b>
+</p>
+<p>
+&nbsp;
+</p>
+<p class="MsoBodyText" style="margin-bottom: 12pt">
+<b><u><span>Usuario</span></u></b><b><span> </span></b><span style="font-family: Arial; color: black">Podemos utilizar una palabra
+&quot;comodín&quot;:<o:p></o:p></span>
+</p>
+<table class="MsoNormalTable" style="border: medium none ; border-collapse: collapse" border="1" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td style="border: 1pt solid windowtext; padding: 0cm 5.4pt; width: 76.3pt" valign="top" width="102">
+			<p class="MsoBodyText">
+			<b><span>ALL<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 404pt" valign="top" width="539">
+			<p class="MsoBodyText">
+			<span>Se</span><span style="font-family: Arial; color: black">
+			refiere a todos los usuarios.<o:p></o:p></span>
+			</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<p class="MsoBodyText" style="margin-top: 6pt">
+<span style="font-family: Arial; color: black">Si no es ALL, entonces se
+interpretará como el nombre de un usuario. O más de uno, separados por comas. O
+un grupo, si va precedido por </span><b><span>+ </span></b><span style="font-family: Arial; color: black">(entonces se refiere
+a todos los miembros del grupo). Observamos que a partir de la versión 8.1 todo
+son roles. Lo que especifica realmente el signo + será los roles que directa o
+indirectamente dependen de este rol. Si no lleva el signo + se refiere
+únicamente al rol mencionado, y no sus posibles miembros.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<b><span>La dirección IP y</span></b><span style="font-family: Arial; color: black">
+la máscara</span><b><span> IP</span></b><span style="font-family: Arial; color: black">:<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Entre las dos especifican una dirección o un rango de direcciones.
+Evidentemente no tienen sentido cuando el tipo de acceso es local. <o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Pueden coger dos formatos. Los dos ejemplos siguientes son
+completamente equivalentes y especifican solo una máquina:<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 42.55pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">192.168.3.17 255.255.255.255<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue"><o:p> </o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 42.55pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">192.168.3.17/32 <span>           </span>#</span></b><span style="font-family: 'Courier New'; color: mediumblue">(no deben haber espacios en blanco en medio)<o:p></o:p></span>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Mientras que estos dos, también equivalente, especifican todo un
+rango:<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 42.55pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">192.168.3.0 255.255.255.0<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue"><o:p> </o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 42.55pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">192.168.3.0/24<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Ya hemos comentado antes el caso especial de localhost. Se
+especificará la dirección local de cualquiera de estas maneras:<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 42.55pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">127.0.0.1 255.255.255.255<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue"><o:p> </o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 42.55pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">127.0.0.1/32<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="color: blue"> <o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<b><span>Método de autenticación<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Indicará la manera de autenticarse el usuario especificado, a la
+base de datos especificada, desde la máquina especificada. Algunos de los
+métodos son:<o:p></o:p></span>
+</p>
+<p>
+&nbsp;
+</p>
+<table class="MsoNormalTable" style="border: medium none ; border-collapse: collapse" border="1" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td style="border: 1pt solid windowtext; padding: 0cm 5.4pt; width: 97.55pt" valign="top" width="130">
+			<p class="MsoBodyText">
+			<b><span>TRUST<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 391.3pt" valign="top" width="522">
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">La conexión siempre se acepta,
+			sea cual sea el usuario, sin comprobar el password.<o:p></o:p></span>
+			</p>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">Por ejemplo: <o:p></o:p></span>
+			</p>
+			<p class="MsoBodyText" style="margin-left: 44.2pt">
+			<b><span style="font-family: 'Courier New'; color: mediumblue">local xarxa ALL trust <o:p></o:p></span></b>
+			</p>
+			<p class="MsoBodyText">
+			<span>hace</span><span style="font-family: Arial; color: black"> que todos</span><b><span> los</span></b><span style="font-family: Arial; color: black">
+			usuarios de PostgreSQL puedan entrar sin problemas a la BD</span><span style="color: black"> </span><b><span>xarxa<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td style="border: medium none ; padding: 0cm" width="3">
+			<p class="MsoNormal">
+			&nbsp;
+			</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 97.55pt" valign="top" width="130">
+			<p class="MsoBodyText">
+			<b><span>REJECT<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 391.3pt" valign="top" width="522">
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">La conexión siempre se rechaza. <o:p></o:p></span>
+			</p>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black" lang="EN-GB">Por
+			ejemplo: <o:p></o:p></span>
+			</p>
+			<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 44.2pt; margin-right: 95.3pt">
+			<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+			<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">HOST
+			ALL ALL 192.168.4.0 <o:p></o:p></span></b>
+			</p>
+			<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+			<b><span style="font-family: 'Courier New'; color: mediumblue">255.255.255.0 reject <o:p></o:p></span></b>
+			</p>
+			</div>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">rechazará todas las conexiones
+			que se intentan hacer desde este rango de máquinas<o:p></o:p></span>
+			</p>
+			</td>
+			<td style="border: medium none ; padding: 0cm" width="3">
+			<p class="MsoNormal">
+			&nbsp;
+			</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 97.55pt" valign="top" width="130">
+			<p class="MsoBodyText">
+			<b><span>PASSWORD<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 391.3pt" valign="top" width="522">
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">Obliga al cliente a proporcionar
+			la contraseña, que se comprobará con la del usuario. Debemos estar seguros
+			que el usuario tiene contraseña, ya que si no le hemos proporcionado la
+			tendrá a null y por tanto no se podrá conectar. Lo podemos saber consultando
+			la vista </span><b><i><span>pg_shadow</span></i></b><span style="font-family: Arial; color: black">, que aunque la clave esté encriptada, nos dice si tiene o no. <o:p></o:p></span>
+			</p>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">Si nos hace falta cambiar la
+			contraseña del usuario lo podemos hacer con: <o:p></o:p></span>
+			</p>
+			<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 37.15pt; margin-right: 59.85pt">
+			<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+			<b><span style="font-family: 'Courier New'; color: mediumblue">ALTER ROLE nombre PASSWORD
+			'contraseña' <o:p></o:p></span></b>
+			</p>
+			</div>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">Cuando la conexión se hace desde
+			un otra máquina, esta contraseña será visible desde la red, estará en texto
+			claro. Según el grado de seguridad de que vulguem aplicar, este método puede
+			ser insuficiente.<o:p></o:p></span>
+			</p>
+			</td>
+			<td style="border: medium none ; padding: 0cm" width="3">
+			<p class="MsoNormal">
+			&nbsp;
+			</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 97.55pt" valign="top" width="130">
+			<p class="MsoBodyText">
+			<b><span>MD5<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 391.3pt" valign="top" width="522">
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">Igual que el anterior, pero la
+			contraseña deberá estar encriptada por MD5, con lo cual ya no es inteligible
+			por la red.<o:p></o:p></span>
+			</p>
+			</td>
+			<td style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color windowtext; border-width: medium medium 1pt" width="3">
+			<p class="MsoNormal">
+			&nbsp;
+			</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 97.55pt" valign="top" width="130">
+			<p class="MsoBodyText">
+			<b><span>IDENT mapa<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 393.2pt" valign="top" width="524">
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">Obtiene el nombre de usuario del
+			S.O. (bien el local, por conexiones locales o bien el remoto, para conexiones
+			vía TCP/IP) y comprueba si el usuario tiene permiso por a conectarse
+			dependiendo de lo que va a continuación: <o:p></o:p></span>
+			</p>
+			<p class="MsoBodyText" style="margin-left: 36pt; text-indent: -18pt">
+			<!--[if !supportLists]--><span style="font-family: Symbol; color: black"><span>·<span style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal">       
+			</span></span></span><!--[endif]--><span style="font-family: Arial; color: black">Si a continuación va </span><b><span>SAMEUSER</span></b><span style="font-family: Arial; color: black"> el usuario de S.O. y de PostgreSQL deben ser idénticos. Entonces,
+			PostgreSQL se fía del S.O. y deja conectarse. <o:p></o:p></span>
+			</p>
+			<p class="MsoBodyText" style="margin-left: 36pt; text-indent: -18pt">
+			<!--[if !supportLists]--><span style="font-family: Symbol; color: black"><span>·<span style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal">       
+			</span></span></span><!--[endif]--><span style="font-family: Arial; color: black">Si no, lo que va a continuación
+			se interpretará como un </span><i><span>mapa </span></i><span style="font-family: Arial; color: black">de
+			correspondencias entre usuarios de S.O. y de PostgreSQL. Este mapa estará en
+			el fichero </span><b><i><span>pg_ident.conf</span></i></b><span style="font-family: Arial; color: black">, donde cada línea tendrá la siguiente estructura:<o:p></o:p></span>
+			</p>
+			<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 15.85pt; margin-right: 33.4pt">
+			<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+			<span style="font-family: Arial; color: black"><span> </span></span><b><span style="font-family: 'Courier New'; color: mediumblue">nombre_mapa usuario_sonido usuario_posgres <o:p></o:p></span></b>
+			</p>
+			</div>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">donde nombre</span><b><i><span>_mapa es</span></i></b><span style="font-family: Arial; color: black"> lo
+			que aparecía a continuación de </span><b><i><span>ident </span></i></b><span style="font-family: Arial; color: black">en el fichero </span><b><span>pg_hba.conf</span></b><span style="font-family: Arial; color: black">. <o:p></o:p></span>
+			</p>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">Por ejemplo, vamos a suponer que
+			a la Base de Datos xarxa</span><b><span> </span></b><span style="font-family: Arial; color: black">(el
+			propietario de la que es </span><b><span>xarxa</span></b><span style="font-family: Arial; color: black">) dejaremos
+			conectarse a todos los alumnos del grupo de segundo del ASI, que tienen un
+			usuario en Linux, en Windows, o aún mejor, en el dominio solo los dejaremos
+			conectarse si lo intentan desde una máquina de los Talleres de Informática
+			(192.168.3.0/24). Lo podríamos hacer así: <o:p></o:p></span>
+			</p>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">En </span><b><span>pg_hba.conf </span></b><span>ponemos</span><span style="font-family: Arial; color: black">: <o:p></o:p></span>
+			</p>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black"><o:p> </o:p></span>
+			</p>
+			<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 15.85pt; margin-right: 26.35pt">
+			<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+			<b><span style="font-family: 'Courier New'; color: mediumblue">HOST xarxa ALL 192.168.3.0/24 ident
+			tablaasi <o:p></o:p></span></b>
+			</p>
+			</div>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black"><o:p> </o:p></span>
+			</p>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">Y en </span><b><span>pg_ident.conf ponemos</span></b><span style="font-family: Arial; color: black">: <o:p></o:p></span>
+			</p>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black"><o:p> </o:p></span>
+			</p>
+			<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 51.3pt; margin-right: 111.4pt">
+			<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+			<b><span style="font-family: 'Courier New'; color: mediumblue">tablaasi al_1111 xarxa <o:p></o:p></span></b>
+			</p>
+			<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+			<b><span style="font-family: 'Courier New'; color: mediumblue">tablaasi al_2222 xarxa <o:p></o:p></span></b>
+			</p>
+			<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+			<b><span style="font-family: 'Courier New'; color: mediumblue">tablaasi al_3333 xarxa <o:p></o:p></span></b>
+			</p>
+			<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+			<b><span style="font-family: 'Courier New'; color: mediumblue">tablaasi xarxa xarxa <o:p></o:p></span></b>
+			</p>
+			</div>
+			<p class="MsoBodyText">
+			<span style="font-family: Arial; color: black">(la última es por sí nos habíamos
+			olvidado del propietario, que si no, no se podrá conectar).<o:p></o:p></span>
+			</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 97.55pt" valign="top" width="130">
+			<p class="MsoBodyText">
+			<b><span>LDAP<o:p></o:p></span></b>
+			</p>
+			</td>
+			<td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 393.2pt" valign="top" width="524">
+			<p class="MsoBodyText">
+			<b><span>Utiliza</span></b><span style="font-family: Arial; color: black"> la autenticación
+			de LDAP<o:p></o:p></span>
+			</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+&nbsp;
+</p>
+<p class="MsoBodyText">
+<b><u><span>NOTA<o:p></o:p></span></u></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">No debemos restringir el acceso de posgres</span><b><i><span> </span></i></b><span style="font-family: Arial; color: black">a
+la Base de Datos </span><b><i><span>template1</span></i></b><span style="font-family: Arial; color: black">, ya unas cuantas utilidades necesitan acceder a
+esta BD.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Aquí tenemos algunos ejemplos, que supondremos absolutamente
+independientes, con la explicación inmediatamente después:<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 134.55pt">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">local ALL ALL
+reject<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">HOST ALL ALL
+0.0.0.0 <span>  </span>0.0.0.0 reject<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black" lang="EN-GB"><span>            </span></span><span style="font-family: Arial; color: black">no se puede conectar nadie, ni de dentro ni de
+fuera.<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 127.45pt">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">local ALL ALL trust<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">HOST ALL ALL
+0.0.0.0 <span>  </span>0.0.0.0 reject<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<span style="font-family: Arial; color: black">se pueden conectar todos
+los de dentro, sin contraseña ni nada, y nadie de fuera<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 35.45pt">
+<span style="font-family: Arial; color: black">(en Windows, el resultado
+sería que nadie se puede conectar)<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 127.45pt">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">local ALL ALL trust<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">HOST ALL ALL
+127.0.0.1/32 trust<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<span style="color: blue" lang="EN-GB"> </span><b><span style="font-family: 'Courier New'; color: mediumblue">HOST ALL ALL 0.0.0.0 <span> </span>0.0.0.0
+reject<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<b><span style="font-family: 'Courier New'; color: mediumblue"><o:p> </o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">se pueden conectar todos los de dentro, sin contraseña ni nada,
+tanto utilizando sockets Unix como sockets TCP/IP, y ninguno de fuera (ahora en
+Windows, el resultado sería que los de dentro se pueden conectar y los de fuera
+no)<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 127.45pt">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">local ALL posgres
+password<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">local sameuser ALL
+password<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">posgres se puede conectar a cualquier Base de Datos (con
+contraseña), y los otros usuarios solo a la suya (con contraseña), y siempre en
+local<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 127.45pt">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">local ALL posgres
+password<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">local xarxa xarxa
+ident<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">sameuser<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">local empresa ALL
+trust<o:p></o:p></span></b>
+</p>
+</div>
+<p>
+&nbsp;
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 127.45pt">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">local ALL ALL
+reject<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">HOST ALL posgres
+127.0.0.1/32 password<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">HOST xarxa
+xar3,xar4 127.0.0.1/32 password<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">HOST xarxa +g_xarxa
+127.0.0.1/32 password<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">HOST sameuser ALL
+127.0.0.1/32 password<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">HOST xarxa ALL
+192.168.3.0/24 ident<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">tablaasi<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">HOST ALL ALL
+0.0.0.0 0.0.0.0 reject<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText" style="margin-left: 1cm">
+<b><i><span>postgres </span></i></b><i><span>se</span></i><span style="font-family: Arial; color: black"> puede conectar a
+todas (poniendo la contraseña) desde dentro; <o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 1cm">
+<b><i><span>xarxa </span></i></b><span style="font-family: Arial; color: black">a <b><i>xarxa</i></b></span><b><i><span> </span></i></b><span style="font-family: Arial; color: black">(desde una sesión del usuario xarxa</span><b><i><span> </span></i></b><span style="font-family: Arial; color: black">del
+S.O.) todos los usuarios se pueden conectar a la BD empresa sin contraseña ni nada
+(excepto posgres, para que prevalece la primera línea) todas las otras locales
+son rechazadas<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 1cm">
+<b><i><span>postgres </span></i></b><i><span>se</span></i><span style="font-family: Arial; color: black"> puede conectar a
+todas (poniendo la contraseña) desde localhost (TCP/IP en la misma máquina) <o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 1cm">
+<b><i><span>xar3 y</span></i></b><span style="font-family: Arial; color: black"> </span><b><i><span>xar4 se</span></i></b><span style="font-family: Arial; color: black"> pueden conectar a la BD xarxa con contraseña
+desde localhost todos los miembros del grupo </span><b><i><span>g_xarxa se</span></i></b><span style="font-family: Arial; color: black"> pueden conectar a la BD xarxa</span><b><i><span> </span></i></b><b><i><span style="font-family: Arial; color: black">con </span></i></b><span style="font-family: Arial; color: black">contraseña
+desde localhost <o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 1cm">
+<span style="font-family: Arial; color: black">todos los usuarios del mapa
+</span><b><i><span>tablaasi </span></i></b><span style="font-family: Arial; color: black">de
+</span><b><i><span>pg_ident.conf se</span></i></b><span style="font-family: Arial; color: black">
+podrán conectar en red</span><b><i><span> desde</span></i></b><span style="font-family: Arial; color: black"> las direcciones 192.169.3.x todas las otras
+remotas son rechazadas (también se rechazarán las localhost que no estén
+especificadas anteriormente)<o:p></o:p></span>
+</p>
+<p>
+&nbsp;
+</p>
+<p>
+&nbsp;
+</p>
+<p>
+&nbsp;
+</p>
+</div></div>
+</div>
+<div id='bottomPagination'><div class="pagination noprt"><a href="44__roles_y_miembros.html" class="prev"><span>&laquo; </span>Anterior</a> | <a href="5__gestin_de_bases_de_datos.html" class="next"> Siguiente<span> &raquo;</span></a></div>
+</div></div>
+</div>
+</body></html>

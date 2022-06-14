@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsi:schema
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+
+<!--
+Mtdo de los Tipos
+-->
+<!-- 
+	ELEMENTOS SIMPLES===========
+titulo 			xsi:string / whiteSpace preserve / mantenga espacios blancos
+
+autor			igual
+
+personaje		igual, saco provecho a los tipos
+
+amigoDe 			referencia
+
+desde				fecha
+
+calificación		calificación elegir entre unos valores
+
+no distingo bien entre choice y enumeration
+-->
+
+<xsi:simpleType name="TipoTexto">
+		<xsi:restriction base="xsi:string"> 
+			<xsi:whiteSpace value="preserve" />
+			<xsi:maxLength value="103"/>
+		</xsi:restriction>	
+</xsi:simpleType>	
+	
+
+<xsi:simpleType name="TipoAmigoDe">
+	
+		<xsi:restriction base="xsi:string">
+			<xsi:enumeration value="A1"/>
+			<xsi:enumeration value="A2"/>
+			<xsi:enumeration value="A3"/>
+			<xsi:enumeration value="A4"/>	
+		</xsi:restriction>	
+</xsi:simpleType>
+
+ 
+
+<xsi:simpleType name="TipoDesde">
+	
+		<xsi:restriction base="xsi:date">
+			<xsi:minInclusive value="1900-01-01"/>	
+
+		</xsi:restriction>	
+</xsi:simpleType>
+		
+<xsi:simpleType name="TipoCalificación">
+	 
+	<xsi:restriction base="xsi:string">	
+	 	<xsi:enumeration value="El Mejor"/>
+	 	<xsi:enumeration value="Bueno"/>
+	 	<xsi:enumeration value="Regular"/>
+	 	<xsi:enumeration value="Malo"/>
+	 	<xsi:enumeration value="El Peor"/>
+	</xsi:restriction>		
+</xsi:simpleType>
+
+<!--
+definicion atributos
+-->
+
+<xsi:simpleType name="TipoIsbn">
+	
+		<xsi:restriction base="xsi:string">
+			<xsi:pattern value="[0-9]{3}-[0-9]{2}-[0-9]{4}-[0-9]{3}-[0-9]{1}"/>
+		</xsi:restriction>		
+</xsi:simpleType>
+	
+
+<xsi:simpleType name="TipoCodigo">
+	 
+		<xsi:restriction base="xsi:string">
+			<xsi:pattern value="[A-Z 0-9]{2}"/>
+		</xsi:restriction>	
+</xsi:simpleType>	
+		
+ 
+	
+
+<!--
+
+	ELEMENTOS COMPLEJOS==============
+
+biblioteca
+libro
+personaje
+grupo de personajes para las IDs
+
+-->
+<!--
+personaje
+-->	
+<xsi:complexType name="TipoPersonaje">
+	 
+		<xsi:sequence> 
+			<xsi:element name="nombre" type="TipoTexto" minOccurs="1" maxOccurs="1"/>
+			<xsi:element name="amigoDe" type="TipoAmigoDe" minOccurs="0" maxOccurs="unbounded"/>
+			<xsi:element name="desde" type="TipoDesde" minOccurs="0" maxOccurs="unbounded"/>
+			<xsi:element name="calificación" type="TipoCalificación" minOccurs="1" maxOccurs="1"/>
+		</xsi:sequence>
+	<xsi:attribute name="codigo" type="TipoCodigo" id="codigo"/> 	
+</xsi:complexType>
+ 
+ <!--
+libro
+-->
+ 
+<xsi:complexType name="TipoLibro">
+	
+		<xsi:sequence> 
+			<xsi:element name="titulo" type="TipoTexto" minOccurs="1" maxOccurs="1"/>
+			<xsi:element name="autor" type="TipoTexto" minOccurs="0" maxOccurs="unbounded"/>
+			<xsi:element name="personaje" type="TipoPersonaje" minOccurs="0" maxOccurs="unbounded"/>
+		</xsi:sequence>
+	<xsi:attribute name="isbn" type="TipoIsbn" id="isbn"/> 	
+</xsi:complexType>
+
+<!--
+	biblioteca
+
+-->
+<xsi:element name="biblioteca">
+	<xsi:complexType>
+		<xsi:sequence>
+			<xsi:element name="libro" type="TipoLibro" minOccurs="1" maxOccurs="unbounded"/>
+			 	
+		</xsi:sequence>	
+	</xsi:complexType>	
+</xsi:element>	
+
+	
+
+
+
+</xsi:schema>

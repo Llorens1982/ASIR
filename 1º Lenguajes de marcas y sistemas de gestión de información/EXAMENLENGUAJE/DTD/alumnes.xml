@@ -1,0 +1,30 @@
+﻿<!DOCTYPE  factura SYSTEM  "alumnes.dtd">
+<alumnes institut="IES Camp de Morvedre">
+	<alumne id="e3542905" cicle="SMX">
+	<nom>Juan</nom>
+	<cognom>Perez</cognom>
+	<cognom>Mohedano</cognom>
+	<Edat>27</Edat>
+	<adreca>
+		<ciutat>Castelló</ciutat>
+		<carrer>Pstg. Dos de Mayo</carrer>
+		<numero>2</numero>
+		<pis>4</pis>
+		<porta>1</porta>
+		<cp>08440</cp>
+	</adreca>
+	</alumne>
+	<alumne id="h8492401" cicle="DAW">
+	<nom>Sergi</nom>
+	<cognom>Martí</cognom>
+	<Edat>27</Edat>
+	<adreca>
+		<ciutat>València</ciutat>
+		<carrer>Rue del Percebe</carrer>
+		<numero>13</numero>
+		<pis>1</pis>
+		<porta>1</porta>
+		<cp>08000</cp>
+		</adreca>
+	</alumne>
+</alumnes>

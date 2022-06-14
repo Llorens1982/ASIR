@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<!-- Created using eXe: http://exelearning.org -->
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" /><link rel="stylesheet" type="text/css" href="content.css" /><link rel="stylesheet" type="text/css" href="nav.css" /><title>5.2 - Esquemas </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta http-equiv="Content-Type" content="text/html;  charset=utf-8" />
+<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+<div id="content">
+<div id="emptyHeader"></div><div id="siteNav">
+<ul>
+<li><a href="index.html" class="daddy main-node">Administración de PostgreSQL</a></li><li><a href="1__instalacin.html" class="no-ch">1 - Instalación</a></li>
+<li><a href="nota_previa.html" class="no-ch">Nota Previa</a></li>
+<li><a href="2_arranque_y_parada_del_sistema.html" class="no-ch">2. Arranque y parada del sistema</a></li>
+<li><a href="3__ficheros_de_configuracin.html" class="no-ch">3 - Ficheros de configuración</a></li>
+<li><a href="4__gestin_de_usuarios_y_privilegios.html" class="daddy">4 - Gestión de usuarios y privilegios</a><ul class="other-section">
+<li><a href="41__gestin_de_roles_utilizacin_como_usuarios.html" class="no-ch">4.1 - Gestión de roles: utilización como usuarios</a></li>
+<li><a href="42__gestin_de_roles_utilizacin_como_grupos.html" class="no-ch">4.2 - Gestión de roles: utilización como grupos</a></li>
+<li><a href="43__permisos.html" class="no-ch">4.3 - Permisos</a></li>
+<li><a href="44__roles_y_miembros.html" class="no-ch">4.4 - Roles y miembros</a></li>
+<li><a href="45__autenticacin_de_usuarios.html" class="no-ch">4.5 - Autenticación de usuarios</a></li>
+</ul>
+</li>
+<li class="current-page-parent"><a href="5__gestin_de_bases_de_datos.html" class="current-page-parent daddy">5 - Gestión de Bases de Datos</a><ul>
+<li><a href="51__bases_de_datos_creacin_modificacin_y_eliminacin.html" class="no-ch">5.1 - Bases de Datos: Creación, Modificación y Eliminación</a></li>
+<li id="active"><a href="52__esquemas.html" class="active no-ch">5.2 - Esquemas</a></li>
+<li><a href="53__tablespaces.html" class="no-ch">5.3 - Tablespaces</a></li>
+<li><a href="54_lugares_alternativos.html" class="no-ch">5.4 Lugares alternativos</a></li>
+</ul>
+</li>
+<li><a href="6_copia_de_seguridad_y_restauracin.html" class="daddy">6- Copia de seguridad y restauración</a><ul class="other-section">
+<li><a href="61__pg_dump.html" class="no-ch">6.1 - PG_DUMP</a></li>
+<li><a href="62__restauracin_del_dump.html" class="no-ch">6.2 - Restauración del DUMP</a></li>
+<li><a href="63__backup_desde_pgadmin.html" class="no-ch">6.3 - Backup desde PgAdmin</a></li>
+<li><a href="64__backup_por_copia_de_ficheros.html" class="no-ch">6.4 - Backup por copia de ficheros</a></li>
+</ul>
+</div>
+<div id='topPagination'><div class="pagination noprt"><a href="51__bases_de_datos_creacin_modificacin_y_eliminacin.html" class="prev"><span>&laquo; </span>Anterior</a> | <a href="53__tablespaces.html" class="next"> Siguiente<span> &raquo;</span></a></div>
+</div><div id="main">
+<div id="nodeDecoration"><h1 id="nodeTitle">5.2 - Esquemas</h1></div>
+<div class="FreeTextIdevice" id="id13">
+<div class="iDevice emphasis0">
+<div id="ta13_1" class="block" style="display:block;position:relative"><p>
+&nbsp;
+</p>
+<p>
+&nbsp;
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">En una Base de Datos tendremos como mínimo un </span><b><i><span>Esquema </span></i></b><span style="font-family: Arial; color: black">(</span><b><i><span>Schema</span></i></b><span style="font-family: Arial; color: black">),
+aunque podemos tener más de uno con diferentes permisos de acceso. El esquema
+será, por tanto, una separación lógica de la Base de Datos. En cada esquema
+podremos crear diferentes objetos (tablas, vistas, funciones, ...).<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Siempre que creamos una Base de Datos se crea el primer esquema
+que será </span><b><i><span>público</span></i></b><span style="font-family: Arial; color: black">.
+Eso quiere decir que cualquiera usuario que se conecte a la Base de Datos podrá
+listar las tablas de este esquema, e incluso </span><i><span>crear sus tablas</span></i><span style="font-family: Arial; color: black">,
+si no hemos controlado el acceso a la Base de Datos (con </span><b><span>pg_hba.conf</span></b><span style="font-family: Arial; color: black">). Así llegaríamos a la contradicción que el
+propietario de la Base de Datos no podría ver el contenido de estas tablas
+creadas por otro usuario en su Base de Datos (en el esquema público). Por ejemplo,
+el usuario </span><b><span>geo es</span></b><span style="font-family: Arial; color: black">
+propietario de la Base de Datos </span><b><span>geo</span></b><span style="font-family: Arial; color: black">, donde solo hay un
+esquema, </span><b><span>público</span></b><span style="font-family: Arial; color: black">. Si no impedimos el acceso
+de otros usuarios (ved pregunta 4.5 Autenticación de usuarios), se podría
+conectar el usuario </span><b><span>xarxa</span></b><span style="font-family: Arial; color: black">,
+por ejemplo. Este usuario podría ver qué tablas hay creadas, aunque no podría
+ver su contenido (si no tiene permiso por medio de </span><b><i><span>Grant</span></i></b><span style="font-family: Arial; color: black">). Pero perfectamente podría crear una tabla en
+este esquema, </span><b><i><span>t1_xarxa</span></i></b><span style="font-family: Arial; color: black">. Entonces el usuario </span><b><span>geo</span></b><span style="font-family: Arial; color: black">, no podrá ver el contenido de esta tabla porque
+no es suya. En la imagen tenemos todo este proceso.<o:p></o:p></span>
+</p>
+<p>
+
+</p>
+<blockquote>
+	<p>
+	<img src="Tema_5_Admon_5.2_Imagen1.JPG" height="751" width="643" /> 
+	</p>
+</blockquote>
+<p>
+&nbsp;
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Para evitar a que se cuelan, podemos por una banda limitar el
+acceso por medio del </span><b><i><span>pg_hba.conf</span></i></b><span style="font-family: Arial; color: black">. Y por otra limitar el
+acceso al esquema público</span><b><i><span> </span></i></b><span style="font-family: Arial; color: black">o crear otros esquemas.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">La sintaxis de creación de un esquema es uno de los dos
+siguientes:<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">CREATE SCHEMA nombre<i>_esquema
+</i>[ AUTHORIZATION nombre<i>_usuario </i>]<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<b><span style="font-family: 'Courier New'; color: mediumblue"><o:p> </o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">CREATE SCHEMA AUTHORIZATION nombre<i>_usuario<o:p></o:p></i></span></b>
+</p>
+</div>
+<p>
+&nbsp;
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Si no se especifica el nombre del esquema se debe especificar
+quien tiene la autorización (quien es el propietario), y entonces el nombre del
+esquema será el mismo del usuario.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Si no se especifica el usuario, el propietario será quien hace la
+creación. <o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Para poder crear el esquema en la Base de Datos se debe tener
+permiso (solo el propietario y superusuarios). A un esquema creado en principio
+nada más tendrá acceso el propietario, aunque se puede dar permiso por medio de
+</span><b><i><span>GRANT</span></i></b><span style="font-family: Arial; color: black">.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Para crear un objeto dentro de un esquema que no sea público</span><b><i><span> </span></i></b><span style="font-family: Arial; color: black">(que
+es el esquema por defecto), se deberá calificar el objeto con el nombre del
+esquema, es decir nombre</span><b><i><span>_esq.nom_obj</span></i></b><span style="font-family: Arial; color: black">.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Vamos a ver un ejemplo basado en el ejemplo anterior, por ver como
+limitamos el acceso.<o:p></o:p></span>
+</p>
+<p>
+&nbsp;
+</p>
+<blockquote>
+	<p>
+	<img src="Tema_5_Admon_5.2_Imagen2.JPG" height="442" width="643" /> 
+	</p>
+</blockquote>
+<p>
+&nbsp;
+</p>
+<p>
+<span style="font-size: 12pt; font-family: Arial; color: black">Hay manera, por hacer las cosas más cómodas, de
+cambiar el orden de los esquemas para un usuario (por defecto el primero es el </span><b><i><span style="font-size: 12pt">público</span></i></b><span style="font-size: 12pt; font-family: Arial; color: black">),
+pero con lo que hemos visto ya hemos cumplido las espectatives del curso.</span> 
+</p>
+<p>
+&nbsp;
+</p>
+</div></div>
+</div>
+<div id='bottomPagination'><div class="pagination noprt"><a href="51__bases_de_datos_creacin_modificacin_y_eliminacin.html" class="prev"><span>&laquo; </span>Anterior</a> | <a href="53__tablespaces.html" class="next"> Siguiente<span> &raquo;</span></a></div>
+</div></div>
+</div>
+</body></html>

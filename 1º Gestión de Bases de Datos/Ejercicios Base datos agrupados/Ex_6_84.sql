@@ -1,0 +1,8 @@
+CREATE TABLE LINIA_FAC
+(num_f NUMERIC,
+num_l NUMERIC ,
+cod_a VARCHAR (10) CONSTRAINT nn_cod NOT NULL,
+quant NUMERIC (6),
+dte NUMERIC,
+CONSTRAINT pk_l_f PRIMARY KEY (num_f,num_l)
+)

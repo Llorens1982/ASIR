@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<!-- Created using eXe: http://exelearning.org -->
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" /><link rel="stylesheet" type="text/css" href="content.css" /><link rel="stylesheet" type="text/css" href="nav.css" /><title>4.1 - Gestión de roles: utilización como usuarios </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta http-equiv="Content-Type" content="text/html;  charset=utf-8" />
+<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+<div id="content">
+<div id="emptyHeader"></div><div id="siteNav">
+<ul>
+<li><a href="index.html" class="daddy main-node">Administración de PostgreSQL</a></li><li><a href="1__instalacin.html" class="no-ch">1 - Instalación</a></li>
+<li><a href="nota_previa.html" class="no-ch">Nota Previa</a></li>
+<li><a href="2_arranque_y_parada_del_sistema.html" class="no-ch">2. Arranque y parada del sistema</a></li>
+<li><a href="3__ficheros_de_configuracin.html" class="no-ch">3 - Ficheros de configuración</a></li>
+<li class="current-page-parent"><a href="4__gestin_de_usuarios_y_privilegios.html" class="current-page-parent daddy">4 - Gestión de usuarios y privilegios</a><ul>
+<li id="active"><a href="41__gestin_de_roles_utilizacin_como_usuarios.html" class="active no-ch">4.1 - Gestión de roles: utilización como usuarios</a></li>
+<li><a href="42__gestin_de_roles_utilizacin_como_grupos.html" class="no-ch">4.2 - Gestión de roles: utilización como grupos</a></li>
+<li><a href="43__permisos.html" class="no-ch">4.3 - Permisos</a></li>
+<li><a href="44__roles_y_miembros.html" class="no-ch">4.4 - Roles y miembros</a></li>
+<li><a href="45__autenticacin_de_usuarios.html" class="no-ch">4.5 - Autenticación de usuarios</a></li>
+</ul>
+</li>
+<li><a href="5__gestin_de_bases_de_datos.html" class="daddy">5 - Gestión de Bases de Datos</a><ul class="other-section">
+<li><a href="51__bases_de_datos_creacin_modificacin_y_eliminacin.html" class="no-ch">5.1 - Bases de Datos: Creación, Modificación y Eliminación</a></li>
+<li><a href="52__esquemas.html" class="no-ch">5.2 - Esquemas</a></li>
+<li><a href="53__tablespaces.html" class="no-ch">5.3 - Tablespaces</a></li>
+<li><a href="54_lugares_alternativos.html" class="no-ch">5.4 Lugares alternativos</a></li>
+</ul>
+</li>
+<li><a href="6_copia_de_seguridad_y_restauracin.html" class="daddy">6- Copia de seguridad y restauración</a><ul class="other-section">
+<li><a href="61__pg_dump.html" class="no-ch">6.1 - PG_DUMP</a></li>
+<li><a href="62__restauracin_del_dump.html" class="no-ch">6.2 - Restauración del DUMP</a></li>
+<li><a href="63__backup_desde_pgadmin.html" class="no-ch">6.3 - Backup desde PgAdmin</a></li>
+<li><a href="64__backup_por_copia_de_ficheros.html" class="no-ch">6.4 - Backup por copia de ficheros</a></li>
+</ul>
+</div>
+<div id='topPagination'><div class="pagination noprt"><a href="4__gestin_de_usuarios_y_privilegios.html" class="prev"><span>&laquo; </span>Anterior</a> | <a href="42__gestin_de_roles_utilizacin_como_grupos.html" class="next"> Siguiente<span> &raquo;</span></a></div>
+</div><div id="main">
+<div id="nodeDecoration"><h1 id="nodeTitle">4.1 - Gestión de roles: utilización como usuarios</h1></div>
+<div class="FreeTextIdevice" id="id6">
+<div class="iDevice emphasis0">
+<div id="ta6_1" class="block" style="display:block;position:relative">
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">    Un </span><b><span>rol es</span></b><span style="font-family: Arial; color: black">
+una entidad capaz de recoger permisos y privilegios. Uno de estos permisos es
+el de conexión (login). En este sentido sería como un usuario, eso sí,
+completamente independiente de los usuarios de S.O.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">    Este </span><b><span>rol </span></b><span style="font-family: Arial; color: black">o
+usuario</span><b><span> </span></b><span style="font-family: Arial; color: black">(PostgreSQL mantiene en cierta medida la
+nomenclatura de usuarios) será un nombre con una posible contraseña (que
+dependiendo del método de autenticación, servirá para controlar el acceso) que
+tendrá distintos permisos para crear tablas y otros objetos en una determinada
+Base de Datos, utilizarlos para hacer consultas o actualizaciones,...<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-bottom: 0.0001pt">
+<span style="font-family: Arial; color: black">Aparte
+de esto, los permisos de un rol pueden asignarse a otro. Entonces es como si el segundo
+rol pertenecerá al primero, y el primero funciona como un grupo.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-bottom: 0.0001pt">
+<span style="font-family: Arial; color: black"><o:p> </o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Los roles no están incluidos en ningún base de datos particular.
+Por tanto son globales a toda la instalación de PostgreSQL (la gran Base de
+Datos, el cluster).<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Los roles, tanto si pueden hacer login como si no, se guardarán en
+la tabla </span><b><i><span>pg_authid </span></i></b><span style="font-family: Arial; color: black">(en
+caso de usuarios con la contraseña encriptada o no). Por comodidad (y
+compatibilidad con versiones anteriores) hay unas vistas a que pueden hacer más
+cómoda la consulta.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 36pt; text-indent: -18pt">
+<!--[if !supportLists]--><span style="font-family: Symbol; color: black"><span>·<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal; font-family: 'Times New Roman'">       
+</span></span></span><!--[endif]--><b><span>pg_roles contiene</span></b><span style="font-family: Arial; color: black">
+todos los roles.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 36pt; text-indent: -18pt">
+<!--[if !supportLists]--><span style="font-family: Symbol; color: black"><span>·<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal; font-family: 'Times New Roman'">       
+</span></span></span><!--[endif]--><b><span>pg_user contiene</span></b><span style="font-family: Arial; color: black">
+los usuarios, es decir, los roles a que pueden hacer un login.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 36pt; text-indent: -18pt">
+<!--[if !supportLists]--><span style="font-family: Symbol; color: black"><span>·<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal; font-family: 'Times New Roman'">       
+</span></span></span><!--[endif]--><b><span>pg_shadow contiene</span></b><span style="font-family: Arial; color: black">
+también las contraseñas.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 36pt; text-indent: -18pt">
+<!--[if !supportLists]--><span style="font-family: Symbol; color: black"><span>·<span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal; font-family: 'Times New Roman'">       
+</span></span></span><!--[endif]--><b><span>pg_group contiene</span></b><span style="font-family: Arial; color: black">
+los grupos, es decir, los roles que no pueden hacer login.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Por tanto la primera manera de gestionar los roles sería manipular
+directamente las tablas o vistas, aunque parece demasiado laborioso.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Vamos a ver las maneras normales de crear roles.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<b><span>CREATE ROL<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Deberemos ejecutar esta sentencia SQL desde un usuario con permiso
+para crear roles, y conectado a cualquiera B.D.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">La sintaxis es la siguiente:<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">CREATE ROLE nombre<i> </i>[
+[ WITH ] opción<i> </i>[ ... ] ]<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">donde la opción puede ser (las subrayadas son las opciones por
+defecto):<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b><span style="font-size: 10pt; color: black">SUPERUSER
+| <u>NOSUPERUSER</u> </span></b><span style="font-size: 10pt; color: black">permiso</span><span style="font-size: 10pt; font-family: Arial; color: black">
+de superusuario (por defecto no)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b><span style="font-size: 10pt; color: black">CREATEDB
+| <u>NOCREATEDB</u> </span></b><span style="font-size: 10pt; color: black">permiso</span><span style="font-size: 10pt; font-family: Arial; color: black">
+para crear B.D (por defecto no)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b><span style="font-size: 10pt; color: black">CREATEROLE
+| <u>NOCREATEROLE</u> <span> </span></span></b><span style="font-size: 10pt; color: black">permiso</span><span style="font-size: 10pt; font-family: Arial; color: black"> para crear usuarios (por defecto no)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b><span style="font-size: 10pt; color: black">CREATEUSER
+| <u>NOCREATEUSER</u> </span></b><span style="font-size: 10pt; font-family: Arial; color: black">similar
+a anterior (obsoleta)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b><u><span style="font-size: 10pt; color: black">INHERIT</span></u></b><b><span style="font-size: 10pt; color: black"> | NOINHERIT </span></b><span style="font-size: 10pt; font-family: Arial; color: black">determina si el rol hereda las propiedades de los grupos (roles) a
+los que pertenece<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b><span style="font-size: 10pt; color: black">LOGIN
+| <u>NOLOGIN</u> </span></b><span style="font-size: 10pt; color: black">permiso</span><span style="font-size: 10pt; font-family: Arial; color: black">
+para conectarse (será un usuario)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b><span style="font-size: 10pt; color: black">CONNECTION
+LÍMIT connlimit </span></b><span style="font-size: 10pt; font-family: Arial; color: black">si
+un usuario puede conectarse esto especifica cuantas conexiones<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<span style="font-size: 10pt; font-family: Arial; color: black">concurrentes puede haber (por defecto -1, que quiere decir ilimitadas)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin: 0cm -14.3pt 6pt 7.1pt">
+<b><span style="font-size: 10pt; color: black">[ENCRYPTED |
+UNENCRYPTED] PASSWORD 'password' </span></b><span style="font-size: 10pt; color: black">contraseña</span><span style="font-size: 10pt; font-family: Arial; color: black"> del usuario que puede ir encriptada o no<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b><span style="font-size: 10pt; color: black">VÁLIDO
+UNTIL 'fecha'</span></b><span style="font-size: 10pt; color: black"> fecha</span><span style="font-size: 10pt; font-family: Arial; color: black">
+de caducidad del usuario<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b><span style="font-size: 10pt; color: black">IN
+ROL <span> </span>rolename [, ...] roles</span></b><span style="font-size: 10pt; font-family: Arial; color: black"> (grupos) a los que pertenece</span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+&nbsp;
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b><span style="font-size: 10pt; color: black">IN
+GROUP rolename [, ...] </span></b><span style="font-size: 10pt; font-family: Arial; color: black">similar
+al anterior (obsoleta)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b>ROLE</b><b><span style="font-size: 10pt; color: black"> rolename [, ...] </span></b><span style="font-size: 10pt; color: black">roles</span><span style="font-size: 10pt; font-family: Arial; color: black"> que pertenecerán a este rol (grupo)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b><span style="font-size: 10pt; color: black">USER
+rolename [, ...] </span></b><span style="font-size: 10pt; font-family: Arial; color: black">similar
+al anterior (obsoleta)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 7.1pt">
+<b><span style="font-size: 10pt; color: black">ADMIN
+rolename [, ...] </span></b><span style="font-size: 10pt; font-family: Arial; color: black">similar
+al anterior pero además tendrá permiso para administrarlo (WITH<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 10pt; font-family: Arial; color: black">ADMIN
+OPTION)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="color: black">Para mantener la compatibilidad
+con versiones anteriores tenemos la sentencia equivalente</span><span style="font-family: Arial; color: black">:<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">CREATE USER nombre [ [ WITH ] opción [ ... ] ]<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">donde por defecto sí que tendrá el privilegio LOGIN.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Así, por ejemplo, desde una conexión por </span><b><i><span>PSQL como</span></i></b><span style="font-family: Arial; color: black">
+posgres</span><b><i><span> </span></i></b><span style="font-family: Arial; color: black">a xarxa</span><b><i><span> podemos</span></i></b><span style="font-family: Arial; color: black">
+hacer:<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">CREATE ROLE xar1 LOGIN;<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">--puede conectarse, no tiene password y no puede crear ni usuarios
+ni B.D.<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText" style="margin-left: 1cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue"><o:p> </o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">CREATE USER xar2;<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">--puede conectarse, no tiene password y no puede crear ni usuarios
+ni B.D.<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText" style="margin-left: 1cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue"><o:p> </o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">CREATE ROLE xar3
+LOGIN PASSWORD 'xar3';<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">--puede conectarse, tiene password, no puede crear ni
+usuarios<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">ni B.D.<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText" style="margin-left: 1cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB"><o:p> </o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">CREATE ROLE xar4
+LOGIN PASSWORD 'xar4' CREATEDB;<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">--puede conectarse, tiene password, no puede crear usuarios,<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">pero sí B.D.<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText" style="margin-left: 1cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB"><o:p> </o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">CREATE ROLE xar5
+LOGIN PASSWORD 'xar5' CREATEDB CREATEROLE;<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">--puede conectarse, tiene password, y puede crear usuarios y<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">B.D.<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText" style="margin-left: 14.2pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB"><o:p> </o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">CREATE ROLE xar6
+LOGIN PASSWORD 'xar6' VALID UNTIL '31-05-2010';<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">--puede conectarse hasta el 31 de mayo a las 0:00, tiene password
+y no puede crear ni usuarios ni B.D.<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black"><o:p> </o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Si queremos modificar algún aspecto del usuario, lo haremos con la
+sentencia<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 21.3pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">ALTER ROLE nombre<i> </i>[
+[ WITH ] opción<i> </i>[ ... ] ]<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">donde las opciones son las mismas que en CREATE ROLE, por ejemplo:<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 14.2pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">ALTER ROLE xar2
+PASSWORD 'xar2';<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">aunque esta sentencia tiene más utilidades:<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 14.2pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">ALTER ROLE nombre<i> </i>RENAME
+TO nombre<i>_nuevo<o:p></o:p></i></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">o<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 14.2pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">ALTER ROLE nombre<i> SET</i>
+parámetro<i> TO</i> <i>valor<o:p></o:p></i></span></b>
+</p>
+</div>
+<p class="MsoBodyText" style="margin-left: 14.2pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue"><o:p> </o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 14.2pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">ALTER ROLE nombre<i> RESET</i>
+<i>parámetro<o:p></o:p></i></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">que servirán para inicializar determinados parámetros a un
+determinado valor, para el usuario.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Si queremos eliminar un rol, sencillamente<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 14.2pt">
+<b><span style="font-family: 'Courier New'; color: mediumblue">DROP ROLE <i>nombre<o:p></o:p></i></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Evidentemente existen las sentencias sinónimas </span><b><span>ALTER USER y</span></b><span style="font-family: Arial; color: black"> </span><b><span>DROP USER<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<b><span>*create user<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="margin-bottom: 0.0001pt">
+<span style="font-family: Arial; color: black">Otra
+manera de crear roles, esta vez desde el sistema (sin entrar en PostgreSQL). Es
+un fichero ejecutable que proporciona PostgreSQL, y que nada más podrán ejecutar
+los superusuarios PostgreSQL. Si no ponemos la opción </span><b><span>-U </span></b><span>se
+intentará</span><span style="font-family: Arial; color: black"> ejecutar como un<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-bottom: 0.0001pt">
+<span style="font-family: Arial; color: black">usuario
+PostgreSQL con el mismo nombre que el usuario de S.O. que está ejecutando este ejecutable.
+En principio, como de momento nada más tenemos un superusuario (más
+concretamente un usuario con permiso para crear usuarios) si queremos tener
+éxito deberemos ejecutarlo como usuario de S.O. </span><b><i><span>posgres</span></i></b><span style="font-family: Arial; color: black">, pero si estamos en una consola como un usuario
+distinto podemos esquivarlo con la opción </span><b><span>-U</span></b><span style="font-family: Arial; color: black">.
+Más adelante pondremos un ejemplo.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-bottom: 0.0001pt">
+<span style="font-family: Arial; color: black"><o:p> </o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">La sintaxis es:<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 21.3pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">create user [<i>opciones</i>]
+<i>nombre<o:p></o:p></i></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Y en las opciones, entre otros, podremos poner:<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-size: 10pt">-s </span></b><span style="font-size: 10pt; font-family: Arial; color: black">el
+nuevo usuario será superusuario (si no lo ponemos nos lo pedirá)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-size: 10pt">-S </span></b><span style="font-size: 10pt; font-family: Arial; color: black">el
+nuevo usuario no será superusuario<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-size: 10pt">-d </span></b><span style="font-size: 10pt; font-family: Arial; color: black">el
+nuevo usuario podrá crear bases de datos (si no lo ponemos nos lo pedirá)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-size: 10pt">-D </span></b><span style="font-size: 10pt; font-family: Arial; color: black">el
+nuevo usuario no podrá crear bases de datos<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-size: 10pt">-r </span></b><span style="font-size: 10pt; font-family: Arial; color: black">el
+nuevo usuario podrá crear roles (si no lo ponemos nos lo pedirá)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-size: 10pt">-R </span></b><span style="font-size: 10pt; font-family: Arial; color: black">el
+nuevo usuario no podrá crear roles<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-size: 10pt">-l </span></b><span style="font-size: 10pt; font-family: Arial; color: black">el
+nuevo usuario podrá conectarse (por defecto)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-size: 10pt">-L </span></b><span style="font-size: 10pt; font-family: Arial; color: black">el
+nuevo usuario no podrá conectarse<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-size: 10pt">-P pedirá</span></b><span style="font-size: 10pt; font-family: Arial; color: black"> la contraseña para el nuevo usuario<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-size: 10pt; font-family: Arial; color: black"><o:p> </o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Aparte de estas opciones podemos poner otras, similares a las
+opciones de </span><b><i><span>psql<o:p></o:p></span></i></b>
+</p>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-size: 10pt">-h nombre</span></b><i><span style="font-size: 10pt"> nombre</span></i><span style="font-size: 10pt; font-family: Arial; color: black">
+del servidor a que nos conectamos (por defecto local)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-size: 10pt">-p port<i> </i></span></b><i><span style="font-size: 10pt">puerto</span></i><span style="font-size: 10pt; font-family: Arial; color: black"> del servidor a través del que nos conectamos
+(por defecto 5432)<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 42.55pt">
+<b><span style="font-size: 10pt">-U nombre<i> </i></span></b><i><span style="font-size: 10pt">nombre</span></i><span style="font-size: 10pt; font-family: Arial; color: black"> del usuario que hace la operación (no el que se
+crea)<o:p></o:p></span>
+</p>
+<b><span style="font-size: 10pt">-W </span></b><span style="font-size: 10pt">para</span><span style="font-size: 10pt; font-family: Arial; color: black"> que
+nos pida obligatoriamente la contraseña del usuario que hace la operación (no
+el que </span><span style="font-size: 10pt; font-family: Arial; color: black">se crea).<o:p></o:p></span>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Así, si en la consola no estamos como usuario posgres, podemos
+cambiar a este usuario, o sencillamente hacer:<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">create user -U posgres<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black"><o:p> </o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Aquí tenemos algunos ejemplos. Los dos primeros hacen exactamente
+el mismo. Hemos puesto tanto las sentencias de creación como los comentarios
+que salen, como las contestaciones. Observa que la contraseña que pide es la de
+quien ejecuta el orden. Por tanto deberemos ejecutarlo como </span><b><span>posgres </span></b><span>y</span><span style="font-family: Arial; color: black">
+poner su contraseña. En el último también pide la contraseña que se quiere poner
+al usuario que se va a crear.<o:p></o:p></span>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 1cm; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">create user -h 127.0.0.1 xar7 <o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">¿Será el nuevo rol un superusuario? (s/n) n<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">¿Debe permitírsele al rol la creación de bases de datos? (s/n)
+n<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">¿Debe permitírsele al rol la creación de otros rolas? </span></b><b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">(s/n)
+n<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">Contraseña:<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">CREATE ROLE<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB"><o:p> </o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 21.3pt; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">create user -h
+127.0.0.1 -S -D -R xar7<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">Contraseña:<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">CREATE ROLE<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB"><o:p> </o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue" lang="EN-GB">create user -h
+127.0.0.1 -S -P xar8<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">Ingrese la contraseña para el nuevo rol:<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">Ingrésela nuevamente:<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">¿Debe permitírsele al rol la creación de bases de datos? (s/n)
+n<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">¿Debe permitírsele al rol la creación de otros rolas? (s/n) n<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">Contraseña:<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">CREATE ROLE<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<b><span><o:p> </o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<b><span>Nota<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="margin-bottom: 0.0001pt">
+<span style="font-family: Arial; color: black">Los
+ejercicios anteriores están para <span> </span>que funcionen
+igual tanto en Windows como en<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-bottom: 0.0001pt">
+<span style="font-family: Arial; color: black">Linux.
+Si en Windows no ponemos el host (</span><b><span>-h 127.0.0.1</span></b><span style="font-family: Arial; color: black">)
+funcionaría exactamente igual.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-bottom: 0.0001pt">
+<span style="font-family: Arial; color: black">En
+cambio, en Linux si no ponemos el host no nos pedirá la contraseña, pero funcionará
+bien (siempre que lo ejecutamos como </span><b><span>posgres</span></b><span style="font-family: Arial; color: black">).
+La explicación de todo esto está en el punto </span><b><span>4.5 Autenticación de
+usuarios</span></b><span style="font-family: Arial; color: black">.<o:p></o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black"><o:p> </o:p></span>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">No existe el programa </span><b><span>alteruser</span></b><span style="font-family: Arial; color: black">,
+para modificar un rol, pero sí </span><b><span>dropuser por</span></b><span style="font-family: Arial; color: black">
+eliminarlo<o:p></o:p></span>
+</p>
+<p class="MsoBodyText" style="margin-left: 1cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">dropuser [<i>opciones</i>]
+<i>nombre<o:p></o:p></i></span></b>
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">donde las opciones son algunas del createuser, con el mismo
+significado: </span><b><span>-h -P -U -W<o:p></o:p></span></b>
+</p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 2cm; margin-right: 0cm">
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">dropuser xar7<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">Contraseña:<o:p></o:p></span></b>
+</p>
+<p class="MsoBodyText" style="border: medium none ; padding: 0cm">
+<b><span style="font-family: 'Courier New'; color: mediumblue">DROP ROLE<o:p></o:p></span></b>
+</p>
+</div>
+<p class="MsoBodyText">
+<b><span><o:p> </o:p></span></b>
+</p>
+<p class="MsoBodyText">
+<b><span><span style="font-size: medium">Herramientas gráficas</span><o:p></o:p></span></b>
+</p>
+<p>
+<span style="font-size: 12pt; font-family: Arial; color: black">Para
+dar de alta un rol utilizado como un usuario con PgAdmin deberemos ir a la
+opción </span><b><i><span style="font-size: 12pt">Roles de entrada </span></i></b><span style="font-size: 12pt; font-family: Arial; color: black">(</span><b><i><span style="font-size: 12pt">Login Roles</span></i></b><span style="font-size: 12pt; font-family: Arial; color: black">)
+habiéndonos autenticado como un usuario (un rol) que puede crear usuarios (roles),
+que en principio puede ser </span><b><span style="font-size: 12pt">posgres</span></b><span style="font-size: 12pt; font-family: Arial; color: black">.</span>
+</p>
+<p>
+&nbsp;
+</p>
+<p>
+<img src="Tema5_4_4_1.JPG" height="521" width="664" />
+<br />
+ 
+</p>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black"></span><span style="font-family: Arial; color: black"><br />
+<o:p></o:p></span>
+</p>
+<blockquote>
+</blockquote>
+<p class="MsoBodyText">
+<span style="font-family: Arial; color: black">Podemos ver que ya tenemos 5 roles de entrada creados (si ya has
+ejecutado las sentencias del apartado anterior, también te aparecerán </span><b><span>xar1 </span></b><span style="font-family: Arial; color: black">... </span><b><span>xar8</span></b><span style="font-family: Arial; color: black">),
+y que son independientes de las Bases de Datos, mejor dicho, no están dentro de
+ellas.</span>
+</p>
+<p class="MsoBodyText">
+S<span style="font-family: Arial; color: black">i intentamos crear un usuario nuevo, veremos que tenemos todas
+las posibilidades que teníamos en la creación por SQL. Y además no nos deja
+tocar la opción Puede</span><b><i><span> entrar </span></i></b><span style="font-family: Arial; color: black">(</span><b><i><span>Login</span></i></b><span style="font-family: Arial; color: black">), ya que es un rol utilizado como un usuario.<o:p></o:p></span>
+</p>
+<blockquote>
+	<blockquote>
+		<img src="Tema5_4_4_2.JPG" height="459" width="412" />
+	</blockquote>
+</blockquote>
+<p class="MsoBodyText">
+&nbsp;
+</p>
+<p class="Textbody">
+<span style="color: blue"></span><span style="font-family: Arial; color: black">De</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">misma</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">manera</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">podremos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">modificar</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">un</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">usuario</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(yendo</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">a</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">sus</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">propiedades)</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">o</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">eliminarlo</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(a</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">papelera!).<o:p></o:p></span>
+</p>
+<p class="Textbody">
+<span style="font-family: Arial; color: black"><o:p> </o:p><br />
+Estos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">roles</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">entrada</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">o</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">usuarios</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">son</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">absolutamente</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">independientes</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">los</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">usuarios</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">del</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">S.O.</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ya</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">se</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">encarga</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">él</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">se</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">autentiquen).</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Puede</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">haber</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">usuarios</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ambos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">tipos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">con</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">mismo</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">nombre,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">cosa</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">puede</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">facilitar</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">autenticación,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">pero</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">no</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">tiene</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">porque</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">ser</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">así.</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Perfectamente</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">puede</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">haber</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">usuarios</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">B.D.</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">que</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">no</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">existen</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">en</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">S.O.</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">(y</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">al</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">revés,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">evidentemente).</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">Pero</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">si</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">no</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">hacemos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">nada</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">más,</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">estos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">usuarios</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">no</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">podrán</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">conectarse.</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">En</span><span style="font-family: Arial; color: black"> el punto </span><span style="font-family: Arial; color: black">4.5</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">trataremos</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">el</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">problema</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">de</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">la</span><span style="font-family: Arial; color: black"> </span><span style="font-family: Arial; color: black">autenticación.<o:p></o:p></span>
+</p>
+<p>
+&nbsp;
+</p>
+</div></div>
+</div>
+<div id='bottomPagination'><div class="pagination noprt"><a href="4__gestin_de_usuarios_y_privilegios.html" class="prev"><span>&laquo; </span>Anterior</a> | <a href="42__gestin_de_roles_utilizacin_como_grupos.html" class="next"> Siguiente<span> &raquo;</span></a></div>
+</div></div>
+</div>
+</body></html>

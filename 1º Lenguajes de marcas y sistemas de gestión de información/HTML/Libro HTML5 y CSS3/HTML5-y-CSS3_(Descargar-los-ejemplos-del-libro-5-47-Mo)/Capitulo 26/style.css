@@ -1,0 +1,17 @@
+﻿a { color: black; }
+#box{ margin: 0px auto; 
+      background: white;     
+      width: 340px;
+      border:5px solid rgb(195,215,235);
+      padding-left:5px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;}
+#caja { width: 80px;
+         border: 1px solid black;
+         text-align: center;
+         margin : auto;}
+.parrafo { margin-top: 8px;
+              margin-bottom: 8px;}
+.offline { background: #c00;}
+.online { background: #0c0;}

@@ -1,0 +1,24 @@
+no ip domain-lookup
+hostname R1
+service password-encryption
+enable secret 1234
+banner motd # ¡Solo Acceso Autorizado! #
+line con 0
+password 1234
+login 
+loggin synchronous
+line vty 0 15
+password 1234
+loggin synchronous
+login 
+exit
+ip domain-name ccna-lab.com
+username llorens privilege 15 secret 1234
+line vty 0 4
+login local
+transport input ssh
+line vty 5 15
+login local
+transport input ssh
+crypto key generate rsa general-keys modulus 1024
+end

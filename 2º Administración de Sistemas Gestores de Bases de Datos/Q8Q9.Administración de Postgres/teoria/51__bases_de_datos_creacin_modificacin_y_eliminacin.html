@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<!-- Created using eXe: http://exelearning.org -->
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" /><link rel="stylesheet" type="text/css" href="content.css" /><link rel="stylesheet" type="text/css" href="nav.css" /><title>5.1 - Bases de Datos: Creación, Modificación y Eliminación </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta http-equiv="Content-Type" content="text/html;  charset=utf-8" />
+<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+<div id="content">
+<div id="emptyHeader"></div><div id="siteNav">
+<ul>
+<li><a href="index.html" class="daddy main-node">Administración de PostgreSQL</a></li><li><a href="1__instalacin.html" class="no-ch">1 - Instalación</a></li>
+<li><a href="nota_previa.html" class="no-ch">Nota Previa</a></li>
+<li><a href="2_arranque_y_parada_del_sistema.html" class="no-ch">2. Arranque y parada del sistema</a></li>
+<li><a href="3__ficheros_de_configuracin.html" class="no-ch">3 - Ficheros de configuración</a></li>
+<li><a href="4__gestin_de_usuarios_y_privilegios.html" class="daddy">4 - Gestión de usuarios y privilegios</a><ul class="other-section">
+<li><a href="41__gestin_de_roles_utilizacin_como_usuarios.html" class="no-ch">4.1 - Gestión de roles: utilización como usuarios</a></li>
+<li><a href="42__gestin_de_roles_utilizacin_como_grupos.html" class="no-ch">4.2 - Gestión de roles: utilización como grupos</a></li>
+<li><a href="43__permisos.html" class="no-ch">4.3 - Permisos</a></li>
+<li><a href="44__roles_y_miembros.html" class="no-ch">4.4 - Roles y miembros</a></li>
+<li><a href="45__autenticacin_de_usuarios.html" class="no-ch">4.5 - Autenticación de usuarios</a></li>
+</ul>
+</li>
+<li class="current-page-parent"><a href="5__gestin_de_bases_de_datos.html" class="current-page-parent daddy">5 - Gestión de Bases de Datos</a><ul>
+<li id="active"><a href="51__bases_de_datos_creacin_modificacin_y_eliminacin.html" class="active no-ch">5.1 - Bases de Datos: Creación, Modificación y Eliminación</a></li>
+<li><a href="52__esquemas.html" class="no-ch">5.2 - Esquemas</a></li>
+<li><a href="53__tablespaces.html" class="no-ch">5.3 - Tablespaces</a></li>
+<li><a href="54_lugares_alternativos.html" class="no-ch">5.4 Lugares alternativos</a></li>
+</ul>
+</li>
+<li><a href="6_copia_de_seguridad_y_restauracin.html" class="daddy">6- Copia de seguridad y restauración</a><ul class="other-section">
+<li><a href="61__pg_dump.html" class="no-ch">6.1 - PG_DUMP</a></li>
+<li><a href="62__restauracin_del_dump.html" class="no-ch">6.2 - Restauración del DUMP</a></li>
+<li><a href="63__backup_desde_pgadmin.html" class="no-ch">6.3 - Backup desde PgAdmin</a></li>
+<li><a href="64__backup_por_copia_de_ficheros.html" class="no-ch">6.4 - Backup por copia de ficheros</a></li>
+</ul>
+</div>
+<div id='topPagination'><div class="pagination noprt"><a href="5__gestin_de_bases_de_datos.html" class="prev"><span>&laquo; </span>Anterior</a> | <a href="52__esquemas.html" class="next"> Siguiente<span> &raquo;</span></a></div>
+</div><div id="main">
+<div id="nodeDecoration"><h1 id="nodeTitle">5.1 - Bases de Datos: Creación, Modificación y Eliminación</h1></div>
+<div class="FreeTextIdevice" id="id12">
+<div class="iDevice emphasis0">
+<div id="ta12_1" class="block" style="display:block;position:relative"><p class="MsoBodyText"><strong><span style="text-decoration: underline;"><span>CREACI&Oacute;N</span></span></strong></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">La creaci&oacute;n la efectuaremos con la sentencia SQL:</span></p>
+<p class="MsoBodyText" style="margin-left: 2cm;"><strong><span style="font-family: 'Courier New'; color: mediumblue;">CREATE DATABASE nombre</span></strong></p>
+<p class="MsoBodyText" style="margin-left: 2cm;"><strong><span style="font-family: 'Courier New'; color: mediumblue;">WITH ] [ OWNER [=] nombre<em>_propietario </em>]</span></strong></p>
+<p class="MsoBodyText" style="margin-left: 2cm;"><strong><span style="font-family: 'Courier New'; color: mediumblue;" lang="EN-GB">TEMPLATE [=] <em>template </em>]</span></strong></p>
+<p class="MsoBodyText" style="margin-left: 2cm;"><strong><span style="font-family: 'Courier New'; color: mediumblue;" lang="EN-GB">ENCODING [=] <em>encoding </em>]</span></strong></p>
+<p class="MsoBodyText" style="margin-left: 2cm;"><strong><span style="font-family: 'Courier New'; color: mediumblue;" lang="EN-GB">TABLESPACE [=] <em>tablespace </em>]</span></strong></p>
+<p class="MsoBodyText" style="margin-left: 2cm;"><strong><span style="font-family: 'Courier New'; color: mediumblue;" lang="EN-GB">CONNECTION LIMIT [=] n&uacute;m<em>_conn </em>] ]</span></strong></p>
+<p><span style="font-size: 12pt; font-family: Arial; color: black;">En principio el propietario de la Base de Datos ser&aacute; quien la crea, que evidentemente habr&aacute; de tener permiso para crear (permiso de </span><strong><span style="font-size: 12pt;">CREATEDB</span></strong><span style="font-size: 12pt; font-family: Arial; color: black;">).&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt; font-family: Arial; color: black;">Si somos s&uacute;per usuarios </span><span style="font-size: medium;"><span style="font-family: Arial; color: black;">podremos hacer que el propietario sea otro usuario.</span></span></p>
+<p class="MsoBodyText"><span style="font-size: medium;"><span style="font-family: Arial; color: black;">Cuando se crea una Base de Datos en realidad, por ir m&aacute;s r&aacute;pido, lo que hace es copiarla de otra, una especie de plantilla. Podemos elegir esta plantilla o Base de Datos original (</span><strong><em><span>template1 </span></em></strong><span style="font-family: Arial; color: black;">o </span><strong><em><span>template0; por</span></em></strong><span style="font-family: Arial; color: black;"> defecto </span><strong><em><span>template1</span></em></strong><span style="font-family: Arial; color: black;">).</span></span></p>
+<p class="MsoBodyText"><span style="font-size: medium;"><span style="font-family: Arial; color: black;">&nbsp;</span></span></p>
+<p class="MsoBodyText" style="margin-left: 42.55pt;"><span style="font-size: medium;"><strong><span>Nota</span></strong></span></p>
+<p class="MsoBodyText" style="margin-left: 42.55pt;"><span style="font-size: medium;"><span style="font-family: Arial; color: black;">Aunque podr&iacute;amos estar tentados de utilizar la cl&aacute;usula </span><strong><em><span>template </span></em></strong>para<span style="font-family: Arial; color: black;"> copiar Base de Datos nuestras (es decir, utilizar las nuestras como </span><em><span>plantilla y</span></em><span style="font-family: Arial; color: black;"> as&iacute; esperar que se copie bien), no es aconsejable ya que puede producirnos muchos problemas (con transacciones pendientes, ...). Para copiar las tablas y contenidos, ya veremos los comandos oportunos en el apartado </span><strong><em><span>Copia de seguridad y restauraci&oacute;n</span></em></strong><span style="font-family: Arial; color: black;">.</span></span></p>
+<p class="MsoBodyText"><span style="font-size: medium;"><span style="font-family: Arial; color: black;">&nbsp;</span></span></p>
+<p class="MsoBodyText"><span style="font-size: medium;"><span style="font-family: Arial; color: black;">La cl&aacute;usula </span><strong><em><span>encoding</span></em></strong><span style="font-family: Arial; color: black;"> servir&aacute; para especificar un conjunto de caracteres. La lista es larga, aunque parece que la cosa va decant&aacute;ndose por UTF-8. por lo menos as&iacute; lo aconseja PostgreSQL.</span></span></p>
+<p class="MsoBodyText"><span style="font-size: medium;">Podemos<span style="font-family: Arial; color: black;"> especificar en cu&aacute;l </span><strong><span>Tablespace </span></strong>se<span style="font-family: Arial; color: black;"> guardar&aacute; la Base de Datos y sus </span>objetos<span style="font-family: Arial; color: black;"> (a no ser a que digamos lo contrario). Veremos los </span><strong><span>Tablespaces </span></strong><span style="font-family: Arial; color: black;">a continuaci&oacute;n.</span></span></p>
+<p class="MsoBodyText"><span style="font-size: medium;"><span style="font-family: Arial; color: black;">Por &uacute;ltimo podemos decir cu&aacute;ntas conexiones concurrentes se pueden hacer a la presente B.D.</span></span></p>
+<p class="MsoBodyText"><span style="font-size: medium;"><span style="font-family: Arial; color: black;">Por defecto (-1) no hay l&iacute;mite.</span></span></p>
+<p class="MsoBodyText"><span style="font-size: medium;"><span style="font-family: Arial; color: black;">Tambi&eacute;n lo podemos hacer con las utilidades proporcionadas por PostgreSQL, y con una sesi&oacute;n de un usuario de S.O. que coincida con un usuario de PostgreSQL y que tenga permiso para crear B.D.</span></span></p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 2cm; margin-right: 134.55pt;">
+<p class="MsoBodyText" style="padding: 0cm;"><span style="font-size: medium;"><span style="color: blue;">&nbsp;</span><strong><span style="font-family: 'Courier New'; color: mediumblue;">createdb [ opciones] <em>nombre</em></span></strong></span></p>
+</div>
+<p class="MsoBodyText"><span style="font-size: medium;"><span style="font-family: Arial; color: black;">Las opciones correspondientes a las de la sentencia SQL son</span></span></p>
+<p class="MsoBodyText" style="margin-left: 2cm;"><span style="font-size: medium;"><strong><span>-O </span></strong><span style="font-family: Arial; color: black;">(</span><em><span>owner</span></em><span style="font-family: Arial; color: black;">) </span><strong><span>-T </span></strong><span style="font-family: Arial; color: black;">(</span><em><span>template</span></em><span style="font-family: Arial; color: black;">) </span><strong><span>-E </span></strong><span style="font-family: Arial; color: black;">(</span><em><span>encoding</span></em><span style="font-family: Arial; color: black;">) </span><strong><span>-D </span></strong><span style="font-family: Arial; color: black;">(</span></span><em><span><span style="font-size: medium;">tablespace)</span></span></em></p>
+<p class="MsoBodyText"><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
+coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+filled="f" stroked="f">
+<v:stroke joinstyle="miter"/>
+<v:formulas>
+<v:f eqn="if lineDrawn pixelLineWidth 0"/>
+<v:f eqn="sum @0 1 0"/>
+<v:f eqn="sum 0 0 @1"/>
+<v:f eqn="prod @2 1 2"/>
+<v:f eqn="prod @3 21600 pixelWidth"/>
+<v:f eqn="prod @3 21600 pixelHeight"/>
+<v:f eqn="sum @0 0 1"/>
+<v:f eqn="prod @6 1 2"/>
+<v:f eqn="prod @7 21600 pixelWidth"/>
+<v:f eqn="sum @8 21600 0"/>
+<v:f eqn="prod @7 21600 pixelHeight"/>
+<v:f eqn="sum @10 21600 0"/>
+</v:formulas>
+<v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+<o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="Imagen_x0020_8" o:spid="_x0000_s1026" type="#_x0000_t75"
+style='position:absolute;margin-left:164.55pt;margin-top:27.3pt;width:176.25pt;
+height:230.3pt;z-index:-1;visibility:visible' wrapcoords="-184 0 -184 21525 21692 21525 21692 0 -184 0">
+<v:imagedata src="file:///C:\DOCUME~1\profesor\CONFIG~1\Temp\msohtml1\01\clip_image001.emz"
+o:title=""/>
+<w:wrap type="through"/>
+</v:shape><![endif]--><!--[if !vml]--><!--[endif]--><span style="font-family: Arial; color: black;">Aparte tendr&aacute; otros (como vi&eacute;ramos con </span><strong><em><span>createuser</span></em></strong><span style="font-family: Arial; color: black;">) para especificar el HOST, o pedir contrase&ntilde;a, ...</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">Desde </span><strong><em><span>PgAdmin</span></em></strong></p>
+<blockquote>
+<blockquote>
+<p>&nbsp;<img src="Tema_5_Admon_5.1.JPG" height="308" width="403" /></p>
+</blockquote>
+</blockquote>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">Como se puede comprobar tenemos las mismas opciones.</span></p>
+<p class="MsoBodyText"><strong><span>MODIFICACI&Oacute;N</span></strong></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">La sentencia </span><strong><span>ALTER DATABASE permite</span></strong><span style="font-family: Arial; color: black;"> reconfigurar la Base de Datos, variante los par&aacute;metros, o renombrarla.</span></p>
+<p class="MsoBodyText"><strong><span>ELIMINACI&Oacute;N</span></strong></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">Para borrar una Base de Datos utilizaremos la sentencia SQL </span><em><strong>DROP DATABASE</strong></em><span style="font-family: Arial; color: black;">, o la utilidad </span><strong><em><span>dropdb</span></em></strong><span style="font-family: Arial; color: black;">.</span></p></div></div>
+</div>
+<div id='bottomPagination'><div class="pagination noprt"><a href="5__gestin_de_bases_de_datos.html" class="prev"><span>&laquo; </span>Anterior</a> | <a href="52__esquemas.html" class="next"> Siguiente<span> &raquo;</span></a></div>
+</div></div>
+</div>
+</body></html>

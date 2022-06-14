@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Formulario</title>
+    <link rel="stylesheet" type="text/css" href="Estilos/formulario.css">
+</head>
+<body>
+<nav><a href="Formulario.html"> Formulario </a> - <a href="Curriculum.html"> Curriculum </a> </nav>
+<h1>Alta Currículum</h1>
+<form id="formulario" autocomplete="on"   action="mailto:llorensarbiol@gmail.com" method="get">
+  <fieldset>
+  <legend> Datos Personales</legend>
+    <label>Nombre(*): <input id="Nombre" name="nombre" type="text" placeholder="Nombre" autofocus required size="50"></label><br>
+    <label>Apellidos(*): <input id="Apellidos" name="apellidos" type="text" placeholder="Apellidos" required size="50"></label><br>
+    <label>Teléfono(*): <input id="Telefono" name="telefono" type="tel" placeholder="123456789" required size="9" pattern="([0-9]{9})"></label><br>
+    <label>Email(*): <input id="Email" name="email" type="email" placeholder="Introduce tu email" required size="52"></label><br>
+    <label>Fecha de nacimiento: <input type="date"></label><br>
+    <label>Lugar de nacimiento: <input id="LugNacim" name="lugnacim" type="text" placeholder="Introduce tu lugar de nacimiento" size="50"></label><br>
+  </fieldset>
+  <fieldset>
+  <legend> Formación</legend>
+  <label>Descripción: <input name="Des1" id="des1" type="text" size="25"></label>
+  <label>Lugar: <input name="Lug1" id="lug1" type="text" size="25"></label>
+  <label>Periodo: <input name="Per1" id="per1" type="text" size="25"></label><br>
+  <label>Descripción: <input name="Des2" id="des2" type="text" size="25"></label>
+  <label>Lugar: <input name="Lug2" id="lug2" type="text" size="25"></label>
+  <label>Periodo: <input name="Per2" id="per2" type="text" size="25"></label><br>
+  <label>Descripción: <input name="Des3" id="des3" type="text" size="25"></label>
+  <label>Lugar: <input name="Lug3" id="lug3" type="text" size="25"></label>
+  <label>Periodo: <input name="Per3" id="per3" type="text" size="25"></label><br>
+  </fieldset>
+<fieldset>
+  <legend> Idiomas </legend>
+    <select name="Idioma1">    
+       <option value="Valenciano" selected="selected">Valenciano</option>
+       <option value="Ingles">Inglés</option>
+       <option value="Frances">Francés</option>
+       <option value="Aleman">Alemán</option>
+  </select>
+  <input type="radio" name="Alto" value="Alto"> Alto 
+  <input type="radio" name="Medio" value="Medio"> Medio 
+  <input type="radio" name="Bajo" value="Bajo"> Bajo<br>
+  <select name="Idioma2">    
+       <option value="Valenciano" selected="selected">Valenciano</option>
+       <option value="Ingles">Inglés</option>
+       <option value="Frances">Francés</option>
+       <option value="Aleman">Alemán</option>
+  </select>
+  <input type="radio" name="Alto" value="Alto"> Alto 
+  <input type="radio" name="Medio" value="Medio"> Medio 
+  <input type="radio" name="Bajo" value="Bajo"> Bajo<br>
+  <select name="Idioma3">    
+       <option value="Valenciano" selected="selected">Valenciano</option>
+       <option value="Ingles">Inglés</option>
+       <option value="Frances">Francés</option>
+       <option value="Aleman">Alemán</option>
+  </select>
+  <input type="radio" name="Alto" value="Alto"> Alto 
+  <input type="radio" name="Medio" value="Medio"> Medio 
+  <input type="radio" name="Bajo" value="Bajo"> Bajo
+</fieldset>
+ <fieldset>
+  <legend> Adjuntar PDF </legend>
+	<label><input type="file"></label>
+ </fieldset> 
+ <input type="image" src="Imagenes/envio.gif" alt="Enviar" width="100" height="60">
+</form>
+</body>
+</html>

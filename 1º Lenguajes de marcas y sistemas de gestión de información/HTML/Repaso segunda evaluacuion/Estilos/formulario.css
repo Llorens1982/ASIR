@@ -1,0 +1,39 @@
+
+/*Archivo de estilo del formulario*/
+body{
+	background-color: #F0BC6C;
+}
+
+form{
+	border:10px solid #EFA015;
+	width:820px;
+	height:500px;
+	padding:20px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:40px;
+	background-color:#7E7E79;
+
+}
+fieldset {
+	background-color:#F4E79B ;
+	border-radius:10px;
+}
+legend {
+	background-color: #6F071B;
+	color: white;
+	font-size: 12px;
+	border-radius:5px;
+	border: 2px solid #6F071B;
+	font-size: 12px;
+}
+h1{
+	text-align: center;
+}
+nav{
+	text-align: center;
+}
+a{
+	text-decoration: none;
+			color: black;
+}

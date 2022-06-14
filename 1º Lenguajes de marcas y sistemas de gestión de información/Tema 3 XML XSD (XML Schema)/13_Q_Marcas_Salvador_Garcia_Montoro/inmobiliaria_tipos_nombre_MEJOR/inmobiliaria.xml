@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pisos xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
+ 	xs:noNamespaceSchemaLocation="inmobiliaria.xsd">
+    <pis codi="a1">
+        <adresa>
+			<carrer>C\ Rocafort 24</carrer>
+			<codi_postal>08014</codi_postal>
+			<poblacio>Barcelona</poblacio>
+        </adresa>        
+        <tipus>Pis</tipus>
+        
+        <venta_o_lloguer>Lloguer</venta_o_lloguer>
+        <preu>700
+        </preu>
+    </pis>
+	<pis codi="a2">
+        <adresa>
+			<carrer>C\ Sants 24</carrer>
+			<codi_postal>08015</codi_postal>
+			<poblacio>Barcelona</poblacio>
+        </adresa>        
+        <tipus>Dúplex</tipus>
+        
+        <venta_o_lloguer>Venta</venta_o_lloguer>
+        <preu>
+          180.000
+        </preu>
+    </pis>
+</pisos>

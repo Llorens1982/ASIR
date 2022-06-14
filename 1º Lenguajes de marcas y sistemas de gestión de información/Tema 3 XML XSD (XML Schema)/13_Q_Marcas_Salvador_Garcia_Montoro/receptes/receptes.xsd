@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:annotation>
+	 <xs:documentation>
+	 	Esqueleto del xsd...
+	 	xs:schema
+	 	xmlns:xs="http://www.w3.org/2001/XMLSchema"	/URI no coincide con la del xml
+
+	 	==============
+	 	Elemento simple solo texto, todos los demas son complejos (attr, hijos, mixto)
+
+	 	===============
+
+
+	 </xs:documentation>	
+</xs:annotation>
+
+<!--
+receptes es complejo porque tiene hijos
+-->	
+	<xs:element name="receptes">
+		<xs:complexType>
+		<xs:sequence>	
+			<xs:element name="recepta" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="nom" type="xs:string"/>
+						<xs:element name="fotografia" minOccurs="0" type="xs:string"/>
+						<xs:element name="ingredients">
+							<xs:complexType>
+							<xs:sequence minOccurs="1" maxOccurs="unbounded">	
+							 	<xs:element name="ingredient"  type="xs:string"/>	
+							</xs:sequence> 
+							</xs:complexType>	
+						</xs:element>
+						<xs:element name="preparacio">
+							<xs:complexType>
+								<xs:sequence minOccurs="1" maxOccurs="unbounded">	
+								<xs:element name="pas">
+									<xs:complexType>
+										<xs:simpleContent>
+											<xs:extension base="xs:string">
+												<xs:attribute name="numero" type="xs:string" use="required"/>
+											</xs:extension>	
+										</xs:simpleContent>	
+									</xs:complexType>	
+								</xs:element>
+								</xs:sequence>		
+							</xs:complexType>	
+						</xs:element>	
+					</xs:sequence>	
+				</xs:complexType>	
+			</xs:element>	
+		</xs:sequence>	
+		</xs:complexType>
+	</xs:element>
+</xs:schema>				

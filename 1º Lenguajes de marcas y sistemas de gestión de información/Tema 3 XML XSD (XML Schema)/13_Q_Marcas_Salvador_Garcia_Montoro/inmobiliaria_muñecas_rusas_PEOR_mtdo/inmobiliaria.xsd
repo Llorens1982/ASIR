@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<!--  
+  targetNamespace="http://www.Salvador.or/Salvador_Lenguaje_de_Marcas/Quincena_13"
+  xmlns:new="http://www.Salvador.or/Salvador_Lenguaje_de_Marcas/Quincena_13" 
+  elementFormDefault="qualified">
+-->  
+  <xs:element name="pisos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="0" name="pis">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="adresa">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="carrer">
+                     <xs:simpleType> 
+                      <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="100"/>
+<!--                        
+                        <xs:length value="100"/> esto sería exacto = 100
+-->                        
+                      </xs:restriction>
+                     </xs:simpleType>
+                    </xs:element>   
+                    <xs:element name="codi_postal">
+                      <xs:simpleType>
+                      <xs:restriction base="xs:decimal">
+                          <xs:pattern value="[0-9]{5}"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                    </xs:element>  
+                    <xs:element name="poblacio" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+ <!-- 
+ no identifica que tipus es un 
+ choice, simplemente lo pone como dar
+ la estructura general. Hay q entrar en los pequeños detalles.
+ The devil is in the details...
+ -->             
+              <xs:element name="tipus">
+                <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="Pis"/>
+                  <xs:enumeration value="Dúplex"/>
+                  <xs:enumeration value="Casa"/>
+                  <xs:enumeration value="pis"/>
+                  <xs:enumeration value="dúplex"/>
+                  <xs:enumeration value="casa"/>
+                </xs:restriction>
+                </xs:simpleType> 
+              </xs:element>  
+              <xs:element name="venta_o_lloguer">
+                <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="Venta"/>
+                  <xs:enumeration value="lloguer"/>
+                  <xs:enumeration value="venta"/>
+                  <xs:enumeration value="Lloguer"/>
+                </xs:restriction> 
+                </xs:simpleType>  
+              </xs:element>  
+<!--
+  Me daba error simpleType is not allowed
+-->                 
+              <xs:element name="preu">
+               <xs:simpleType> 
+               <xs:restriction base="xs:decimal">
+                <xs:minInclusive value="0"/>
+               </xs:restriction>
+               </xs:simpleType>
+              </xs:element>
+
+
+            </xs:sequence>
+<!--
+codigo
+-->            
+            <xs:attribute name="codi" id="codi" use="required"/>
+
+
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

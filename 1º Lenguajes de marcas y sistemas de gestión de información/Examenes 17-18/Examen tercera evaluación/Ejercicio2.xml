@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE exchange SYSTEM "SolExercici2.dtd">
+<exchange dia="6-6-2017" hora="15:15">
+  <company index="general" code="c001">
+    <name>Banesto</name>
+    <logo>BAN</logo>
+    <prize currency="euro">17.825</prize>
+  </company>
+  <company index="tecno" code="c043">
+    <name>Yahoo</name>
+    <logo>YAH</logo>
+    <prize currency="euro">25.364</prize>
+  </company>
+  <company index="economy" code="c741">
+    <name>Standard </name>
+    <logo>STD</logo>
+    <prize currency="euro">27.623</prize>
+  </company>
+  <company index="general" code="c785">
+    <name>Ubisoft</name>
+    <logo>UBI</logo>
+    <prize currency="euro">100.742</prize>
+  </company>
+  <company index="tecno" code="c187">
+    <name>INTEL</name>
+    <logo>ITL</logo>
+    <prize currency="euro">47.119</prize>
+  </company>
+</exchange>

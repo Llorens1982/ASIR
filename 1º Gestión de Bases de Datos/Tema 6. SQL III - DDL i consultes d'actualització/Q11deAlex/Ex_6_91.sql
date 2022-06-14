@@ -1,0 +1,1 @@
+CREATE INDEX i_adr_ven ON VENEDOR (cp ASC, adreca DESC);

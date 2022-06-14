@@ -1,0 +1,67 @@
+
+no ip domain-lookup
+hostname R1
+service password-encryption
+enable secret 1234
+banner motd # ¡Solo Acceso Autorizado! #
+line con 0
+password 1234
+login 
+loggin synchronous
+line vty 0 15
+password 1234
+loggin synchronous
+login 
+exit
+ip domain-name ccna-lab.com
+username llorens privilege 15 secret 1234
+line vty 0 4
+login local
+transport input ssh
+line vty 5 15
+login local
+transport input ssh
+crypto key generate rsa general-keys modulus 1024
+end
+
+ 
+ <<--Interfaces LAN--->>
+ 
+interface G0/1
+ip address 192.168.1.33 255.255.255.224
+no shutdown
+interface G0/2
+ip address 192.168.1.65 255.255.255.224
+no shutdown
+interface G0/3
+ip address 192.168.1.97 255.255.255.224
+no shutdown
+interface G0/4
+ip address 192.168.1.129 255.255.255.224
+no shutdown
+interface G0/5
+ip address 192.168.1.2 255.255.255.224
+no shutdown
+end
+
+
+
+
+<<--Interfaces NAT--->>
+interface G0/0
+ip address dhcp 
+no shutdown
+ip nat outside
+interface G0/1
+ip nat inside
+interface G0/2
+ip nat inside
+interface G0/3
+ip nat inside
+interface G0/4
+ip nat inside 
+exit
+ip nat inside source list 1 interface gigabitEthernet 0/0 overload
+access-list 1 permit any
+end
+

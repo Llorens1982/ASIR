@@ -1,0 +1,16 @@
+Gallito es como una navaja suiza, 
+hace muchas cosas. 
+Primero convierte las palabras 
+de los textos en números. 
+A partir de aquí, se pueden realizar 
+diferentes análisis. 
+Lo más simple es comprobar cómo las palabras 
+se parecen unas a otras, aunque también se pueden llevar a cabo tareas 
+más complejas, como resumir un texto en sus ideas principales, medir la 
+cantidad de información que tienen las palabras en los contextos en los 
+que aparecen, hacer listados de las que más se parecen… Además, en el 
+ámbito académico, Gallito preevalúa las respuestas de los exámenes 
+siguiendo varios criterios: si la respuesta se corresponde con lo 
+que se pregunta, si el texto guarda coherencia entre párrafos y 
+frases que lo componen o si esa respuesta está plagiada de otras 
+redactadas por otros alumnos.

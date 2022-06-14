@@ -1,0 +1,63 @@
+﻿Tots els cicles
+
+/institut/cicles/especialitat/cicle/text()
+
+o
+
+// cicle/text()
+
+Nom de totes les especialitats
+
+//especialitat/@nom
+
+Tots els cicles de l'especialitat d'informàtica
+//especialitat[@nom="Administratiu"]/cicle/text()
+
+Nom de totes les dones que no han aprovat
+
+//alumne[@aprovat="NO" and ./genere="Dona"]/nom/text()
+
+o
+
+//alumne[@aprovat="NO"][genere="Dona"]/nom/text()
+
+Tots els cicles on hi ha algun alumne amb beca
+
+//beca/../../@nom
+
+o
+
+//classe[alumne/beca]/@nom
+
+o
+
+//alumne[beca]/../@nom
+
+Tots els cicles que contenen el text "Xarxes"
+
+
+Sistemes Microinformàtics i Xarxes
+
+//cicle[contains(.,"Xarxes")]/text()
+
+Tots els cicles que contenen el text "informàtic" (tant en majúscules com en minúscules)
+
+Número d'alumnes que hi ha
+
+count(//alumne)
+
+
+Nom complet (no val l'abreviatura) del cicle que estudia Sandra Taylor
+
+consulta 1
+
+//classe[alumne/nom="Sandra Taylor"]/@nom
+
+Consulta final (amb subconsulta)
+
+//cicle[@id=//classe[alumne/nom="Sandra Taylor"]/@nom]/text()
+
+Nom i correu de tots els alumnes d'ASIX
+
+//classe[@nom="ASIX"]/alumne/nom | //classe[@nom="ASIX"]/alumne/email
+

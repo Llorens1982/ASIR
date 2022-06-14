@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<universidad>
+    <nombre>Universidad de Valencia</nombre>
+    <pais>España</pais>
+
+<!-- CARRERAS -->
+
+    <carreras>
+
+        <carrera id="c01">
+            <nombre>Ingeniería Multimedia</nombre>
+            <plan>2014</plan>
+            <creditos>240</creditos>
+            <centro>ETSE</centro>
+        </carrera>
+
+        <carrera id="c02">
+            <nombre>ADE</nombre>
+            <plan>2013</plan>
+            <creditos>240</creditos>
+            <centro>Facultad de Ciencias Sociales</centro>
+            <subdirector>Daniel Figueres Deusto</subdirector>
+        </carrera>
+
+        <carrera id="c03">
+            <nombre>Magisterio</nombre>
+            <plan>2013</plan>
+            <creditos>240</creditos>
+            <centro>Facultad de Magisterio</centro>
+        </carrera>
+
+        <carrera id="c04">
+            <nombre>Química</nombre>
+            <plan>2010</plan>
+            <creditos>240</creditos>
+            <centro>Facultad de Ciencias Experimentales</centro>
+        </carrera>
+
+        <carrera id="c05">
+            <nombre>Biología</nombre>
+            <plan>2001</plan>
+            <creditos>240</creditos>
+            <centro>Facultad de Ciencias Experimentales</centro>
+        </carrera>
+
+        <carrera id="c06">
+            <nombre>Medicina</nombre>
+            <plan>1980</plan>
+            <creditos>300</creditos>
+            <centro>Facultad de Medicina</centro>
+        </carrera>
+
+    </carreras>
+
+<!-- ASIGNATURAS -->
+
+    <asignaturas>
+
+        <asignatura id="a01" titulacion="c01">
+            <nombre>Ofimática</nombre>
+            <creditos>6</creditos>
+            <trimestre>1</trimestre>
+        </asignatura>
+
+        <asignatura id="a02" titulacion="c01">
+            <nombre>Ingeniería del Software</nombre>
+            <creditos>6</creditos>
+            <trimestre>2</trimestre>
+        </asignatura>
+
+        <asignatura id="a03" titulacion="c02">
+            <nombre>Administración de Empresas</nombre>
+            <creditos>6</creditos>
+            <trimestre>1</trimestre>
+        </asignatura>
+
+        <asignatura id="a04" titulacion="c02">
+            <nombre>Derecho Internacional</nombre>
+            <creditos>9</creditos>
+            <trimestre>1</trimestre>
+        </asignatura>
+
+        <asignatura id="a05" titulacion="c04">
+            <nombre>Pedagogía</nombre>
+            <creditos>6</creditos>
+            <trimestre>2</trimestre>
+        </asignatura>
+
+        <asignatura id="a06" titulacion="c03">
+            <nombre>Didáctica</nombre>
+            <creditos>6</creditos>
+            <trimestre>2</trimestre>
+        </asignatura>
+
+        <asignatura id="a07" titulacion="c04">
+            <nombre>Tecnología de los Alimentos</nombre>
+            <creditos>9</creditos>
+            <trimestre>2</trimestre>
+        </asignatura>
+
+        <asignatura id="a08" titulacion="c01">
+            <nombre>Bases de Datos</nombre>
+            <creditos>6</creditos>
+            <trimestre>1</trimestre>
+        </asignatura>
+
+        <asignatura id="a09" titulacion="c06">
+            <nombre>Historia de la Medicina</nombre>
+            <creditos>6</creditos>
+            <trimestre>2</trimestre>
+        </asignatura>
+
+    </asignaturas>
+
+<!-- ALUMNOS -->
+
+    <alumnos>
+
+        <alumno id="e01">
+            <apellido1>Rialto</apellido1>
+            <apellido2>Sánchez</apellido2>
+            <nombre>Víctor</nombre>
+            <sexo>Hombre</sexo>
+            <estudios>
+                <carrera codigo="c01"/>
+                <asignaturas>
+                    <asignatura codigo="a01"/>
+                    <asignatura codigo="a03"/>
+                    <asignatura codigo="a05"/>
+                    <asignatura codigo="a09"/>
+                </asignaturas>
+            </estudios>
+        </alumno>
+
+        <alumno id="e02">
+            <apellido1>Peris</apellido1>
+            <apellido2>Galindo</apellido2>
+            <nombre>Ángela</nombre>
+            <sexo>Mujer</sexo>
+            <estudios>
+                <carrera codigo="c02"/>
+                <asignaturas>
+                    <asignatura codigo="a02"/>
+                    <asignatura codigo="a01"/>
+                </asignaturas>
+                <proyecto>Web de gentaco.com</proyecto>
+            </estudios>
+
+        </alumno>
+
+        <alumno id="e03" beca="si">
+            <apellido1>Perales</apellido1>
+            <apellido2>Ramírez</apellido2>
+            <nombre>Francisoc</nombre>
+            <sexo>Hombre</sexo>
+            <estudios>
+                <carrera codigo="c02"/>
+                <asignaturas>
+                    <asignatura codigo="a02"/>
+                    <asignatura codigo="a01"/>
+                    <asignatura codigo="a04"/>
+                    <asignatura codigo="a09"/>
+                </asignaturas>
+            </estudios>
+        </alumno>
+
+        <alumno id="e04">
+            <apellido1>Ávalos</apellido1>
+            <apellido2>Jovellanos</apellido2>
+            <nombre>María del Carmen</nombre>
+            <sexo>Mujer</sexo>
+            <estudios>
+                <carrera codigo="c01"/>
+                <asignaturas>
+                    <asignatura codigo="a02"/>
+                    <asignatura codigo="a01"/>
+                    <asignatura codigo="a07"/>
+                </asignaturas>
+                <proyecto>Estudio de Salinidad del Embalse de Contreras</proyecto>
+            </estudios>
+        </alumno>
+
+    </alumnos>
+
+</universidad>

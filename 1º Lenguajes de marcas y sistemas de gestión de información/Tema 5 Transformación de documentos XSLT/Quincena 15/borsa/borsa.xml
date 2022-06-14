@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="borsa.xsl"?>
+<borsa
+  dia="22/07/2016" 
+  hora="12:00">
+<empresa index="general">
+<nom>Inditex</nom>
+<codi>IND</codi>
+<preu>28.875</preu>
+</empresa>
+<empresa index="technology">
+<nom>Google</nom>
+<codi>GOO</codi>
+<preu>92.250</preu>
+</empresa>
+<empresa index="technology">
+<nom>Microsoft</nom>
+<codi>MIC</codi>
+<preu>20.313</preu>
+</empresa>
+<empresa index="general">
+<nom>Coca-Cola</nom>
+<codi>COC</codi>
+<preu>38.895</preu>
+</empresa>
+<empresa index="technology">
+<nom>Apple</nom>
+<codi>APP</codi>
+<preu>45.119</preu>
+</empresa>
+</borsa>

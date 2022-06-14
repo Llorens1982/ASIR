@@ -1,0 +1,22 @@
+no ip domain-lookup
+hostname S1
+ip domain-name ccna-lab.com
+username admin01 privilege 15 secret adminpass
+interface G0/0
+shutdown
+interface G0/1
+shutdown
+interface G1/0
+shutdown
+interface G0/3
+duplex full
+interface Vlan1
+ip address 192.168.1.2 255.255.255.0
+line vty 0 4
+login local
+transport input ssh
+line vty 5 15
+login local
+transport input ssh
+crypto key generate rsa general-keys modulus 1024
+end

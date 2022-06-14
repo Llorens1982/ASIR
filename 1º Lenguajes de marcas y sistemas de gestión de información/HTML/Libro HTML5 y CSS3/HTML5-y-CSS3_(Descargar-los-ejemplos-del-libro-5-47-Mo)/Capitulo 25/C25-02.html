@@ -1,0 +1,90 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>Html5</title> 
+<meta charset="utf-8">
+<style type="text/css">
+#box { border: 1px dotted navy;
+       padding-left: 3px;
+       background-color: rgb(195,215,235);
+       width: 230px;}
+#boton { margin-top: 10px;
+          padding-left: 3px;}
+#non { width: 190px; 
+       display: none;}
+p { margin-top: 5px;
+    margin-bottom: 3px;}
+.first { background-color: rgb(195,215,235);}
+td { font-family: monospace;
+     padding: 5px;
+     border: 1px solid silver;}
+table { margin-top: 12px;
+        border-collapse:collapse;}      
+</style>
+<script type="text/javascript">
+function dosetItem() {
+var producto = document.getElementById("prod").value;
+var data = document.getElementById("q").value;
+localStorage.setItem(producto, data);
+document.getElementById("prod").value="";
+document.getElementById("q").value="";
+mostrar();
+}
+function dogetItem() {
+var producto = document.getElementById("prod").value;
+document.getElementById("q").value = localStorage.getItem(producto);
+mostrar();
+}  
+function doremoveItem() {
+var producto = document.getElementById("prod").value;
+localStorage.removeItem(producto);
+document.getElementById("prod").value="";
+mostrar();
+}
+function doClear() {
+localStorage.clear();
+mostrar();
+}
+function mostrar() {
+var key = "";
+var pares = "<tr class=\"first\"><td><b>Producto</b></td><td><b>Cantidad</b></td></tr>\n";
+var i=0;
+for (i=0; i<=localStorage.length-1; i++) {
+key = localStorage.key(i);
+pares += "<tr><td>"+key+"</td>\n<td>"+localStorage.getItem(key)+"</td></tr>\n";
+}
+if (pares == "<tr class=\"first\"><td><b>Producto</b></td><td><b>Cantidad</b></td></tr>\n") {
+pares += "<tr><td><i>Vacío</i></td>\n<td><i>Vacío</i></td></tr>\n";
+}
+document.getElementById('pares').innerHTML = pares;
+}
+</script>
+</head>
+<body onload="mostrar()">
+<header>
+<h2>Mi lista de compras</h2>
+</header>
+<div id="non"></div>
+<section>
+<form>
+<div id="box">
+<p>
+<label for="prod">Producto:</label><br>
+<input id="prod" name="prod" size="30" placeholder="Producto">
+</p>
+<p>
+<label for="q">Cantidad:</label><br>
+<input id="q" name="q" size="30" placeholder="Cantidad">
+</p>
+<p>
+<input type="button" value="Agregar" onclick="dosetItem()">
+<input type="button" value="Editar" onclick="dogetItem()">
+<input type=button value="Eliminar" onclick="doremoveItem()">
+</p>     
+</div>
+</form>
+<table id=pares></table>
+</section>
+<input type=button id="boton" value="Nueva lista" onclick="doClear()">
+</body>
+</html>

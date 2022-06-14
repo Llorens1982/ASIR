@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="receptes" type="receptesTipo"/>
+  
+  <xs:complexType name="ingredientsTipo">
+    <xs:sequence>
+      <xs:element type="xs:string" name="ingredient" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pasTipo">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="numero"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <xs:complexType name="preparacioTipo">
+    <xs:sequence>
+      <xs:element type="pasTipo" name="pas" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="receptaTipo">
+    <xs:sequence>
+      <xs:element type="xs:string" name="nom"/>
+      <xs:element type="xs:string" name="fotografia" minOccurs="0"/>
+      <xs:element type="ingredientsTipo" name="ingredients"/>
+      <xs:element type="preparacioTipo" name="preparacio"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="receptesTipo">
+    <xs:sequence>
+      <xs:element type="receptaTipo" name="recepta" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

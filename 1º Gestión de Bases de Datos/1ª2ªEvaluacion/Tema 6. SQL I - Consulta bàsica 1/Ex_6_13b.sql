@@ -1,0 +1,3 @@
+SELECT *
+FROM client
+WHERE nom NOT LIKE '%VILLALONGA%';

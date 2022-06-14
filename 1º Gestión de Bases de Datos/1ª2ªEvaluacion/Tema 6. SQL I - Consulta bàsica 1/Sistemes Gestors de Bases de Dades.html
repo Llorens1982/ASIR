@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0088)http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/index.html -->
+<html lang="ca" xml:lang="ca" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./Sistemes Gestors de Bases de Dades_files/base.css">
+<link rel="stylesheet" type="text/css" href="./Sistemes Gestors de Bases de Dades_files/content.css">
+<link rel="stylesheet" type="text/css" href="./Sistemes Gestors de Bases de Dades_files/nav.css">
+
+<title>Sistemes Gestors de Bases de Dades </title>
+<link rel="shortcut icon" href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/favicon.ico" type="image/x-icon">
+<meta http-equiv="content-language" content="ca">
+<meta name="author" content="Àlvar Serrano Calduch">
+<meta name="generator" content="eXeLearning 2.0.4 - exelearning.net">
+<script type="text/javascript" src="./Sistemes Gestors de Bases de Dades_files/exe_jquery.js.descarga"></script>
+<script type="text/javascript">$exe_i18n={show:"Mostra",hide:"Amaga",showFeedback:"Mostra realimentació",hideFeedback:"Amaga realimentació",correct:"Correcte",incorrect:"Incorrecte",menu:"Menú"}</script>
+<script type="text/javascript" src="./Sistemes Gestors de Bases de Dades_files/common.js.descarga"></script>
+</head>
+<body class="exe-web-site js"><script type="text/javascript">document.body.className+=" js"</script>
+<div id="content">
+<p id="skipNav"><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/index.html#main" class="sr-av">Omet navegació</a></p>
+<div id="header" role="banner">Sistemes Gestors de Bases de Dades</div>
+<div id="siteNav" role="navigation">
+<ul>
+   <li id="active"><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/index.html" class="active daddy main-node">Tema 6: SQL -  Consulta bàsica (part I)</a></li>
+   <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/objectius_i_coneixements_previs.html" class="no-ch">Objectius i Coneixements previs</a></li>
+   <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/1_introducci.html" class="no-ch">1. Introducció</a></li>
+   <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/2_ddl_i_dml.html" class="no-ch">2. DDL i DML</a></li>
+   <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/3_entorns_de_treball.html" class="daddy">3. Entorns de treball</a>
+   <ul class="other-section">
+      <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/31_pgadmin.html" class="no-ch">3.1 PgAdmin</a></li>
+   </ul>
+   </li>
+   <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/4_dades_dels_exemples_i_els_exercicis.html" class="no-ch">4. Dades dels exemples i els exercicis</a></li>
+   <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/5_prctica_guiada.html" class="no-ch">5. Pràctica guiada</a></li>
+   <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/6_operadors.html" class="no-ch">6. Operadors</a></li>
+   <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/7_funcions.html" class="daddy">7. Funcions</a>
+   <ul class="other-section">
+      <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/71_formats_de_les_dates.html" class="no-ch">7.1 Formats de les dates</a></li>
+      <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/72_formats_dels_nmeros.html" class="no-ch">7.2 Formats dels números</a></li>
+   </ul>
+   </li>
+   <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/8_la_consulta_select.html" class="no-ch">8. La consulta SELECT</a></li>
+   <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/9_consulta_bsica.html" class="daddy">9. Consulta bàsica</a>
+   <ul class="other-section">
+      <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/exercicis1.html" class="no-ch">Exercicis</a></li>
+   </ul>
+   </li>
+   <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/10_lies_en_les_columnes.html" class="daddy">10. Àlies en les columnes</a>
+   <ul class="other-section">
+      <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/exercicis2.html" class="no-ch">Exercicis</a></li>
+   </ul>
+   </li>
+   <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/11_la_clusula_where.html" class="daddy">11. La clàusula WHERE</a>
+   <ul class="other-section">
+      <li><a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/exercicis3.html" class="no-ch">Exercicis</a></li>
+   </ul>
+   </li>
+</ul>
+</div>
+<div id="topPagination">
+<div class="pagination noprt">
+<a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/objectius_i_coneixements_previs.html" class="next"> Següent<span> »</span></a>
+</div>
+</div>
+<div id="main-wrapper">
+<div id="main" role="main"><a name="main"></a>
+<div id="nodeDecoration"><h1 id="nodeTitle">Tema 6: SQL -  Consulta bàsica (part I)</h1></div>
+<div class="iDevice_wrapper FreeTextIdevice" id="id28">
+<div class="iDevice emphasis0">
+<div id="ta28_1" class="block iDevice_content">
+
+<p>
+&nbsp;
+</p>
+<p>
+&nbsp;
+</p>
+<p align="center">
+&nbsp;
+</p>
+<div style="text-align: center">
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0" width="550" height="550">
+	<param name="play" value="true">
+	<param name="scale" value="exactfit">
+	<param name="src" value="VideoSQL.swf">
+	<param name="width" value="550">
+	<param name="height" value="550">
+	<embed type="application/x-shockwave-flash" play="true" scale="exactfit" src="VideoSQL.swf" width="550" height="550">
+</object>
+</div>
+<p>
+&nbsp;
+</p>
+
+</div>
+</div>
+</div>
+<div id="bottomPagination">
+<div class="pagination noprt">
+<a href="http://fp.edu.gva.es/av/pluginfile.php/1867453/mod_resource/content/6/tema6p1/objectius_i_coneixements_previs.html" class="next"> Següent<span> »</span></a>
+</div>
+</div>
+<p align="center">Llicenciat sota la  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Llicència Creative Commons Reconeixement NoComercial CompartirIgual 3.0</a></p></div>
+</div>
+</div>
+</body></html>

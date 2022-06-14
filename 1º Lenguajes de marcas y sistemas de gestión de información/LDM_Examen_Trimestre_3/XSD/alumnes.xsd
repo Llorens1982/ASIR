@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+  <xs:element name="alumnes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="alumne" type="tipoAlumne" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="institut" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  
+
+    <xs:complexType name="tipoAlumne">
+      <xs:sequence>
+        <xs:element name="nom" type="xs:string"/>
+        <xs:element name="cognom" type="xs:string" minOccurs="1" maxOccurs="2"/>
+        <xs:element name="Edat" type="xs:integer"/>
+        <xs:element name="adreca" type="tipoAdreca"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string"/>
+      <xs:attribute name="cicle" type="tipoCicle"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="tipoAdreca">
+      <xs:sequence>
+        <xs:element name="ciutat" type="xs:string"/>
+        <xs:element name="carrer" type="xs:string"/>
+        <xs:element name="numero" type="tipoNumero"/>
+        <xs:element name="pis" type="xs:integer"/>
+        <xs:element name="porta" type="xs:integer"/>
+        <xs:element name="cp" type="xs:integer"/>
+      </xs:sequence>
+    </xs:complexType>
+
+  
+  <xs:simpleType name="tipoCicle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ASIX"/>
+      <xs:enumeration value="SMX"/>
+      <xs:enumeration value="DAW"/>
+      <xs:enumeration value="DAM"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="tipoNumero">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="200"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>

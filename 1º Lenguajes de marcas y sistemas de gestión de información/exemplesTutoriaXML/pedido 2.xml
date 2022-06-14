@@ -1,0 +1,17 @@
+﻿<!DOCTYPE pedido SYSTEM "pedido.dtd">
+<pedido fecha="2019-01-01">
+          <producto talla="L">
+          <referencia>A-123</referencia>        
+          <unidades>3</unidades>
+          <color codigo="43">Rojo</color>
+        </producto>
+        <producto talla="M">
+          <referencia>A-123</referencia>        
+          <unidades>3</unidades>
+        </producto>
+        <producto talla="XL">
+          <referencia>B-123</referencia>        
+          <unidades>3</unidades>
+        </producto>
+  
+</pedido>

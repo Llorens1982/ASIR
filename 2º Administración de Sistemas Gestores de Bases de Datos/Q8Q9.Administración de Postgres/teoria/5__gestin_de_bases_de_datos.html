@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<!-- Created using eXe: http://exelearning.org -->
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" /><link rel="stylesheet" type="text/css" href="content.css" /><link rel="stylesheet" type="text/css" href="nav.css" /><title>5 - Gestión de Bases de Datos </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta http-equiv="Content-Type" content="text/html;  charset=utf-8" />
+<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+<div id="content">
+<div id="emptyHeader"></div><div id="siteNav">
+<ul>
+<li><a href="index.html" class="daddy main-node">Administración de PostgreSQL</a></li><li><a href="1__instalacin.html" class="no-ch">1 - Instalación</a></li>
+<li><a href="nota_previa.html" class="no-ch">Nota Previa</a></li>
+<li><a href="2_arranque_y_parada_del_sistema.html" class="no-ch">2. Arranque y parada del sistema</a></li>
+<li><a href="3__ficheros_de_configuracin.html" class="no-ch">3 - Ficheros de configuración</a></li>
+<li><a href="4__gestin_de_usuarios_y_privilegios.html" class="daddy">4 - Gestión de usuarios y privilegios</a><ul class="other-section">
+<li><a href="41__gestin_de_roles_utilizacin_como_usuarios.html" class="no-ch">4.1 - Gestión de roles: utilización como usuarios</a></li>
+<li><a href="42__gestin_de_roles_utilizacin_como_grupos.html" class="no-ch">4.2 - Gestión de roles: utilización como grupos</a></li>
+<li><a href="43__permisos.html" class="no-ch">4.3 - Permisos</a></li>
+<li><a href="44__roles_y_miembros.html" class="no-ch">4.4 - Roles y miembros</a></li>
+<li><a href="45__autenticacin_de_usuarios.html" class="no-ch">4.5 - Autenticación de usuarios</a></li>
+</ul>
+</li>
+<li id="active"><a href="5__gestin_de_bases_de_datos.html" class="active daddy">5 - Gestión de Bases de Datos</a><ul>
+<li><a href="51__bases_de_datos_creacin_modificacin_y_eliminacin.html" class="no-ch">5.1 - Bases de Datos: Creación, Modificación y Eliminación</a></li>
+<li><a href="52__esquemas.html" class="no-ch">5.2 - Esquemas</a></li>
+<li><a href="53__tablespaces.html" class="no-ch">5.3 - Tablespaces</a></li>
+<li><a href="54_lugares_alternativos.html" class="no-ch">5.4 Lugares alternativos</a></li>
+</ul>
+</li>
+<li><a href="6_copia_de_seguridad_y_restauracin.html" class="daddy">6- Copia de seguridad y restauración</a><ul class="other-section">
+<li><a href="61__pg_dump.html" class="no-ch">6.1 - PG_DUMP</a></li>
+<li><a href="62__restauracin_del_dump.html" class="no-ch">6.2 - Restauración del DUMP</a></li>
+<li><a href="63__backup_desde_pgadmin.html" class="no-ch">6.3 - Backup desde PgAdmin</a></li>
+<li><a href="64__backup_por_copia_de_ficheros.html" class="no-ch">6.4 - Backup por copia de ficheros</a></li>
+</ul>
+</div>
+<div id='topPagination'><div class="pagination noprt"><a href="45__autenticacin_de_usuarios.html" class="prev"><span>&laquo; </span>Anterior</a> | <a href="51__bases_de_datos_creacin_modificacin_y_eliminacin.html" class="next"> Siguiente<span> &raquo;</span></a></div>
+</div><div id="main">
+<div id="nodeDecoration"><h1 id="nodeTitle">5 - Gestión de Bases de Datos</h1></div>
+<div class="FreeTextIdevice" id="id11">
+<div class="iDevice emphasis0">
+<div id="ta11_1" class="block" style="display:block;position:relative"><p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">Una Base de Datos es un lugar donde puede haber uno o m&aacute;s de un esquema, y en cada esquema se pueden crear muchos objetos.</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">La jerarqu&iacute;a ser&aacute; la siguiente: </span><strong><em><span>Servidor -&gt; Base de Datos -&gt; Esquema -&gt; Tabla</span></em></strong><span style="font-family: Arial; color: black;">.</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">Un usuario que se conecte a una Base de Datos podr&aacute; ver (si tiene permiso) los objetos de los diferentes esquemas de esta Base de Datos. Ya hemos visto que los permisos le </span>podemos<span style="font-family: Arial; color: black;"> dar a 2 niveles: dependiendo de como tengamos configurado </span><strong><span>pg_hba.conf</span></strong><span style="font-family: Arial; color: black;">, se podr&aacute; conectar o no; y dependiendo de los permisos dados sobre cada uno de los objestes podr&aacute; hacer unas operaciones u otros (SELECT, INSERT, ..., o nada)</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">&nbsp;</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">Por otra parte llamamos </span><strong><span>CLUSTER DE BASE DE DATOS </span></strong><span style="font-family: Arial; color: black;">(</span><strong><em><span>DataBase Cluster</span></em></strong><span style="font-family: Arial; color: black;">) al lugar donde se guardar&aacute;n todas las Bases de Datos (a veces abusamos del lenguaje y nos hemos referido a &eacute;l como Base de Datos; ser&iacute;a la s&uacute;per Base de Datos donde est&aacute;n todas las mini Base de Datos). Normalmente solo habr&aacute; un cluster en un servidor. Nosotros lo tenemos en </span><strong><em><span>/var/lib/postgresql/8.3/main </span></em></strong><span style="font-family: Arial; color: black;">o en </span><strong><span>C:\Archivos de Programa\PostgreSQL\8.3\data</span></strong><span style="font-family: Arial; color: black;">.</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">Pero se puede crear otro lugar, otro cluster. Incluso pueden estar los dos en marcha, eso s&iacute; escuchando puertos distintos (sino el primero que se pone en marcha, escuchar&aacute; todas las peticiones). Lo intentaremos, teniendo en cuenta que ya es administraci&oacute;n avanzada, pero quiz&aacute;&nbsp; no lo consigamos...</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">&nbsp;</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">Dentro del </span><strong><span>cluster</span></strong><span style="font-family: Arial; color: black;">, PostgreSQL guarda todos los objetos de todas las mini - Bases de Datos, pero si miramos el contenido, nos percataremos que lo hace a su modo. Primero observaremos que hay algunos directorios, y quiz&aacute; los ficheros de configuraci&oacute;n (ya los hemos comentado). Las datos est&aacute;n en el subdirectorio </span><strong><em><span>base</span></em></strong><span style="font-family: Arial; color: black;">, y dentro de &eacute;l hay m&aacute;s subdirectorios, el nombre de todos ellos son n&uacute;meros. Si miramos el contenido de alguno de ellos, veremos que hay ficheros, y el nombre de todos ellos son n&uacute;meros.</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">&iquest;Qu&eacute; n&uacute;meros son estos? Tiene que ver con los </span><strong><span>OID </span></strong><span style="font-family: Arial; color: black;">(</span><strong><em><span>Object IDentifier</span></em></strong><span style="font-family: Arial; color: black;">).</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">Este es el sistema que tiene PostgreSQL para organizarse internamente. Todo objeto creado en un cluster (tablas, vistas, funciones, operadores, triggers, Bases de Datos, Esquemas,...) tiene un n&uacute;mero que le identifica un&iacute;vocamente. Se puede comprobar f&aacute;cilmente desde PgAdmin cuando vemos las propiedades de cualquier objeto, que siempre tendr&aacute; un OID. Incluso como administradores nos puede servir para seguir la pista a un objeto, consultando determinadas vistas. PostgreSQL tiene un contador de 32 bites encargado de llevar este control y poder ir asignando valores.</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">Los OID nos pueden servir incluso para identificar una fila de una tabla. Es decir, se aprovecha la estructura de OID para asignar una una fila. Si es as&iacute; tendremos un campo en la tabla que ser&aacute; de tipo </span><strong><span>OID</span></strong><span style="font-family: Arial; color: black;">, y que le asignar&aacute; autom&aacute;ticamente, a partir del contador OID, un n&uacute;mero cada vez que se introduce una fila en la tabla. E ir&iacute;a bien como clave principal.</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">Sin embargo el uso de OID's en las tablas est&aacute; en desuso, y PostgreSQL cada vez lo aconseja menos, aunque debe mantener la posibilidad por compatibilidad con versiones anteriores. No olvidemos que aunque el contador OID es grande (32 bits), utilizarlo indiscriminadamente en tablas que puedan llegar a ser muy grandes puede ser peligroso, ya que es vital para su funcionamiento</span></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">La manera de crear una tabla con OID's es poniendo la cl&aacute;usula </span><strong><span>WITH OIDS </span></strong><span style="font-family: Arial; color: black;">en la creaci&oacute;n</span></p>
+<div style="border: 1pt solid windowtext; padding: 1pt 4pt; margin-left: 2cm; margin-right: 141.65pt;">
+<p class="MsoBodyText" style="padding: 0cm;"><strong><span style="font-family: 'Courier New'; color: mediumblue;" lang="EN-GB">CREATE TABLE ....</span></strong></p>
+<p class="MsoBodyText" style="padding: 0cm;"><strong><span style="font-family: 'Courier New'; color: mediumblue;" lang="EN-GB">WITH OIDS | WITHOUT OIDS]</span></strong></p>
+</div>
+<p class="MsoBodyText"><strong><span style="font-family: 'Courier New'; color: mediumblue;">...</span></strong></p>
+<p class="MsoBodyText"><span style="font-family: Arial; color: black;">Si no se pone nada, se coge el valor que tenga el par&aacute;metro del fichero de configuraci&oacute;n </span><strong><em><span>default_with_oids</span></em></strong><span style="font-family: Arial; color: black;">, que por defecto, en las nuevas versiones, est&aacute; a </span><em><span>off</span></em></p>
+<p>&nbsp;</p></div></div>
+</div>
+<div id='bottomPagination'><div class="pagination noprt"><a href="45__autenticacin_de_usuarios.html" class="prev"><span>&laquo; </span>Anterior</a> | <a href="51__bases_de_datos_creacin_modificacin_y_eliminacin.html" class="next"> Siguiente<span> &raquo;</span></a></div>
+</div></div>
+</div>
+</body></html>

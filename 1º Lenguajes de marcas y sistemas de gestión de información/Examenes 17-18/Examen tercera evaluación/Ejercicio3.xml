@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<alumnos xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" clase="C01" xs:noNamespaceSchemaLocation="SolExercici3.xsd">
+  <alumno DNI="654361870F">
+    <nombre>Alejandra</nombre>
+    <apellidos>Vega González</apellidos>
+    <direccion>
+      <domicilio>La salamandra, 12</domicilio>
+      <codigo_postal>63850</codigo_postal>
+      <localidad>Oviedo</localidad>
+      <provincia>Asturias</provincia>
+    </direccion>
+  </alumno>
+  <alumno DNI="665138440H">
+    <nombre>Gerardo</nombre>
+    <apellidos>López Pérez</apellidos>
+    <direccion>
+      <domicilio>Jacint Verdaguer, 25</domicilio>
+      <codigo_postal>96238</codigo_postal>
+      <localidad>Valencia</localidad>
+      <provincia>Comunidad Valenciana</provincia>
+    </direccion>
+  </alumno>
+</alumnos>

@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Html5</title>
+<meta charset="UTF-8"> 
+</head>
+<body>
+<canvas id="zona" width="150px" height="150px" style="border: 1px solid black">
+Su navegador no soporta la etiqueta canvas
+</canvas>
+<script type="text/javascript">
+var canvas = document.getElementById("zona");
+var contexto = canvas.getContext("2d");
+contexto.beginPath();
+contexto.lineWidth = 2;
+contexto.moveTo(75,40);
+contexto.bezierCurveTo(75,37,70,25,50,25);
+contexto.bezierCurveTo(20,25,20,62.5,20,62.5);
+contexto.bezierCurveTo(20,80,40,102,75,120);
+contexto.bezierCurveTo(110,102,130,80,130,62.5);
+contexto.bezierCurveTo(130,62.5,130,25,100,25);
+contexto.bezierCurveTo(85,25,75,37,75,40);
+contexto.stroke();
+</script>
+</body>
+</html>

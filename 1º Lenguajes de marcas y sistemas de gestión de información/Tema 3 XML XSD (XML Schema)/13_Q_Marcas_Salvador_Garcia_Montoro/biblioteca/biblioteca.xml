@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="biblioteca.xsd">
+<!-- 
+Schema-instance en el xml 
+
+prefijo es xsi, voy a respetarlo
+aunque se podria cambiar a xs,
+ para escribir menos
+
+ he introducido el elemento biblioteca, 
+ para que se puedan meter más libros ...
+-->
+<libro isbn="786-78-5645-567-1">
+<titulo>Un mundo feliz</titulo>
+<autor>Aldoux Huxley</autor>
+
+<personaje codigo="A1">
+<nombre>Bernard Marx</nombre>
+<amigoDe>A2</amigoDe>
+<amigoDe>A4</amigoDe>
+<amigoDe>A3</amigoDe>
+<desde>1983-12-12</desde>
+<calificación>Bueno</calificación>
+
+</personaje>
+<personaje codigo="A2">
+<nombre>Lenina Crowne</nombre>
+<desde>1984-06-07</desde>
+<calificación>Regular</calificación>
+</personaje>
+<personaje codigo="A3">
+<nombre>Helmhotz Watson</nombre>
+<desde>1984-06-07</desde>
+<calificación>Regular</calificación>
+</personaje>
+<personaje codigo="A4">
+<nombre>Benito Hoover</nombre>
+<amigoDe>A1</amigoDe>
+<desde>1984-06-07</desde>
+<calificación>Regular</calificación>
+</personaje>
+</libro>
+</biblioteca>

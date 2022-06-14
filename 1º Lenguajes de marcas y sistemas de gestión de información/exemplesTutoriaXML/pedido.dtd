@@ -1,0 +1,9 @@
+<!ELEMENT pedido (producto+)>
+<!ELEMENT producto (referencia,unidades,color?)>
+<!ELEMENT referencia (#PCDATA)>
+
+<!ELEMENT unidades (#PCDATA)>
+<!ELEMENT color (#PCDATA)>
+<!ATTLIST pedido fecha CDATA  #REQUIRED>
+<!ATTLIST color codigo CDATA  #REQUIRED>
+<!ATTLIST producto talla (L|M|XL|S) #REQUIRED>

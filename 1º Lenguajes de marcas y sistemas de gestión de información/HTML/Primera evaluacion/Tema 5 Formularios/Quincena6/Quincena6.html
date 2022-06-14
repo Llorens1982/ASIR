@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+<title>Tarea Quincena 06</title>
+<meta charset="UTF-8">
+	<style>
+		
+		h1 {text-align: center;
+			font-weight:bold;
+			font-size:3ex;
+		}
+		
+		h2 {text-align: center;
+			font-weight:bold;
+			font-size:1.5ex;
+		}
+		form {
+      padding-top: 2ex;
+      background-color: black;
+      border-radius: 15px;
+    }	
+		fieldset {
+			margin-top: 6ex;
+			background-color:grey;
+			border-radius: 15px;
+      margin-left: 8ex;
+      margin-right: 8ex;
+		}	
+		
+
+		legend {
+			margin-top: 4ex;
+			background-color:#B4045F;
+			border-radius: 15px;
+		}
+		.boton {
+    margin-top: 4ex;
+    margin-left: 4ex;
+    margin-bottom: 4ex;
+    } 
+	  footer {
+			text-align: center;
+			font-size: 1ex;
+			margin-top: 4ex;
+		}
+
+	</style>
+</head>
+
+<body>
+<header>
+     <h1>The Classical Music Place</h1>
+     <h2>Acme United Subsidiary</h2> 
+</header>
+  <fieldset>
+    <legend> Customer Info </legend>
+    <p>
+      <label>Name:
+        <input name="name" type="text" placeholder="Enter your name" autofocus required size="50">
+      </label>
+    </p>
+    <p>
+      <label>Telephone:
+        <input name="telephone" type="tel" placeholder="Pattern: 1-234-567-8910" required size="50" pattern="([0-9]{1}(-[0-9]{3})(-[0-9]{3})(-[0-9]{4}))">
+      </label>
+    </p>
+    <p>
+      <label>Email address:
+        <input name="email" type="email" placeholder="Enter your email address" required size="50">
+      </label>
+    </p>
+      <p>
+      <label>Date: <input type="date">
+      </label>
+    </p>
+  </fieldset>
+  
+  <fieldset>
+    <legend> Favorite Composer </legend>
+    <p>
+    <label>
+      <input type="text" list="composers">
+      <datalist id=composers>
+       <option value="Bach">
+       <option value="Beethoven">
+       <option value="Brahms">
+       <option value="Chopin">
+    	<option value="Mendelssohn">
+      </datalist>
+    </label>
+    </p>
+  </fieldset>
+  
+  <fieldset>
+    <legend>Composers</legend>
+      <p>
+        <label>
+          Bach: <input name="form_number" type="number" min="1" max="5" >
+    	</label>
+      </p>
+      <p>
+        <label>
+          Beethoven: <input name="form_number" type="number" min="1" max="10" >
+    	</label>
+      </p>
+      <p>
+      <label>
+      Brahms: <input name="form_number" type="number" min="1" max="7" >
+	    </label>
+      </p>
+      <p>
+      <label>
+      Chopin: <input name="form_number" type="number" min="1" max="10" >
+	    </label>
+      </p>
+      <p>
+      <label>
+      Mendelssohn: <input name="form_number"  type="number" min="1" max="4" >
+	    </label>
+      </p>
+  </fieldset>
+ 
+  <fieldset>
+    <legend> Upload file(s) </legend>
+    <p>Upload one of your orchestra's file(s) for inclusion in our library</p>
+    <p>
+    <label> 
+  	  <input type="file" multiple="multiple" /> 
+  	</label>
+    </p>
+  </fieldset> 
+      <input class=boton type="image" src="Submit.png" alt="Submit" width="100" height="45" />
+  </form>
+
+  <footer>
+  	<p>2011 Acme United. All rights reserved.</p>
+  </footer>
+</body>
+</html>

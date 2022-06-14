@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Html5</title>
+<meta charset="iso-8859-1"> 
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false
+&amp;key=ABQIAAAA8JXb0YDVa4otOLnM95w50BSeC_rwpfX9fQb-
+nbMGMDH8BB4BVRTjxWS14T5WLZf7TpXaaAtk_SIb-Q" 
+type="text/javascript">
+</script>
+<script type="text/javascript">
+var map;
+var geocoder;
+function init() {
+map = new GMap2(document.getElementById("mapa"));
+map.setCenter(new GLatLng(34, 0), 1);
+geocoder = new GClientGeocoder();
+}
+function en_mapa(response) {
+map.clearOverlays();
+if (!response || response.Status.code != 200) {
+alert("Lo sentimos, no es posible geolocalizar su dirección.");
+}
+else {
+place = response.Placemark[0];
+point = new GLatLng(place.Point.coordinates[1],
+place.Point.coordinates[0]);
+marker = new GMarker(point);
+map.setCenter(point, 13);
+map.addOverlay(marker);
+}
+}
+function geolocalizacion() {
+var direccion = document.form.latitud.value + "," + document.form.longitud.value
+geocoder.getLocations(direccion, en_mapa);
+}
+if (navigator.geolocation) {
+navigator.geolocation.getCurrentPosition(function(position) {  
+latitud = position.coords.latitude;
+longitud = position.coords.longitude;
+document.form.longitud.value = longitud;
+document.form.latitud.value = latitud;
+geolocalizacion();
+}); 
+} 
+else {
+alert("Su navegador no soporta la geolocalización");
+}  
+</script>
+</head>
+<body onload="init()">
+<div style="text-align:center; width: 400px;">
+<h1>HTML 5 geolocalización</h1>
+<form name="form" action="">
+<p>
+Longitud: <input type="text" name="longitud" value="" size="20"><br>
+Latitud: <input type="text" name="latitud" value="" size="20">
+</p>
+</form>
+<div id="mapa" style="width: 400px; height: 250px;"></div>
+</div>
+</body>
+</html>
